@@ -1,0 +1,8 @@
+客户信息分组增删查改，，录音，文件自动清理
+   
+   
+   客户信息库的设计：包括手工录入批量导入，按时间进行查找，对已有信息的分类修改等。
+录音的设计：录音的压缩存储，定期清理录音文件。
+
+录音功能可以调用操作系统API，建议到这里查询相关文档；https://docs.microsoft.com/en-us/cpp/cppcx/visual-c-language-reference-c-cx
+
