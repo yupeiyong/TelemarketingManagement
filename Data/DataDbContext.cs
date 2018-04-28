@@ -49,7 +49,7 @@ namespace Data
             }
 
             //添加实体类型
-            var entityTypes =Assembly.Load("WinCai.Models").GetTypes().Where(t => t.BaseType != null && t.BaseType == typeof(BaseEntity));
+            var entityTypes =Assembly.Load("Models").GetTypes().Where(t => t.BaseType != null && t.BaseType == typeof(BaseEntity));
             foreach (var type in entityTypes)
             {
                 modelBuilder.RegisterEntityType(type);

@@ -1,0 +1,7 @@
+F:\workspace\TelemarketingManagement\Common\bin\Debug\Common.dll
+F:\workspace\TelemarketingManagement\Common\bin\Debug\Common.pdb
+F:\workspace\TelemarketingManagement\Common\bin\Debug\AutoMapper.dll
+F:\workspace\TelemarketingManagement\Common\bin\Debug\AutoMapper.xml
+F:\workspace\TelemarketingManagement\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+F:\workspace\TelemarketingManagement\Common\obj\Debug\Common.dll
+F:\workspace\TelemarketingManagement\Common\obj\Debug\Common.pdb

@@ -1,0 +1,4 @@
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\ViewModels.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\ViewModels.pdb
+F:\workspace\TelemarketingManagement\ViewModels\obj\Debug\ViewModels.dll
+F:\workspace\TelemarketingManagement\ViewModels\obj\Debug\ViewModels.pdb
