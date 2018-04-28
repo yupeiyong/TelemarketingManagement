@@ -5,3 +5,12 @@ F:\workspace\TelemarketingManagement\Common\bin\Debug\AutoMapper.xml
 F:\workspace\TelemarketingManagement\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 F:\workspace\TelemarketingManagement\Common\obj\Debug\Common.dll
 F:\workspace\TelemarketingManagement\Common\obj\Debug\Common.pdb
+E:\workspace\TelemarketingManagement\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+E:\workspace\TelemarketingManagement\Common\obj\Debug\Common.dll
+E:\workspace\TelemarketingManagement\Common\obj\Debug\Common.pdb
+E:\workspace\TelemarketingManagement\Common\bin\Debug\Common.dll
+E:\workspace\TelemarketingManagement\Common\bin\Debug\Common.pdb
+E:\workspace\TelemarketingManagement\Common\bin\Debug\AutoMapper.dll
+E:\workspace\TelemarketingManagement\Common\bin\Debug\Newtonsoft.Json.dll
+E:\workspace\TelemarketingManagement\Common\bin\Debug\AutoMapper.xml
+E:\workspace\TelemarketingManagement\Common\bin\Debug\Newtonsoft.Json.xml
