@@ -34,3 +34,5 @@ E:\workspace\TelemarketingManagement\Data\bin\Debug\AutoMapper.xml
 E:\workspace\TelemarketingManagement\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
 E:\workspace\TelemarketingManagement\Data\obj\Debug\Data.dll
 E:\workspace\TelemarketingManagement\Data\obj\Debug\Data.pdb
+E:\workspace\TelemarketingManagement\Data\bin\Debug\Newtonsoft.Json.dll
+E:\workspace\TelemarketingManagement\Data\bin\Debug\Newtonsoft.Json.xml

@@ -40,3 +40,5 @@ E:\workspace\TelemarketingManagement\UnitTestProject\obj\Debug\UnitTestProject.d
 E:\workspace\TelemarketingManagement\UnitTestProject\obj\Debug\UnitTestProject.pdb
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Newtonsoft.Json.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Newtonsoft.Json.xml
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\log4net.dll
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\log4net.xml

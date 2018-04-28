@@ -3,7 +3,7 @@
 
 namespace Common.Operator
 {
-    public class OperatorModel
+    public class OnlineUser
     {
         public string UserId { get; set; }
         public string UserCode { get; set; }

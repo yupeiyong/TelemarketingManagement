@@ -16,20 +16,20 @@ namespace Common.Operator
         private string OnlineUserKey = $"Online_User_{DateTime.Now.Date.ToString("yyyy-MM-dd")}";
         private string LoginProvider = Common.Configs.Configs.GetValue("LoginProvider");
 
-        public OperatorModel GetCurrent()
+        public OnlineUser GetCurrent()
         {
-            OperatorModel operatorModel = new OperatorModel();
+            OnlineUser operatorModel = new OnlineUser();
             if (LoginProvider == "Cookie")
             {
-                operatorModel = DesEncrypt.Decrypt(WebHelper.GetCookie(OnlineUserKey).ToString()).ToObject<OperatorModel>();
+                operatorModel = DesEncrypt.Decrypt(WebHelper.GetCookie(OnlineUserKey).ToString()).ToObject<OnlineUser>();
             }
             else
             {
-                operatorModel = DesEncrypt.Decrypt(WebHelper.GetSession(OnlineUserKey).ToString()).ToObject<OperatorModel>();
+                operatorModel = DesEncrypt.Decrypt(WebHelper.GetSession(OnlineUserKey).ToString()).ToObject<OnlineUser>();
             }
             return operatorModel;
         }
-        public void AddCurrent(OperatorModel operatorModel)
+        public void AddCurrent(OnlineUser operatorModel)
         {
             if (LoginProvider == "Cookie")
             {
