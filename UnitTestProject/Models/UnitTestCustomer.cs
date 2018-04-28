@@ -12,7 +12,7 @@ namespace UnitTestProject.Models
         [TestMethod]
         public void Test_Add()
         {
-            using (var dao = new DataDbContext())
+            using (var dao = new DataDbContext()) 
             {
                 var customer=new Customer
                 {
