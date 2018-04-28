@@ -1,0 +1,14 @@
+F:\workspace\TelemarketingManagement\Models\bin\Debug\Models.dll.config
+F:\workspace\TelemarketingManagement\Models\bin\Debug\Models.dll
+F:\workspace\TelemarketingManagement\Models\bin\Debug\Models.pdb
+F:\workspace\TelemarketingManagement\Models\bin\Debug\Common.dll
+F:\workspace\TelemarketingManagement\Models\bin\Debug\EntityFramework.dll
+F:\workspace\TelemarketingManagement\Models\bin\Debug\EntityFramework.SqlServer.dll
+F:\workspace\TelemarketingManagement\Models\bin\Debug\AutoMapper.dll
+F:\workspace\TelemarketingManagement\Models\bin\Debug\Common.pdb
+F:\workspace\TelemarketingManagement\Models\bin\Debug\EntityFramework.xml
+F:\workspace\TelemarketingManagement\Models\bin\Debug\EntityFramework.SqlServer.xml
+F:\workspace\TelemarketingManagement\Models\bin\Debug\AutoMapper.xml
+F:\workspace\TelemarketingManagement\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+F:\workspace\TelemarketingManagement\Models\obj\Debug\Models.dll
+F:\workspace\TelemarketingManagement\Models\obj\Debug\Models.pdb

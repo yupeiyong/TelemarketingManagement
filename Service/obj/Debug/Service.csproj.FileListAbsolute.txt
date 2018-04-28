@@ -1,0 +1,4 @@
+F:\workspace\TelemarketingManagement\Service\bin\Debug\Service.dll
+F:\workspace\TelemarketingManagement\Service\bin\Debug\Service.pdb
+F:\workspace\TelemarketingManagement\Service\obj\Debug\Service.dll
+F:\workspace\TelemarketingManagement\Service\obj\Debug\Service.pdb
