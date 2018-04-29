@@ -25,7 +25,7 @@ namespace Common.Operator
             }
             else
             {
-                operatorModel = DesEncrypt.Decrypt(WebHelper.GetSession(OnlineUserKey).ToString()).ToObject<OnlineUser>();
+                operatorModel = DesEncrypt.Decrypt(WebHelper.GetSession(OnlineUserKey)?.ToString()).ToObject<OnlineUser>();
             }
             return operatorModel;
         }

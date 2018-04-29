@@ -2,3 +2,8 @@ F:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\DataTransferO
 F:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\DataTransferObjects.pdb
 F:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.dll
 F:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.pdb
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\DataTransferObjects.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\DataTransferObjects.pdb
+E:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.pdb
+E:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.csprojResolveAssemblyReference.cache

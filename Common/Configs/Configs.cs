@@ -12,7 +12,7 @@ namespace Common.Configs
         /// <param name="key"></param>
         public static string GetValue(string key)
         {
-            return ConfigurationManager.AppSettings[key].ToString().Trim();
+            return ConfigurationManager.AppSettings[key]?.ToString().Trim();
         }
         /// <summary>
         /// 根据Key修改Value

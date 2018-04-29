@@ -4,6 +4,6 @@ F:\workspace\TelemarketingManagement\Service\obj\Debug\Service.dll
 F:\workspace\TelemarketingManagement\Service\obj\Debug\Service.pdb
 E:\workspace\TelemarketingManagement\Service\bin\Debug\Service.dll
 E:\workspace\TelemarketingManagement\Service\bin\Debug\Service.pdb
-E:\workspace\TelemarketingManagement\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
 E:\workspace\TelemarketingManagement\Service\obj\Debug\Service.dll
 E:\workspace\TelemarketingManagement\Service\obj\Debug\Service.pdb
+E:\workspace\TelemarketingManagement\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache

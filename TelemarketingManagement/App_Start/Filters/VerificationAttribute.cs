@@ -40,8 +40,8 @@ namespace TelemarketingManagement.App_Start.Filters
         }
         private bool ActionAuthorize(ActionExecutingContext filterContext)
         {
-            var operatorProvider = OnlineUserProvider.Provider.GetCurrent();
-            var roleId = operatorProvider.RoleId;
+            var currentOnlineUser = OnlineUserProvider.Provider.GetCurrent();
+            var roleId = currentOnlineUser.RoleId;
             var moduleId = WebHelper.GetCookie("system_currentmoduleid");
             var action = HttpContext.Current.Request.ServerVariables["SCRIPT_NAME"].ToString();
             //return new RoleAuthorizeService().ActionValidate(roleId, moduleId, action);

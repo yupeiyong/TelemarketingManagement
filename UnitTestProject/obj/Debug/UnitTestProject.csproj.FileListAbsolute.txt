@@ -27,6 +27,8 @@ E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\EntityFramework.S
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Models.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Config.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Common.dll
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\log4net.dll
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Newtonsoft.Json.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\AutoMapper.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Data.pdb
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Models.pdb
@@ -34,11 +36,9 @@ E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\EntityFramework.x
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\EntityFramework.SqlServer.xml
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Config.pdb
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Common.pdb
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\log4net.xml
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Newtonsoft.Json.xml
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\AutoMapper.xml
 E:\workspace\TelemarketingManagement\UnitTestProject\obj\Debug\UnitTestProject.csprojResolveAssemblyReference.cache
 E:\workspace\TelemarketingManagement\UnitTestProject\obj\Debug\UnitTestProject.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\obj\Debug\UnitTestProject.pdb
-E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Newtonsoft.Json.dll
-E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\Newtonsoft.Json.xml
-E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\log4net.dll
-E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\log4net.xml
