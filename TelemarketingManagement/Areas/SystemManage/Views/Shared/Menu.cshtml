@@ -5,116 +5,43 @@
                 <ul class="nav nav-sidebar">
                     <li class="nav-parent">
                         <a>
-                            <span class="text">基础资料</span>
-                        </a>
-                        @*<ul class="nav nav-children">
-                            <li>
-                                <a href="@Url.Action("Index","BasicDataSearch")">
-                                    <span class="text">基础资料编辑</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","FundingSources")">
-                                    <span class="text">@typeof(FundingSources).GetDescription()</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","HigherSpecialFundSource")">
-                                    <span class="text">@typeof(HigherSpecialFundSource).GetDescription()</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","HigherSpecialFundMoneyNature")">
-                                    <span class="text">@typeof(HigherSpecialFundMoneyNature).GetDescription()</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","HigherDepartment")">
-                                    <span class="text">@typeof(HigherDepartment).GetDescription()</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","BudgetUnit")">
-                                    <span class="text">@typeof(BudgetUnit).GetDescription()</span>
-                                </a>
-                            </li>
-                        </ul>*@
-                    </li>
-                    <li class="nav-parent">
-                        <a>
-                            <span class="text">指标管理</span>
+                            <span class="text">系统设置</span>
                         </a>
                         <ul class="nav nav-children">
-                            @*<li>
-                                    <a href="@Url.Action("Index","BeginningBudgetTarget")">
-                                        <span class="text">年初预算指标编辑</span>
-                                    </a>
-                                </li>*@
                             <li>
-                                <a href="@Url.Action("Index","BudgetTarget")">
-                                    <span class="text">指标编辑</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","HigherBudgetTarget")">
-                                    <span class="text">上级专款指标编辑</span>
+                                <a href="@Url.Action("Index","User")">
+                                    <span class="text">用户管理</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-parent">
                         <a>
-                            <span class="text">报表</span>
+                            <span class="text">客户管理</span>
                         </a>
                         <ul class="nav nav-children">
-                            @*<li>
-                                <a href="@Url.Action("Index","BudgetUnitSubjectReport")">
-                                    <span class="text">单位科目分级汇总表</span>
+                            <li>
+                                <a href="@Url.Action("Index","Customer")">
+                                    <span class="text">客户资料管理</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","SubjectBudgetUnitReport")">
-                                    <span class="text">按功能科目统计表（开发中）</span>
-                                </a>
-                            </li>*@
-                            <li>
-                                <a href="@Url.Action("Index","BudgetUnitReport2")">
-                                    <span class="text">单位报表</span>
+                                <a href="@Url.Action("Index","CustomerGenre")">
+                                    <span class="text">客户分类管理</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","SuperiorStatementReport2")">
-                                    <span class="text">上级对帐单报表</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","LowerStatementReport2")">
-                                    <span class="text">下级对帐单报表</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","LowerStatementSummaryReport2")">
-                                    <span class="text">下级对帐单汇总报表</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","BudgetSourceReport2")">
-                                    <span class="text">预算来源报表</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index","BudgetSourceSummaryReport2")">
-                                    <span class="text">预算来源汇总报表</span>
+                                <a href="@Url.Action("Index","TelephoneRecording")">
+                                    <span class="text">电话录音管理</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </nav>
         </div>
     </div>
-    <div class="sidebar-footer">
-        【<span>网络 </span>& <a href="http://www.jjsoft.cn" target="_blank"></a>】
-    </div>
+    @*<div class="sidebar-footer">
+        【<span>网络 </span>& <a href="" target="_blank"></a>】
+    </div>*@
 </div>

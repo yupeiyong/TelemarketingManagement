@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeHelper.cs" />
     <Compile Include="AutoMapperHelper.cs" />
     <Compile Include="Configs\Configs.cs" />
     <Compile Include="Configs\DBConnection.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Security\DESEncrypt.cs" />
     <Compile Include="Security\Md5.cs" />
     <Compile Include="StringHelper.cs" />
+    <Compile Include="Validator.cs" />
     <Compile Include="Web\AjaxResult.cs" />
     <Compile Include="Web\Pagination.cs" />
     <Compile Include="Web\TreeGrid\TreeGrid.cs" />

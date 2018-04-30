@@ -44,8 +44,8 @@ namespace Service.SystemManage
             {
                 if (user.UserState != Models.Enum.UserStateEnum.Enable)
                 {
-                    string dbPassword = Md5.md5(DesEncrypt.Encrypt(Md5.md5(password, 32), Settings.UserSecretkey).ToLower(), 32).ToLower(); 
-                    
+                    string dbPassword = Encrypt(password);
+
                     if (dbPassword == user.Password)
                     {
                         DateTime lastVisitTime = DateTime.Now;
@@ -136,9 +136,9 @@ namespace Service.SystemManage
 
             if (DataDbContext.Set<User>().Any(u => u.AccountName == dto.AccountName))
                 throw new Exception($"添加用户失败，{dto.AccountName}已存在！");
-            
-            var user= dto.MapTo<User>();
-            user.Password = Md5.md5(DesEncrypt.Encrypt(Md5.md5(user.Password, 32), Settings.UserSecretkey).ToLower(), 32).ToLower();
+
+            var user = dto.MapTo<User>();
+            user.Password = Encrypt(dto.Password);
             user.CreatorTime = DateTime.Now;
             user.LastModifyTime = DateTime.Now;
 
@@ -184,55 +184,12 @@ namespace Service.SystemManage
         }
 
 
-        //public void RemoveList(ICollection<long> idList, UserRoleEnum? roleEnum = null)
-        //{
-        //    if (roleEnum.HasValue)
-        //    {
-        //        foreach (var id in idList)
-        //        {
-        //            var user = DbContext.Set<User>().FirstOrDefault(m => m.Id == id && (m.UserRoles.HasValue && ((m.UserRoles.Value & (long)roleEnum.Value) == (long)roleEnum.Value)));
-        //            if (user == null)
-        //                throw new Exception(string.Format($"错误：指定Id {id} 的用户不存在！"));
-        //            DbContext.Remove(user).SaveChanges();
-        //        }
-        //    }
-        //    else
-        //        DbContext.Set<User>().Where(u => idList.Any(id => id == u.Id)).Delete();
-        //}
+        public static string Encrypt(string pwd)
+        {
+            if (string.IsNullOrWhiteSpace(pwd))
+                return string.Empty;
 
-
-        //public static bool IsUserRole(User user, UserRoleEnum role)
-        //{
-        //    return user.UserRoles.HasValue && (user.UserRoles.Value & (long)role) == (long)role;
-        //}
-
-
-        //public User Register(UserRegisterDto dto)
-        //{
-        //    if (string.IsNullOrEmpty(dto.AccountName))
-        //        throw new Exception("错误：注册帐号为空！");
-        //    if (string.IsNullOrEmpty(dto.Password))
-        //        throw new Exception("错误：密码不可为空！");
-
-        //    var isAccountNameExisted = DbContext.Set<User>().Any(e => e.AccountName != null && e.AccountName == dto.AccountName);
-        //    if (isAccountNameExisted)
-        //        throw new Exception("错误：帐号名已被占用！");
-
-        //    var user = new User
-        //    {
-        //        AccountName = dto.AccountName,
-        //        Password = dto.Password,
-
-        //        //默认昵称为帐号名
-        //        NickName = dto.AccountName,
-        //        RedirectLocationAfterLogin = AppSettings.RedirectLocationAfterLoginForMember,
-        //        RedirectLocationAfterWechatLogin = AppSettings.RedirectLocationAfterWechatLoginForMember,
-        //        UserRoles = (long)UserRoleEnum.Member,
-        //        BaseUserState = BaseUserStateEnum.Enabled
-        //    };
-        //    BaseUserService.EncryptPassword(user);
-        //    DbContext.Add(user).SaveChanges();
-        //    return user;
-        //}
+            return Md5.md5(DesEncrypt.Encrypt(Md5.md5(pwd, 32), Settings.UserSecretkey).ToLower(), 32).ToLower();
+        }
     }
 }

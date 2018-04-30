@@ -16,7 +16,7 @@ namespace TelemarketingManagement.App_Start.Base
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap(typeof(UserUpdateDto), typeof(User));
-                //cfg.CreateMap(typeof(ChongQinSscPlan), typeof(ChongQinSSCPlanViewModel));
+                cfg.CreateMap(typeof(CustomerEditDto), typeof(Customer));
                 //cfg.CreateMap(typeof(Pk10Plan), typeof(PK10PlanViewModel));
                 //cfg.CreateMap(typeof(BetSettingEditDto), typeof(BetSetting));
                 //cfg.CreateMap(typeof(BetUrlSettingEditDto), typeof(BetUrlSetting));

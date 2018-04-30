@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TelemarketingManagement.App_Start.Base;
@@ -8,20 +9,25 @@ namespace UnitTestProject
     [TestClass]
     public class BaseUnitTest
     {
-        public IContainer Container = ContainerFactory.GetContainer();
+        protected  IContainer Container = ContainerFactory.GetContainer();
 
         public BaseUnitTest()
         {
             AutoMapperInitial.RegisterMapperType();
+            DataDbContext = Container.Resolve<DataDbContext>();
         }
-        public TService GetService<TService>()
+        ~BaseUnitTest()
+        {
+            if (DataDbContext != null)
+            {
+                DataDbContext.Dispose();
+            }
+        }
+        protected TService GetService<TService>()
         {
             return Container.Resolve<TService>();
         }
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+        protected DataDbContext DataDbContext { get;private set; }
     }
 }

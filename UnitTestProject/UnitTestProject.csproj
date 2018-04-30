@@ -57,7 +57,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -98,8 +101,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Models\UnitTestDataInit.cs" />
     <Compile Include="Models\UnitTestCustomer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\UnitTestCustomerService.cs" />
     <Compile Include="Service\UnitTestUserService.cs" />
     <Compile Include="BaseUnitTest.cs" />
   </ItemGroup>
