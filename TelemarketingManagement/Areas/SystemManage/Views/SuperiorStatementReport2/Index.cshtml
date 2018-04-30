@@ -1,0 +1,117 @@
+﻿@using JJsites.Configs
+@using JJsites.DataTransferObjects.Reports
+@using JJsites.DomainModels.Reports
+@using JJsoft.Infrastructure.Extensions
+@{
+    var title = typeof(SuperiorStatementReport).GetDescription();
+}
+
+<link href="~/Lib/JqueryEasyui/1.5.1/themes/default/easyui.css" rel="stylesheet" />
+<link href="~/Areas/AdminManager/Content/report-index.css" rel="stylesheet"/>
+
+<div class="container-fluid">
+    <div class="CurrentPosition">
+        <img src="~/Content/Images/icon_currentPosition.png" />
+        当前位置：后台管理系统 > @title
+    </div>
+    <div class="row clearfix conditional">
+        <div class="form-search">
+            <form class="search form-inline">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">预算单位：</label>
+                            <div>
+                                <select id="BudgetUnitId" class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", "BasicData", new {ModelTypeName = "BudgetUnit"})"></select>
+                                <input type="hidden" class="hidden-ids" name="@nameof(GenerateReportDto.BudgetUnitIdsString)" value="" />
+                            </div>
+                        </div>
+                        <ul class="SelectedCondition"></ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">功能科目：</label>
+                            <div>
+                                <select id="FunctionSubjectId" class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", "BasicData", new {ModelTypeName = "FunctionSubject"})"></select>
+                                <input type="hidden" class="hidden-ids" name="@nameof(GenerateReportDto.FunctionSubjectIdsString)" value="" />
+                            </div>
+                        </div>
+                        <ul class="SelectedCondition"></ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">经费来源：</label>
+                            <div>
+                                <select id="FundingSourcesId" class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", "BasicData", new {ModelTypeName = "FundingSources"})"></select>
+                                <input type="hidden" class="hidden-ids" name="@nameof(GenerateReportDto.FundingSourcesIdsString)" value="" />
+                            </div>
+                        </div>
+                        <ul class="SelectedCondition"></ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">开始时间：</label>
+                            <div>
+                                <input type="date" value="@(AppSettings.BudgetYear + "-01-01")" class="form-control input-sm" name="StartDatetime" id="StartDateTime" placeholder="开始时间...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">截止时间：</label>
+                            <div>
+                                <input type="date" value="@DateTime.Today.ToDateString()" class="form-control input-sm" name="EndDatetime" id="EndDateTime" placeholder="最后时间...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-sm" id="btnAdd" title="生成" onclick="ReportGenerate(this, '@Url.Action("GenerateReport")');">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                重新生成
+                            </button>
+                            @*<a class="btn btn-default btn-sm" href="@Url.Action("Export")">
+                                <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+                                导出
+                            </a>*@
+                            <button type="button" class="btn btn-default btn-sm" title="生成" onclick="exportExcel(this, '@Url.Action("Export")');">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                导出
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row clearfix" id="listPartial">
+        @* js拉取 *@
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/Lib/JqueryEasyui/1.5.1/jquery.easyui.min.js"></script>
+    <script src="~/Areas/AdminManager/Scripts/report-index.js"></script>
+}
+
+
+<script>
+    function RefreshList() {
+        var message = "<p class='loading'>正在加载数据</p>";
+        $("#listPartial").html(message);
+
+        var params = $('form.search').serializeArray();
+        //var keyWords = $("input[name=Keywords]").val();
+        var url = '@Url.Action("ListPartial")';
+        $.post(url,
+            params,
+            function (response) {
+                $("#listPartial").html(response);
+            },
+            "html");
+    }
+</script>

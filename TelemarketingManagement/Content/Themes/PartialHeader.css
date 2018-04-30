@@ -1,0 +1,40 @@
+header .navbar-right {
+    font-size: 0;
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+}
+
+header .navbar-right > div {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+header .navbar-right > div:first-of-type {
+    background: url(/Content/Images/header_back.png) repeat-x;
+    padding: 0 20px;
+}
+
+header .navbar-right > div:first-of-type a {
+    margin: 0 15px;
+}
+
+header .navbar-right > div:first-of-type img {
+    margin: 0 30px 0 15px;
+}
+
+header .navbar-right > img {
+    vertical-align: top
+}
+
+ header .navbar-right > div:last-of-type > a {
+     display: inline-block;
+     color: #add6ef;
+     margin: 0 5px;
+     -webkit-box-reflect:below -12px -webkit-linear-gradient(top,rgba(250,250,250,0),rgba(250,250,250,.0) 30%,rgba(250,250,250,0.3));
+}
+
+header .navbar-right > div:last-of-type > a img {
+    margin: 0 5px 0 10px;
+}

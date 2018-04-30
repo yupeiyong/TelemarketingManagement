@@ -1,0 +1,203 @@
+﻿@using JJsites.DataTransferObjects.Reports
+@using JJsites.DomainModels
+@using JJsites.DomainModels.Reports
+@using JJsites.ViewModels.Reports
+@using JJsoft.Infrastructure.Extensions
+@model BudgetUnitReportDetailsViewModel
+
+@{
+    var model = Model ?? new BudgetUnitReportDetailsViewModel();
+    var id = model.BudgetUnitReport == null ? 0 : model.BudgetUnitReport.Id;
+}
+<link href="~/Lib/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="~/Lib/select2-extend.css" rel="stylesheet" />
+<style>
+    .u-select2 {
+        width: 200px !important;
+    }
+</style>
+<div class="container-fluid">
+    <div class="CurrentPosition">
+        <img src="~/Content/Images/icon_currentPosition.png" />
+        当前位置：后台管理系统 > @typeof(BudgetUnitReport).GetDescription() > 报表详情
+    </div>
+    <div class="row clearfix conditional">
+        <div class="pull-left">
+            @Model.Title
+        </div>
+        <div class="pull-right">
+            <div class="btn-group">
+                <div class="form-search">
+                    <form class="search form-inline" method="post">
+                        <div class="form-group">
+                            <label class="control-label">预算单位：</label>
+                            <select name="@nameof(GetBudgetUnitReportDto.BudgetUnitId)" id="@nameof(GetBudgetUnitReportDto.BudgetUnitId)" class="form-control u-select2"
+                                    data-url="@Url.Action("GetBasicData","BasicData", new {ModelTypeName = nameof(BudgetUnit)})"></select>
+                            <label class="control-label">功能科目：</label>
+                            <select name="@nameof(GetBudgetUnitReportDto.FunctionSubjectId)" id="@nameof(GetBudgetUnitReportDto.FunctionSubjectId)" class="form-control u-select2"
+                                    data-url="@Url.Action("GetBasicData","BasicData", new {ModelTypeName = nameof(FunctionSubject)})"></select>
+                            &nbsp;&nbsp;
+                            <input type="text" class="form-control bk-radius" name="Keywords" id="Keywords" placeholder="关键词...">
+                            <input type="hidden" name="Id" value="@id" />
+                            <button type="button" class="btn btn-info" onclick="RefreshList();">
+                                <i class="fa fa-search"></i>
+                                搜索
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="btn-group">
+                @Html.ActionLink("导出", "Export", new {id}, new {@class = "btn btn-default btn-sm"})
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-default btn-sm" href="#" onclick="self.location = document.referrer;">返回</a>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <div class="bootstrap-table">
+                <div class="fixed-table-toolbar"></div>
+                <div class="fixed-table-container" style="padding-bottom: 0px;">
+                    <div class="fixed-table-header">
+                        <table class="table table-hover table-striped">
+                            <tr>
+                                <td>
+                                    <div class="pull-right">
+                                        <span>金额单位：@Model.AmountSpecification.GetDescription()</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="fixed-table-body">
+                        <div class="fixed-table-loading" style="display: none; top: 41px;">正在努力地加载数据中，请稍候……</div>
+                        <table id="tab" data-id-field="Id" data-resizable="true" data-filter-control="false" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle; width: 50px;" data-field="_id" tabindex="0">
+                                        <div class="th-inner ">
+                                            ID
+                                        </div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="text-align: center; vertical-align: middle;" data-field="" tabindex="0">
+                                        <div class="th-inner">
+                                            类款项
+                                        </div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="text-align: center; vertical-align: middle;" data-field="" tabindex="0">
+                                        <div class="th-inner">
+                                            摘要
+                                        </div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="text-align: center; vertical-align: middle;" data-field="" tabindex="0">
+                                        <div class="th-inner">
+                                            预算金额
+                                        </div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="text-align: center; vertical-align: middle;" data-field="" tabindex="0">
+                                        <div class="th-inner">
+                                            追加单号
+                                        </div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th style="text-align: center; vertical-align: middle;" data-field="" tabindex="0">
+                                        <div class="th-inner">
+                                            日期
+                                        </div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--js加载-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Lib/select2/4.0.3/js/select2.min.js"></script>
+<script src="~/Lib/select2/4.0.3/js/i18n/zh-CN.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        RefreshList();
+    });
+
+    $(function() {
+        var openedbox = $("#menu li.budgetUnitSubjectReport").parents(".nav-parent");
+        $(openedbox).addClass("opened nav-expanded");
+        $(openedbox).find("li.budgetUnitSubjectReport").addClass("active opened");
+
+        //转换为select2
+        $('.u-select2').each(function() {
+            //当前对象
+            var $this = $(this);
+            var url = $this.data('url');
+
+            //远程筛选
+            $this.select2({
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            Keywords: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function(data, params) {
+                        params.page = params.page || 1;
+                        if (!data.IsSuccess) {
+                            return false;
+                        }
+                        var arr = data.Data || data.data || {};
+                        return {
+                            results: arr
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function(markup) { return markup; },
+                minimumInputLength: 0,
+                language: 'zh-CN'
+            });
+        });
+    });
+
+    function RefreshList() {
+        var message = "<tr class='no-records-found'><td colspan='6'>正在加载数据</td></tr>";
+        $("#tab tbody").html(message);
+
+        var params = $('form.search').serializeArray();
+        //var keyWords = $("input[name=Keywords]").val();
+        var url ='@Url.Action("DetailsListPartial")';
+        $.post(url,
+            params,
+            function (response) {
+                $("#tab tbody").html(response);
+            },
+            "html");
+
+        return false;
+    }
+
+    $(document).keydown(function (event) {
+        if (event.which == 13) {
+            RefreshList();
+            return false;
+        }
+    });
+</script>
+

@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+
+    var department = "";
+    var title = department + "营销管理系统";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <title>@title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link href="~/Lib/BootStrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Lib/FontAwesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Themes/style.css" rel="stylesheet" />
+    <link href="~/Content/Themes/login.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="backBox">
+        <div class="loginBox">
+            <div class="loginInner">
+                <div class="title">
+                    请输入用户名及密码
+                </div>
+                <form class="form-horizontal login" method="post">
+                    <div class="inputBox">
+                        <label>用户名：</label>
+                        <input type="text" name="AccountName" class="form-control bk-radius" id="username" />
+                    </div>
+                    <div class="inputBox">
+                        <label>密码：</label>
+                        <input type="password" name="Password" class="form-control bk-radius" />
+                    </div>
+                    @*<div class="inputBox three">
+                            <label>验证码：</label>
+                            <input type="text" class="form-control bk-radius" name="SecurityCode"/>
+                            <a class="link-change-securityCode" href="#" data-url="/SecurityCode_GetImageStream">
+                                <img class="SecurityCodeImage" src="/SecurityCode_GetImageStream" alt="登录用图形验证码"/>
+                                <span>看不清，换一张</span>
+                            </a>
+                        </div>*@
+                    <p class="messageTips"></p>
+                    <button id="btnLogin" data-url="@Url.Action("LoginSubmitJson", "User", new RouteValueDictionary {{"area", ""}})"></button>
+
+                    @*<div class="inputBox">
+                            @if (!AppSettings.IsSystemInitialized)
+                            {
+                                <span class="WarningMessage">系统尚未初始化请 <a href="/Admin/Administrator/SystemInit">初始化</a></span>
+                            }
+                            else
+                            {
+                                <a href="/Admin/Administrator/SystemInit">初始化</a>
+                            }
+                            <button id="btnLogin" data-url="@Url.Action("LoginSubmitJson", "AllUser", new RouteValueDictionary {{"area", ""}})"></button>
+                        </div>*@
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="~/Lib/JQuery/2.2.4/jquery.min.js"></script>
+    <script src="~/Lib/BootStrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/Lib/Layer/3.0.1/layer.js"></script>
+    <script src="~/Scripts/login.js"></script>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    var height = $(window).height();
+    $(".backBox").css("height", height + "px");
+
+    //var loginBoxH = $(".loginBox").height();
+    //var mgT = (height - loginBoxH) / 2;
+    //$(".backBox").css("padding-top", mgT + "px");
+</script>

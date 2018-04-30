@@ -7,3 +7,16 @@ E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\DataTransferO
 E:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.dll
 E:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.pdb
 E:\workspace\TelemarketingManagement\DataTransferObjects\obj\Debug\DataTransferObjects.csprojResolveAssemblyReference.cache
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\Models.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\EntityFramework.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\Common.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\log4net.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\Newtonsoft.Json.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\AutoMapper.dll
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\Models.pdb
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\EntityFramework.xml
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\Common.pdb
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\log4net.xml
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\Newtonsoft.Json.xml
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\AutoMapper.xml
+E:\workspace\TelemarketingManagement\DataTransferObjects\bin\Debug\zh-Hans\EntityFramework.resources.dll

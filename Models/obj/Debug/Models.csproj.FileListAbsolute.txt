@@ -30,3 +30,5 @@ E:\workspace\TelemarketingManagement\Models\bin\Debug\AutoMapper.xml
 E:\workspace\TelemarketingManagement\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 E:\workspace\TelemarketingManagement\Models\obj\Debug\Models.dll
 E:\workspace\TelemarketingManagement\Models\obj\Debug\Models.pdb
+E:\workspace\TelemarketingManagement\Models\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\workspace\TelemarketingManagement\Models\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll

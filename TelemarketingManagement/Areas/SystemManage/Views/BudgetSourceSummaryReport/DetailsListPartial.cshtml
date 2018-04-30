@@ -1,0 +1,63 @@
+﻿@using JJsites.DomainModels
+@model JJsites.ViewModels.Reports.BudgetSourceSummaryReportDetailsViewModel
+@{
+    var amountSpecificationUnit = Model.AmountSpecificationUnit;
+}
+
+@if (Model.BudgetSourceSummaryReport?.BudgetSourceSummaryReportCategories != null)
+{
+    var unitlevels = Model.BudgetSourceSummaryReport.BudgetUnitLevels ?? new List<BudgetUnitLevel>();
+    foreach (var category in Model.BudgetSourceSummaryReport.BudgetSourceSummaryReportCategories)
+    {
+        foreach (var reportItem in category.ReportItems)
+        {
+            <tr>
+                <td>@reportItem.Id</td>
+                <td>@Html.Raw(reportItem.FunctionSubject?.CustomedNumberAndNameWithHtmlSpaces)</td>
+                <td style="text-align: right">@((reportItem.TotalAdjustmentAmount/amountSpecificationUnit).ToString("N"))</td>
+                <td style="text-align: right">@((reportItem.TotalAssignedAmount/amountSpecificationUnit).ToString("N"))</td>
+                @foreach (var level in unitlevels)
+                {
+                    <td style="text-align: right">@((reportItem[level].AssignedAmount / amountSpecificationUnit).ToString("N"))</td>
+                }
+                <td style="text-align: right">@((reportItem.TotalUndistributedAmount/amountSpecificationUnit).ToString("N"))</td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td>@(category.MoneyNature.Name + "小计：")</td>
+            <td style="text-align: right">@((category.TotalAdjustmentAmount/amountSpecificationUnit).ToString("N"))</td>
+            <td style="text-align: right">@((category.TotalAssignedAmount/amountSpecificationUnit).ToString("N"))</td>
+            @foreach (var level in unitlevels)
+            {
+                if (category.BudgetSourceSummaryReportItemUnitLevelAssignedAmounts.ContainsKey(level))
+                {
+                    <td style="text-align: right">@((category.BudgetSourceSummaryReportItemUnitLevelAssignedAmounts[level] / amountSpecificationUnit).ToString("N"))</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            }
+            <td style="text-align: right">@((category.TotalUndistributedAmount/amountSpecificationUnit).ToString("N"))</td>
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td>合计：</td>
+        <td style="text-align: right">@((Model.BudgetSourceSummaryReport.TotalAdjustmentAmount/amountSpecificationUnit).ToString("N"))</td>
+        <td style="text-align: right">@((Model.BudgetSourceSummaryReport.TotalAssignedAmount/amountSpecificationUnit).ToString("N"))</td>
+        @foreach (var level in unitlevels)
+        {
+            if (Model.BudgetSourceSummaryReport.BudgetSourceSummaryReportTotalUnitLevelAssignedAmounts.ContainsKey(level))
+            {
+                <td style="text-align: right">@((Model.BudgetSourceSummaryReport.BudgetSourceSummaryReportTotalUnitLevelAssignedAmounts[level] / amountSpecificationUnit).ToString("N"))</td>
+            }
+            else
+            {
+                <td></td>
+            }
+        }
+        <td style="text-align: right">@((Model.BudgetSourceSummaryReport.TotalUndistributedAmount/amountSpecificationUnit).ToString("N"))</td>
+    </tr>
+}

@@ -1,0 +1,302 @@
+﻿@using JJsites.DomainModels
+@using JJsites.DomainModels.Reports
+@using JJsites.ViewModels.Reports
+@using JJsoft.Infrastructure.Extensions
+@model SuperiorStatementReportDetailsViewModel
+
+@{
+    //金额单位
+    var amountUnit = Model.AmountSpecificationUnit;
+    var model = Model ?? new SuperiorStatementReportDetailsViewModel();
+    var report = model.Report;
+    //var id = model.Report == null ? 0 : model.Report.Id;
+}
+@if (report == null)
+{
+    <p class="loading">没有找到匹配的记录</p>
+}
+else
+{
+    <div class="col-md-12">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#summary" data-toggle="tab">
+                    汇总
+                </a>
+            </li>
+            <li>
+                <a href="#summaryReportItem" data-toggle="tab">
+                    科目分类
+                </a>
+            </li>
+            @foreach (var reportItem in model.CategoryViewModels)
+                {
+                    var source = reportItem.HigherSpecialFundSource ?? new HigherSpecialFundSource();
+                    var tabHref = "reportItem" + source.Id;
+                    var tableName = (source.Name ?? "") + "明细";
+                <li>
+                    <a href="#@tabHref" data-toggle="tab">
+                        @tableName
+                    </a>
+                </li>
+            }
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="summary">
+                <div class="bootstrap-table">
+                    <div class="fixed-table-toolbar"></div>
+                    <div class="fixed-table-container" style="padding-bottom: 0px;">
+                        <div class="fixed-table-header">
+                            <table class="table table-hover table-striped">
+                                <tr>
+                                    <td>
+                                        <div class="pull-right">
+                                            <span>金额单位：@Model.AmountSpecification.GetDescription()</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="fixed-table-body">
+                            <div class="fixed-table-loading" style="display: none; top: 41px;">正在努力地加载数据中，请稍候……</div>
+                            <table id="tab" data-id-field="Id" data-resizable="true" data-filter-control="false" class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; vertical-align: middle; width: 120px;">
+                                            <div class="th-inner ">
+                                                地区/部门
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="text-align: center; vertical-align: middle; width: 150px;">
+                                            <div class="th-inner">
+                                                合计
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        @foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                        {
+                                            <th style="text-align: center; vertical-align: middle;">
+                                                <div class="th-inner">
+                                                    @nature.Name
+                                                </div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>919906-前锋区</td>
+                                        <td style="text-align: right; vertical-align: middle;">@((report.TotalAmount / amountUnit).ToString("N"))</td>
+                                        @foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                        {
+                                            <td style="text-align: right; vertical-align: middle;">@((report.TotalMoneyNatureSummaries[nature] / amountUnit).ToString("N"))</td>
+                                        }
+                                    </tr>
+                                    @foreach (var source in report.HigherSpecialFundSources)
+                                    {
+                                        var sourceSummary = report[source];
+                                        <tr>
+                                            <td>@source.Name</td>
+                                            <td style="text-align: right; vertical-align: middle;">@((sourceSummary.SubtotalAmount / amountUnit).ToString("N"))</td>
+                                            @foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                            {
+                                                <td style="text-align: right; vertical-align: middle;">@((sourceSummary[nature].TotalAmount / amountUnit).ToString("N"))</td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="summaryReportItem">
+                <div class="bootstrap-table">
+                    <div class="fixed-table-toolbar"></div>
+                    <div class="fixed-table-container" style="padding-bottom: 0px;">
+                        <div class="fixed-table-header">
+                            <table class="table table-hover table-striped">
+                                <tr>
+                                    <td>
+                                        <div class="pull-left">
+                                            <span>单位：前锋区</span>
+                                        </div>
+                                        <div class="pull-right">
+                                            <span>金额单位：@Model.AmountSpecification.GetDescription()</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="fixed-table-body">
+                            <div class="fixed-table-loading" style="display: none; top: 41px;">正在努力地加载数据中，请稍候……</div>
+                            <table id="tab" data-id-field="Id" data-resizable="true" data-filter-control="false" class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center; vertical-align: middle;">科目代码</td>
+                                        <td style="text-align: center; vertical-align: middle;">功能分类</td>
+                                        @{
+                                            var count = 1 + report.HigherSpecialFundMoneyNatures.Count;
+                                        }
+                                        <td colspan="@count" style="text-align: center; vertical-align: middle;">上级专款来源合计</td>
+                                        @foreach (var source in report.HigherSpecialFundSources)
+                                        {
+                                            <td colspan="@count" style="text-align: center; vertical-align: middle;">@source.Name</td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: center; vertical-align: middle;">合计</td>
+                                        @foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                        {
+                                            <td style="text-align: center; vertical-align: middle;">@nature.Name</td>
+                                        }
+                                        @foreach (var source in report.HigherSpecialFundSources)
+                                        {
+                                            <td style="text-align: center; vertical-align: middle;">小计</td>
+                                            foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                            {
+                                                <td style="text-align: center; vertical-align: middle;">@nature.Name</td>
+                                            }
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: right; vertical-align: middle;">@((report.TotalAmount / amountUnit).ToString("N"))</td>
+                                        @foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                        {
+                                            <td style="text-align: right; vertical-align: middle;">@((report.TotalMoneyNatureSummaries[nature] / amountUnit).ToString("N"))</td>
+                                        }
+                                        @foreach (var source in report.HigherSpecialFundSources)
+                                        {
+                                            var sourceSummary = report[source];
+
+                                            //小计
+                                            <td style="text-align: right; vertical-align: middle;">@((sourceSummary.SubtotalAmount / amountUnit).ToString("N"))</td>
+                                            foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                            {
+                                                //每个专款来源汇总
+                                                <td style="text-align: right; vertical-align: middle;">@((sourceSummary[nature].TotalAmount / amountUnit).ToString("N"))</td>
+                                            }
+                                        }
+                                    </tr>
+                                    <!--js加载 先用服务端渲染-->
+                                    @foreach (var item in report.ReportSummaryItems)
+                                    {
+                                        <tr>
+                                            <td>@item.FunctionSubject.CustomedNumber</td>
+                                            <td>@item.FunctionSubject.Name</td>
+                                            <td style="text-align: right; vertical-align: middle;">@((item.TotalAmount / amountUnit).ToString("N"))</td>
+                                            @foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                            {
+                                                <td style="text-align: right; vertical-align: middle;">@((item.MoneyNatureSummaries[nature] / amountUnit).ToString("N"))</td>
+                                            }
+                                            <!--渲染各专款来源汇总项-->
+                                            @foreach (var source in report.HigherSpecialFundSources)
+                                            {
+                                                var sourceSummary = item[source];
+                                                <td style="text-align: right; vertical-align: middle;">@((sourceSummary.SubtotalAmount / amountUnit).ToString("N"))</td>
+
+                                                //渲染资金性质汇总项
+                                                foreach (var nature in report.HigherSpecialFundMoneyNatures)
+                                                {
+                                                    <td style="text-align: right; vertical-align: middle;">@((sourceSummary[nature].TotalAmount / amountUnit).ToString("N"))</td>
+                                                }
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            @foreach (var category in model.CategoryViewModels)
+            {
+                var source = category.HigherSpecialFundSource ?? new HigherSpecialFundSource();
+                var tabHref = "reportItem" + source.Id;
+
+                //var tableName = source.Name ?? "" + "明细";
+                <div class="tab-pane fade" id="@tabHref">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-toolbar"></div>
+                        <div class="fixed-table-container" style="padding-bottom: 0px;">
+                            <div class="fixed-table-header">
+                                <table class="table table-hover table-striped">
+                                    <tr>
+                                        <td>
+                                            <div class="pull-right">
+                                                <span>金额单位：@Model.AmountSpecification.GetDescription()</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="fixed-table-body">
+                                <div class="fixed-table-loading" style="display: none; top: 41px;">正在努力地加载数据中，请稍候……</div>
+                                <table id="tab" data-id-field="Id" data-resizable="true" data-filter-control="false" class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center; vertical-align: middle; width: 50px;">行号</th>
+                                            @foreach (var title in category.Titles)
+                                            {
+                                                <th style="text-align: center; vertical-align: middle;">
+                                                    <div class="th-inner">
+                                                        @title
+                                                    </div>
+                                                    <div class="fht-cell"></div>
+                                                </th>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0, maxIndex = category.Rows.Count; i < maxIndex; i++)
+                                        {
+                                            var row = category.Rows[i];
+                                            <tr>
+                                                <td style="text-align: center; vertical-align: middle; width: 50px;">@(i + 1)</td>
+                                                @foreach (var column in row.Columns)
+                                                {
+                                                    var valueString = string.Empty;
+                                                    if (column.FieldData != null)
+                                                    {
+                                                        if (!string.IsNullOrWhiteSpace(column.CellStyleFormat))
+                                                        {
+                                                            valueString = column.FieldData.ToString(column.CellStyleFormat);
+                                                        }
+                                                        else
+                                                        {
+                                                            //是否是金额
+                                                            if (column.MemberName == nameof(SuperiorStatementReportItem.TotalAmount))
+                                                            {
+                                                                valueString = (column.FieldData / amountUnit).ToString("N");
+                                                            }
+                                                            else
+                                                            {
+                                                                valueString = column.FieldData.ToString();
+                                                            }
+                                                        }
+                                                    }
+
+                                                    <td style="@column.HtmltdStyle">@valueString</td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+                                            }

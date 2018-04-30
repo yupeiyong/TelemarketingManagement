@@ -1,0 +1,89 @@
+﻿@using JJsites.DomainModels
+@using JJsites.ViewModels
+@using JJsoft.Infrastructure.Extensions
+@{
+    ViewBag.Title = typeof (BudgetUnit).GetDescription();
+}
+
+<div class="container-fluid">
+    <div class="CurrentPosition">
+        <img src="~/Content/Images/icon_currentPosition.png"/>
+        当前位置：后台管理系统 > @ViewBag.Title
+    </div>
+    <div class="row clearfix conditional">
+        <div class="pull-left">
+        </div>
+        <div class="pull-right">
+            <div class="form-search">
+                <form class="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bk-radius" name="Keywords" id="Keywords" placeholder="关键词...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" id="btnSearch">
+                                <i class="fa fa-search"></i>
+                                搜索
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" id="btnAdd"
+                        title="信息" data-u-url="@Url.Action("Add")">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    新增
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <table data-url="@Url.Action("GetData")" id="tab"
+                   data-id-field="Id"
+                   data-resizable="true"
+                   data-filter-control="false">
+                <thead>
+                <tr>
+                    <th data-sortable="false" data-field="_id" data-width="50"
+                        data-align="center" data-halign="center" data-valign="middle">
+                        行号
+                    </th>
+                    <th data-sortable="false" data-field="@nameof(BudgetUnitViewModel.Id)" data-visible="false" data-width="0"
+                        data-align="center" data-halign="center" data-valign="middle">
+                        Id
+                    </th>
+                    <th data-sortable="true" data-field="@nameof(BudgetUnitViewModel.CustomedNumberWithHtmlSpaces)" data-width="180"
+                        data-align="left" data-halign="center" data-valign="middle">
+                        编号
+                    </th>
+                    <th data-sortable="true" data-field="@nameof(BudgetUnitViewModel.NameWithHtmlSpaces)"
+                        data-align="left" data-halign="center" data-valign="middle">
+                        名称
+                    </th>
+                    <th data-sortable="true" data-field="@nameof(BudgetUnitViewModel.IsDefaultByAdd)" data-width="80"
+                        data-formatter="isDefaultFormatter"
+                        data-align="center" data-halign="center" data-valign="middle">
+                        是否默认
+                    </th>
+                    <th data-sortable="true" data-field="@nameof(BudgetUnitViewModel.IsDistrictLevel)" data-width="80"
+                        data-formatter="isDistrictLevelFormatter"
+                        data-align="center" data-halign="center" data-valign="middle">
+                        是否区本级
+                    </th>
+                    <th data-sortable="false" data-width="120" data-field="Id"
+                        data-formatter="operateFormatter"
+                        data-align="center" data-halign="center" data-valign="middle">
+                        操作
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/AdminManager/Scripts/budgetUnit-index.js"></script>
+}

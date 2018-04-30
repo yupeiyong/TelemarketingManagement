@@ -5,8 +5,8 @@ namespace Common.Operator
 {
     public class OnlineUser
     {
-        public string UserId { get; set; }
-        public string UserCode { get; set; }
+        public long UserId { get; set; }
+        public string AccountName { get; set; }
         public string UserName { get; set; }
         public string UserPwd { get; set; }
         public string CompanyId { get; set; }
@@ -17,5 +17,7 @@ namespace Common.Operator
         public string LoginToken { get; set; }
         public DateTime LoginTime { get; set; }
         public bool IsSystem { get; set; }
+
+        public string NickName { get; set; }
     }
 }

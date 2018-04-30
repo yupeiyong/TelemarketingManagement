@@ -1,0 +1,58 @@
+﻿@model JJsites.ViewModels.Reports.BudgetUnitReportDetailsViewModel
+@{
+    var amountSpecificationUnit = Model.AmountSpecificationUnit;
+    var reports = Model.BudgetUnitReports;
+}
+
+@if (reports.Count > 0)
+{
+    foreach (var report in reports)
+    {
+        var isWriteUnit = false;
+        foreach (var category in report.BudgetUnitReportCategories)
+        {
+            foreach (var reportItem in category.ReportItems)
+            {
+                <tr>
+                    <!--<td>@reportItem.Id</td>-->
+                    @if (!isWriteUnit)
+                    {
+                        <td>@(report.BudgetUnit.CustomedNumberAndName)</td>
+                        isWriteUnit = true;
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>@Html.Raw(reportItem.FunctionSubject?.CustomedNumberAndNameWithHtmlSpaces)</td>
+                    <td>@(reportItem.Summary)</td>
+                    <td style="text-align: right">@((reportItem.TotalAmount / amountSpecificationUnit).ToString("N"))</td>
+                    <td>@(reportItem.IssueNumber)</td>
+                    <td>@(reportItem.OnPosted?.ToString("yyyy-MM-dd") ?? "")</td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td>@(category.MoneyNature?.Name + "小计：")</td>
+                <td></td>
+                <td style="text-align: right">@((category.SubtotalAmount / amountSpecificationUnit).ToString("N"))</td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td>合计：</td>
+            <td></td>
+            <td style="text-align: right">@((report.TotalAmount / amountSpecificationUnit).ToString("N"))</td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
+}
+else
+{
+    <tr class="no-records-found">
+        <td colspan="6">没有找到匹配的记录</td>
+    </tr>
+}

@@ -1,0 +1,61 @@
+﻿@using JJsoft.Infrastructure.Extensions
+@model JJsites.ViewModels.Reports.LowerStatementReportDetailsViewModel
+@{
+    var amountSpecificationUnit = Model.AmountSpecificationUnit;
+    var reports = Model.LowerStatementReports;
+}
+
+@if (reports.Count > 0)
+{
+    foreach (var item in reports)
+    {
+        var isWriteUnit = false;
+        foreach (var category in item.LowerStatementReportCategories)
+        {
+            foreach (var reportItem in category.ReportItems)
+            {
+                <tr>
+                    <!--<td>@reportItem.Id</td>-->
+                    @if (!isWriteUnit)
+                    {
+                        <td>@(item.LowerBudgetUnit.CustomedNumberAndName)</td>
+                        isWriteUnit = true;
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>@Html.Raw(reportItem.FunctionSubject?.CustomedNumberAndNameWithHtmlSpaces)</td>
+                    <td>@(reportItem.IssueNumber)</td>
+                    <td>@(reportItem.Summary)</td>
+                    <td>@(reportItem.OnPosted.ToDateString())</td>
+                    <td style="text-align: right">@((reportItem.TotalAmount / amountSpecificationUnit).ToString("N"))</td>
+                </tr>
+            }
+            <tr>
+                <!--<td></td>-->
+                <td></td>
+                <td>@(category.MoneyNature.Name + "小计：")</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">@((category.SubtotalAmount / amountSpecificationUnit).ToString("N"))</td>
+            </tr>
+        }
+        <tr>
+            <!--<td></td>-->
+            <td></td>
+            <td>合计：</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right">@((item.TotalAmount / amountSpecificationUnit).ToString("N"))</td>
+        </tr>
+    }
+}
+else
+{
+    <tr class="no-records-found">
+        <td colspan="7">没有找到匹配的记录</td>
+    </tr>
+}

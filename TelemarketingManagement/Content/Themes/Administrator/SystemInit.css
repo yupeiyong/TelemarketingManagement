@@ -1,0 +1,25 @@
+﻿form#SystemInitForm label {
+    width: 100%;
+    padding: 10px 0;
+    font-weight: normal;
+    color: #676767;
+}
+
+form#SystemInitForm label span {
+    display: inline-block;
+    width: 250px;
+}
+
+form#SystemInitForm label input {
+    width: 50%;
+    height: 28px;
+    padding: 0 5px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    color: #444;
+}
+
+form#SystemInitForm input.btn {
+    margin-left: 250px;
+    margin-top: 40px;
+}

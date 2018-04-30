@@ -1,0 +1,56 @@
+﻿@using JJsites.DomainModels
+@model List<Menu>
+@{
+    var menus = Model ?? new List<Menu>();
+    var parentMenus = menus.Where(m => m.Parent == null).OrderBy(m => m.CustomerOrder).ToList();
+}
+<div class="sidebar">
+    <div class="sidebar-collapse">
+        <a class="sidebar-header" href="/Admin/Manager/">
+            <img src="~/Content/Images/icon_logoForBack.png" alt="logo"/>
+        </a>
+        <div class="sidebar-menu">
+            <nav id="menu" class="nav-main" role="navigation">
+                <ul class="nav nav-sidebar">
+                    @foreach (var parent in parentMenus)
+                    {
+                        var textClass = string.IsNullOrWhiteSpace(parent.CssClass) ? "text" : parent.CssClass;
+                        if (parent.Children != null && parent.Children.Count > 0)
+                        {
+                            <li class="nav-parent">
+                                <a>
+                                    <i class="@parent.IconClass" aria-hidden="true"></i><span class="@textClass">@parent.MenuName</span>
+                                </a>
+                                <ul class="nav nav-children">
+                                    @{
+                                        var sonMenus = parent.Children.OrderBy(m => m.CustomerOrder).ToList();
+                                        foreach (var sonMenu in sonMenus)
+                                        {
+                                            var sonTextClass = string.IsNullOrWhiteSpace(sonMenu.CssClass) ? "text" : sonMenu.CssClass;
+                                            <li>
+                                                <a href="@sonMenu.Url">
+                                                    <span class="@sonTextClass">@sonMenu.MenuName</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@parent.Url">
+                                    <i class="@parent.IconClass" aria-hidden="true"></i><span class="@textClass">@parent.MenuName</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="sidebar-footer">
+        技术支持：<span>联创网络</span><a href="http://www.jjsoft.cn" target="_blank">赳赳软件</a>
+    </div>
+</div>

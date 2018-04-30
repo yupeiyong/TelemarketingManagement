@@ -1,86 +1,69 @@
-﻿using System;
+﻿using Common;
+using Common.Net;
+using Common.Operator;
+using Common.Security;
+using Config;
+using Data;
+using DataTransferObjects;
+using Models;
+using System;
 using System.Collections.Generic;
-using Nice.Common.Extend;
-using Nice.Common.Security;
-using Nice.Common.Web;
-using Nice.Domain.Entity.SystemManage;
-using Nice.Repository.IRepository.SystemManage;
-using Nice.Repository.SystemManage;
+using System.Linq;
 
-
-namespace Nice.Service.SystemManage
+namespace Service.SystemManage
 {
     public class UserService
     {
-        private IUserRepository service = new UserRepository();
-        private UserLogOnService _userLogOnService = new UserLogOnService();
 
-        public List<UserBaseEntity> GetList(Pagination pagination, string keyword)
+        public DataDbContext DataDbContext { get; set; }
+
+
+        public List<User> Search(UserSearchDto dto)
         {
-            var expression = ExtLinq.True<UserBaseEntity>();
-            if (!string.IsNullOrEmpty(keyword))
+            var dataSource = DataDbContext.Set<User>().AsQueryable();
+
+            if (!string.IsNullOrEmpty(dto.Keywords))
             {
-                expression = expression.And(t => t.F_Account.Contains(keyword));
-                expression = expression.Or(t => t.F_RealName.Contains(keyword));
-                expression = expression.Or(t => t.F_MobilePhone.Contains(keyword));
+                dataSource = dataSource.Where(m =>
+                    (m.RealName != null && m.RealName.Contains(dto.Keywords)) ||
+                    (m.NickName != null && m.NickName.Contains(dto.Keywords)) ||
+                    (m.MobilePhoneNumber != null && m.MobilePhoneNumber.Contains(dto.Keywords)));
             }
-            expression = expression.And(t => t.F_Account != "admin");
-            return service.FindList(expression, pagination);
+
+            dataSource = dataSource.OrderByDescending(m => m.LastModifyTime);
+            if (dto.IsGetTotalCount)
+                dto.TotalCount = dataSource.Count();
+
+            return dataSource.Skip(dto.StartIndex).Take(dto.PageSize).ToList();
         }
-        public UserBaseEntity GetForm(string keyValue)
+
+        public User CheckLogin(string username, string password)
         {
-            return service.FindEntity(keyValue);
-        }
-        public void DeleteForm(string keyValue)
-        {
-            service.DeleteForm(keyValue);
-        }
-        public void SubmitForm(UserBaseEntity userBaseEntity, UserLogOnBaseEntity userLogOnBaseEntity, string keyValue)
-        {
-            if (!string.IsNullOrEmpty(keyValue))
+            var user = DataDbContext.Set<User>().FirstOrDefault(t => t.AccountName == username);
+            if (user != null)
             {
-                userBaseEntity.Modify(keyValue);
-            }
-            else
-            {
-                userBaseEntity.Create();
-            }
-            service.SubmitForm(userBaseEntity, userLogOnBaseEntity, keyValue);
-        }
-        public void UpdateForm(UserBaseEntity userBaseEntity)
-        {
-            service.Update(userBaseEntity);
-        }
-        public UserBaseEntity CheckLogin(string username, string password)
-        {
-            UserBaseEntity userBaseEntity = service.FindEntity(t => t.F_Account == username);
-            if (userBaseEntity != null)
-            {
-                if (userBaseEntity.F_EnabledMark == true)
+                if (user.UserState != Models.Enum.UserStateEnum.Enable)
                 {
-                    UserLogOnBaseEntity userLogOnBaseEntity = _userLogOnService.GetForm(userBaseEntity.F_Id);
-                    string dbPassword = Md5.md5(DesEncrypt.Encrypt(password.ToLower(), userLogOnBaseEntity.F_UserSecretkey).ToLower(), 32).ToLower();
-                    if (dbPassword == userLogOnBaseEntity.F_UserPassword)
+                    string dbPassword = Md5.md5(DesEncrypt.Encrypt(Md5.md5(password, 32), Settings.UserSecretkey).ToLower(), 32).ToLower(); 
+                    
+                    if (dbPassword == user.Password)
                     {
                         DateTime lastVisitTime = DateTime.Now;
-                        int LogOnCount = (userLogOnBaseEntity.F_LogOnCount).ToInt() + 1;
-                        if (userLogOnBaseEntity.F_LastVisitTime != null)
-                        {
-                            userLogOnBaseEntity.F_PreviousVisitTime = userLogOnBaseEntity.F_LastVisitTime.ToDate();
-                        }
-                        userLogOnBaseEntity.F_LastVisitTime = lastVisitTime;
-                        userLogOnBaseEntity.F_LogOnCount = LogOnCount;
-                        _userLogOnService.UpdateForm(userLogOnBaseEntity);
-                        return userBaseEntity;
+                        user.LogOnCount += 1;
+                        user.LastModifyTime = DateTime.Now;
+                        return user;
                     }
                     else
                     {
+                        user.ErrorTimes += 1;
+                        user.LastErrorDateTime = DateTime.Now;
+                        DataDbContext.SaveChanges();
                         throw new Exception("密码不正确，请重新输入");
                     }
                 }
                 else
                 {
-                    throw new Exception("账户被系统锁定,请联系管理员");
+                    throw new Exception("账户不可用,请联系管理员");
                 }
             }
             else
@@ -88,5 +71,168 @@ namespace Nice.Service.SystemManage
                 throw new Exception("账户不存在，请重新输入");
             }
         }
+
+        public User Login(UserLoginDto dto)
+        {
+            //if (!SecurityCodeService.IsValid(dto.Token, dto.SecurityCode))
+            //    throw new Exception("错误：图形验证码错误！");
+
+            if (string.IsNullOrEmpty(dto.AccountName))
+                throw new Exception("错误：请输入您的账号！");
+            if (string.IsNullOrEmpty(dto.Password))
+                throw new Exception("错误：请输入您的密码！");
+
+            try
+            {
+                //if (Session["nfine_session_verifycode"].IsEmpty() || Md5.md5(code.ToLower(), 16) != Session["nfine_session_verifycode"].ToString())
+                //{
+                //    throw new Exception("验证码错误，请重新输入");
+                //}
+
+                var user = CheckLogin(dto.AccountName, dto.Password);
+                if (user != null)
+                {
+                    OnlineUser onlineUser = new OnlineUser();
+                    onlineUser.UserId = user.Id;
+                    onlineUser.AccountName = user.AccountName;
+                    onlineUser.UserName = user.RealName;
+                    //onlineUser.CompanyId = user.F_OrganizeId;
+                    //onlineUser.DepartmentId = user.F_DepartmentId;
+                    //onlineUser.RoleId = user.F_RoleId;
+                    onlineUser.LoginIPAddress = Net.Ip;
+                    onlineUser.LoginIPAddressName = Net.GetLocation(onlineUser.LoginIPAddress);
+                    onlineUser.LoginTime = DateTime.Now;
+                    onlineUser.LoginToken = DesEncrypt.Encrypt(Guid.NewGuid().ToString());
+                    if (user.AccountName == "admin")
+                    {
+                        onlineUser.IsSystem = true;
+                    }
+                    else
+                    {
+                        onlineUser.IsSystem = false;
+                    }
+                    OnlineUserProvider.Provider.AddCurrent(onlineUser);
+                    return user;
+                }
+                throw new Exception("登录失败，用户不存在！");
+            }
+            catch (Exception ex)
+            {
+                //logBaseEntity.F_Account = username;
+                //logBaseEntity.F_NickName = username;
+                //logBaseEntity.F_Result = false;
+                //logBaseEntity.F_Description = "登录失败，" + ex.Message;
+                //new LogService().WriteDbLog(logBaseEntity);
+                //return Content(new AjaxResult { state = ResultType.error.ToString(), message = ex.Message }.ToJson());
+                throw new Exception("登录失败，" + ex.Message);
+            }
+        }
+
+
+
+        public void Add(UserUpdateDto dto)
+        {
+            ValidateUpdateDto(dto);
+
+            if (DataDbContext.Set<User>().Any(u => u.AccountName == dto.AccountName))
+                throw new Exception($"添加用户失败，{dto.AccountName}已存在！");
+            
+            var user= dto.MapTo<User>();
+            user.Password = Md5.md5(DesEncrypt.Encrypt(Md5.md5(user.Password, 32), Settings.UserSecretkey).ToLower(), 32).ToLower();
+            user.CreatorTime = DateTime.Now;
+            user.LastModifyTime = DateTime.Now;
+
+            DataDbContext.Set<User>().Add(user);
+            DataDbContext.SaveChanges();
+        }
+
+
+        public void Update(UserUpdateDto dto)
+        {
+            var user = DataDbContext.Set<User>().FirstOrDefault(m => m.Id == dto.UpdateId);
+            if (user == null)
+                throw new Exception($"错误：指定Id {dto.UpdateId} 的用户不存在！");
+
+            ValidateUpdateDto(dto);
+            dto.MapTo<User>(user);
+            user.LastModifyTime = DateTime.Now;
+
+            DataDbContext.SaveChanges();
+        }
+
+
+        private static void ValidateUpdateDto(UserUpdateDto dto)
+        {
+            if (string.IsNullOrEmpty(dto.AccountName))
+                throw new Exception("错误：用户帐号不能为空！");
+            if (string.IsNullOrEmpty(dto.Password))
+                throw new Exception("错误：用户密码不能为空！");
+
+            //dto.NickName = dto.NickName ?? "";
+        }
+
+
+        public void Remove(long id)
+        {
+            //var user = roleEnum.HasValue ?
+            //    DbContext.Set<User>().FirstOrDefault(m => m.Id == id && (m.UserRoles.HasValue && ((m.UserRoles.Value & (long)roleEnum.Value) == (long)roleEnum.Value))) :
+            //    DbContext.Set<User>().FirstOrDefault(m => m.Id == id);
+            //if (user == null)
+            //    throw new Exception(string.Format($"错误：指定Id {id} 的用户不存在！"));
+
+            //DbContext.Remove(user).SaveChanges();
+        }
+
+
+        //public void RemoveList(ICollection<long> idList, UserRoleEnum? roleEnum = null)
+        //{
+        //    if (roleEnum.HasValue)
+        //    {
+        //        foreach (var id in idList)
+        //        {
+        //            var user = DbContext.Set<User>().FirstOrDefault(m => m.Id == id && (m.UserRoles.HasValue && ((m.UserRoles.Value & (long)roleEnum.Value) == (long)roleEnum.Value)));
+        //            if (user == null)
+        //                throw new Exception(string.Format($"错误：指定Id {id} 的用户不存在！"));
+        //            DbContext.Remove(user).SaveChanges();
+        //        }
+        //    }
+        //    else
+        //        DbContext.Set<User>().Where(u => idList.Any(id => id == u.Id)).Delete();
+        //}
+
+
+        //public static bool IsUserRole(User user, UserRoleEnum role)
+        //{
+        //    return user.UserRoles.HasValue && (user.UserRoles.Value & (long)role) == (long)role;
+        //}
+
+
+        //public User Register(UserRegisterDto dto)
+        //{
+        //    if (string.IsNullOrEmpty(dto.AccountName))
+        //        throw new Exception("错误：注册帐号为空！");
+        //    if (string.IsNullOrEmpty(dto.Password))
+        //        throw new Exception("错误：密码不可为空！");
+
+        //    var isAccountNameExisted = DbContext.Set<User>().Any(e => e.AccountName != null && e.AccountName == dto.AccountName);
+        //    if (isAccountNameExisted)
+        //        throw new Exception("错误：帐号名已被占用！");
+
+        //    var user = new User
+        //    {
+        //        AccountName = dto.AccountName,
+        //        Password = dto.Password,
+
+        //        //默认昵称为帐号名
+        //        NickName = dto.AccountName,
+        //        RedirectLocationAfterLogin = AppSettings.RedirectLocationAfterLoginForMember,
+        //        RedirectLocationAfterWechatLogin = AppSettings.RedirectLocationAfterWechatLoginForMember,
+        //        UserRoles = (long)UserRoleEnum.Member,
+        //        BaseUserState = BaseUserStateEnum.Enabled
+        //    };
+        //    BaseUserService.EncryptPassword(user);
+        //    DbContext.Add(user).SaveChanges();
+        //    return user;
+        //}
     }
 }

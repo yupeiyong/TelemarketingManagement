@@ -153,7 +153,6 @@ E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\System.Web.WebP
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\System.Web.WebPages.Razor.dll
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\WebGrease.dll
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\log4net.dll
-E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\AutoMapper.dll
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Common.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Autofac.xml
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Autofac.Integration.Mvc.xml
@@ -218,3 +217,5 @@ E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Config.dll
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Data.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Models.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Config.pdb
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\DataTransferObjects.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\DataTransferObjects.pdb

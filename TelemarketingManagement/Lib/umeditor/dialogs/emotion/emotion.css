@@ -1,0 +1,102 @@
+.edui-popup-emotion .edui-emotion-jd img {
+    background: transparent url(images/jxface2.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+}
+
+.edui-popup-emotion .edui-emotion-pp img {
+    background: transparent url(images/fface.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    width: 25px;
+}
+
+.edui-popup-emotion .edui-emotion-ldw img {
+    background: transparent url(images/wface.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+}
+
+.edui-popup-emotion .edui-emotion-tsj img {
+    background: transparent url(images/tface.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+}
+
+.edui-popup-emotion .edui-emotion-cat img {
+    background: transparent url(images/cface.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+}
+
+.edui-popup-emotion .edui-emotion-bb img {
+    background: transparent url(images/bface.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+}
+
+.edui-popup-emotion .edui-emotion-youa img {
+    background: transparent url(images/yface.gif?v=1.1) no-repeat scroll left top;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 35px;
+}
+
+.edui-popup-emotion .edui-emotion-smileytable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.edui-popup-emotion .edui-emotion-wrapper { padding: 15px; }
+
+.edui-popup-emotion .edui-tab-nav {
+    height: auto;
+    *height: 31px;
+}
+
+.edui-popup-emotion .edui-emotion-tabs {
+    clear: both;
+    height: 0;
+    width: 0;
+}
+
+.edui-popup-emotion .edui-tab-content { padding: 15px 0; }
+
+.edui-popup-emotion .edui-emotion-preview-box {
+    background: #FFFFFF;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #9cb945;
+    display: none;
+    height: 76px;
+    left: 494px;
+    position: absolute;
+    top: 67px;
+    width: 90px;
+}
+
+.edui-popup-emotion .edui-tab-text { font-size: 12px; }
+
+.edui-popup-emotion .edui-emotion-preview-left { left: 15px; }
+
+.edui-popup-emotion .edui-emotion-preview-img {
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    height: 100%;
+    width: 100%;
+}

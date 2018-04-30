@@ -17,8 +17,8 @@ namespace TelemarketingManagement.App_Start.Base
         {
             var builder = new ContainerBuilder();
 
-            var assemblyNames = new[] { "Common", "Data", "Service" };
-            var assemblies= assemblyNames.Select(a => Assembly.Load(a)).ToList();
+            var assemblyNames = new[] { "Common", "Data", "Service", "TelemarketingManagement" };
+            var assemblies = assemblyNames.Select(a => Assembly.Load(a)).ToList();
             //var types = AppDomain.CurrentDomain
             //    .GetAssemblies()
             //    .Where(a => assemblyNames.Any(n => a.FullName.StartsWith(n)))

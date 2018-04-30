@@ -1,0 +1,13 @@
+﻿.file-zoom-dialog.modal.fade.in {
+  z-index: 10000; }
+  .file-zoom-dialog.modal.fade.in + .modal-backdrop.fade.in {
+    z-index: 9999; }
+
+/*不显示删除查看详情*/
+.krajee-default .file-footer-buttons {
+    display: none !important;
+}
+
+.file-preview .close {
+    display: none !important;
+}

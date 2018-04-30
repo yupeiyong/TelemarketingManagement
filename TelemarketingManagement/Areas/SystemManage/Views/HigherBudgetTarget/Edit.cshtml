@@ -1,0 +1,155 @@
+﻿@using JJsites.DataTransferObjects
+@using JJsites.DomainModels
+@model JJsites.ViewModels.HigherBudgetTargetEditViewModel
+@{
+    Layout = null;
+    var data = Model.HigherBudgetTarget;
+    var isAdd = data.Id <= 0;
+    var addDefaultValue = "";
+}
+
+<link href="~/Lib/JqueryEasyui/1.5.1/themes/default/easyui.css" rel="stylesheet"/>
+<link href="~/Areas/AdminManager/Content/budgetTarget-edit.css" rel="stylesheet"/>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <form class="form-horizontal form-edit" role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>文号：</label>
+                            <div class="col-sm-8">
+                                <input name="DocumentNumber" type="text" class="form-control input-sm first" value="@data.DocumentNumber" required="true"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>功能科目：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(FunctionSubject)})" style="width: 250px;"
+                                       value="@(data.FunctionSubject != null ? data.FunctionSubject.CustomedNumberAndName : addDefaultValue)"/>
+                                <input class="hidden-id" name="FunctionSubjectId" type="hidden" value="@(data.FunctionSubject?.Id ?? 0)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>专款资金性质：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(HigherSpecialFundMoneyNature)})" style="width: 250px;"
+                                       value="@(data.HigherSpecialFundMoneyNature != null ? data.HigherSpecialFundMoneyNature.CustomedNumberAndName : addDefaultValue)"/>
+                                <input class="hidden-id" name="HigherSpecialFundMoneyNatureId" type="hidden" value="@(data.HigherSpecialFundMoneyNature?.Id ?? 0)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>专款来源：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(HigherSpecialFundSource)})" style="width: 250px;"
+                                       value="@(data.HigherSpecialFundSource != null ? data.HigherSpecialFundSource.CustomedNumberAndName : addDefaultValue)"/>
+                                <input class="hidden-id" name="HigherSpecialFundSourceId" type="hidden" value="@(data.HigherSpecialFundSource?.Id ?? 0)"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>科室：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(HigherDepartment)})" style="width: 250px;"
+                                       value="@(data.HigherDepartment != null ? data.HigherDepartment.CustomedNumberAndName : addDefaultValue)"/>
+                                <input class="hidden-id" name="HigherDepartmentId" type="hidden" value="@(data.HigherDepartment?.Id ?? 0)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>预算来源：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(BudgetSource)})" style="width: 250px;"
+                                       value="@(data.BudgetSource != null ? data.BudgetSource.CustomedNumberAndName : addDefaultValue)" />
+                                <input class="hidden-id" name="@nameof(HigherBudgetTargetEditDto.BudgetSourceId)" type="hidden" value="@(data.BudgetSource?.Id ?? 0)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>金额：</label>
+                            <div class="col-sm-8">
+                                <input name="TotalAmount" id="TotalAmount" type="text" class="form-control input-sm" value="@data.TotalAmount" checkAmount="true" required="true"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>发文时间：</label>
+                            <div class="col-sm-8">
+                                <input name="OnPosted" type="date" class="form-control input-sm" value="@data.OnPosted.ToString("yyyy-MM-dd")" style="width: 250px;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="redRequired">*</span>指标摘要：</label>
+                    <div class="col-sm-10">
+                        <textarea rows="3" name="Summary" class="form-control input-sm" required="true">@data.Summary</textarea>
+                    </div>
+                </div>
+
+                @if (!isAdd)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><span class="redRequired">*</span>已拨付：</label>
+                                <div class="col-sm-8">
+                                    <input type="number" readonly="readonly" class="form-control input-sm" value="@data.TotalAppropriated"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><span class="redRequired">*</span>余额：</label>
+                                <div class="col-sm-8">
+                                    <input type="number" readonly="readonly" class="form-control input-sm" value="@data.Balance"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="hidden">
+                        <input name="Id" type="hidden" value="@data.Id"/>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        @if (isAdd)
+                        {
+                            <button type="button" class="btn btn-success u-btn" id="btnSaveContinue" data-url="@Url.Action("Save")">
+                                <i class="fa fa-save" aria-hidden="true"></i>
+                                保存并新增
+                            </button>
+                        }
+                        <button type="button" class="btn btn-success u-btn" id="btnSave" data-url="@Url.Action("Save")">
+                            <i class="fa fa-save" aria-hidden="true"></i>
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/Areas/AdminManager/Scripts/higherBudgetTarget-edit.js"></script>

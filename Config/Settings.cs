@@ -15,5 +15,6 @@ namespace Config
         public static string Version { get; set; } = "1.0.0.0";
 
 
+        public static string UserSecretkey { get; set; } = "TelemarketingManagement_User_Secret_key";
     }
 }

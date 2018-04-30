@@ -1,0 +1,97 @@
+﻿@model JJsites.ViewModels.BasicDataSearchIndexViewModel
+@{
+    var orders = Model.BasicDataTypeCustomedOrders;
+}
+<link href="~/Content/Themes/Manager/basicDataSearch.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="CurrentPosition">
+        <img src="~/Content/Images/icon_currentPosition.png" />
+        当前位置：后台管理系统 > 基础资料编辑
+    </div>
+    <div class="row clearfix conditional">
+        <div class="pull-left">
+            <div class="Selects">
+                @if (orders.Count > 0)
+                {
+                    <span class="currentTitle" data-model-name="@orders[0].ModelTypeName"><i>@orders[0].ModelChineseName</i><i class="fa fa-caret-down"></i></span>
+                    <ul id="BaseDataList">
+                        <li class="on" data-model-name="@orders[0].ModelTypeName">@orders[0].ModelChineseName</li>
+                        @for (int i = 1, len = orders.Count; i < len; i++)
+                        {
+                            <li data-model-name="@orders[i].ModelTypeName">@orders[i].ModelChineseName</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+        <div class="pull-right">
+            <div class="btn-group">
+                <div class="form-search">
+                    <form class="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bk-radius" name="Keywords" id="Keywords" placeholder="关键词...">
+                            <input type="hidden" name="ModelTypeName" value="@orders[0].ModelTypeName" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-sm" id="btnSearch">
+                                    <i class="fa fa-search"></i>
+                                    搜索
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" id="btnAdd"
+                        title="信息" data-u-url="/Admin/Manager/BasicDataSearch/Add" data-model-name="@orders[0].ModelTypeName">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    新增
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <table data-url="/Admin/Manager/BasicDataSearch/GetData" id="tab"
+                   data-id-field="Id"
+                   data-resizable="true"
+                   data-filter-control="false">
+                <thead>
+                    <tr>
+                        <th data-sortable="false" data-field="_id" data-width="50"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            行号
+                        </th>
+                        <th data-sortable="false" data-field="Id" data-width="50"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            Id
+                        </th>
+                        <th data-sortable="true" data-field="CustomedNumberWithHtmlSpaces" data-width="180"
+                            data-align="left" data-halign="center" data-valign="middle">
+                            编号
+                        </th>
+                        <th data-sortable="true" data-field="NameWithHtmlSpaces"
+                            data-align="left" data-halign="center" data-valign="middle">
+                            名称
+                        </th>
+                        <th data-sortable="true" data-field="IsDefaultByAdd" data-width="80"
+                            data-formatter="isDefaultFormatter"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            是否默认
+                        </th>
+                        <th data-sortable="false" data-width="120" data-field="Id"
+                            data-formatter="operateFormatter"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/AdminManager/Scripts/basicDataSearch-index.js"></script>
+}

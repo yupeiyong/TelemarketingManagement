@@ -1,0 +1,50 @@
+﻿ .currentTitle i:first-of-type {
+        font-style: normal;
+        margin-right: 15px;
+    }
+
+     .Selects {
+         position: relative;
+         display: inline-block;
+         min-width: 130px;
+     }
+
+    .Selects #BaseDataList {
+        display: none;
+        width: 100%;
+        position: absolute;
+        font-weight: normal;
+        font-size: 13px;
+        z-index: 9999999;
+        background: #fff;
+        margin: 0;
+        padding: 0;
+        border: 1px solid;
+    }
+
+    .Selects:hover #BaseDataList {
+        display: block;
+    }
+
+    .Selects #BaseDataList li {
+        list-style: none;
+        padding: 5px 20px;
+        color: #858585;
+        cursor: pointer;
+    }
+
+    .Selects #BaseDataList li.on,
+    .Selects #BaseDataList li:hover {
+        background: #187cc1;
+        color: #fff;
+    }
+
+
+/*------------------*/
+/*.main .container-fluid .row .pull-right > div {
+    display: table;
+}
+
+.main .container-fluid .row .pull-right > div input {
+    width: 200px;
+}*/
