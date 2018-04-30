@@ -219,3 +219,5 @@ E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Models.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\Config.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\DataTransferObjects.dll
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\DataTransferObjects.pdb
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\ViewModels.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\ViewModels.pdb

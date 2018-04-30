@@ -16,6 +16,7 @@ namespace Models
     [Description("客户")]
     public class Customer : BaseEntity
     {
+        [MaxLength(50)]
         public string NickName { get; set; }
 
         public string Sex => this.Gender == null ? string.Empty : this.Gender.Value.GetEnumDescription();
@@ -23,26 +24,33 @@ namespace Models
         public Gender? Gender { get; set; }
 
         public virtual CustomerCategory CustomerCategory { get; set; }
+
+        public string CategoryDescription => CustomerCategory == null ? "" : CustomerCategory.Name;
         /// <summary>
         ///     手机电话号码：用于绑定、找回密码等
         /// </summary>
+        [MaxLength(50)]
         public string MobilePhoneNumber { get; set; }
 
 
         /// <summary>
         ///     QQ
         /// </summary>
+        [MaxLength(20)]
         public string Qq { get; set; }
 
         /// <summary>
         ///     微信
         /// </summary>
+        [MaxLength(50)]
         public string Wechat { get; set; }
 
 
-
+        [Index]
+        [MaxLength(100)]
         public string RealName { get; set; }
 
+        public string AgeDescription => Age < 0 ? "" : Age.ToString();
 
         public int Age
         {
@@ -63,15 +71,6 @@ namespace Models
         public DateTime? Birthday { get; set; }
 
         public string Address { get; set; }
-        //[Index]
-        //[MaxLength(100)]
-        //public string Password { get; set; }
-
-
-        //[Index]
-        //[MaxLength(200)]
-        //public string AccountName { get; set; }
-
 
     }
 

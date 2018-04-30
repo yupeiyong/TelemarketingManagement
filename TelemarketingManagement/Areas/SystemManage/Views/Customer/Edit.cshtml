@@ -1,0 +1,155 @@
+﻿@using Models
+@using Common
+@model ViewModels.CustomerEditViewModel
+@{
+    Layout = null;
+    var data = Model.Customer;
+    var genders = Model.Genders;
+    var isAdd = data.Id <= 0;
+    var addDefaultValue = "";
+}
+
+<link href="~/Lib/JqueryEasyui/1.5.1/themes/default/easyui.css" rel="stylesheet" />
+<link href="~/Areas/AdminManager/Content/budgetTarget-edit.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <form class="form-horizontal form-edit" role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>姓名：</label>
+                            <div class="col-sm-8">
+                                <input name="RealName" type="text" class="form-control input-sm first" value="@data.RealName" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>昵称：</label>
+                            <div class="col-sm-8">
+                                <input name="NickName" type="text" class="form-control input-sm first" value="@data.NickName" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>性别：</label>
+                            <div class="col-sm-8">
+                                <select name="@nameof(Customer.Gender)">
+                                    @foreach (var gender in genders)
+                                    {
+                                        if (data.Gender != null && data.Gender.Value == gender)
+                                        {
+                                            <option value="@gender" selected="selected">@gender.GetEnumDescription()</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@gender">@gender.GetEnumDescription()</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>出生年月：</label>
+                            <div class="col-sm-8">
+                                <input name="Birthday" type="text" class="form-control input-sm first" value="@data.Birthday" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>手机：</label>
+                            <div class="col-sm-8">
+                                <input name="MobilePhoneNumber" type="text" class="form-control input-sm first" value="@data.MobilePhoneNumber" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>QQ：</label>
+                            <div class="col-sm-8">
+                                <input name="Qq" type="text" class="form-control input-sm first" value="@data.Qq" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>微信：</label>
+                            <div class="col-sm-8">
+                                <input name="Wechat" type="text" class="form-control input-sm first" value="@data.Wechat" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>QQ：</label>
+                            <div class="col-sm-8">
+                                <input name="NickName" type="text" class="form-control input-sm first" value="@data.NickName" required="true" />
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                @*<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>科室：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(HigherDepartment)})" style="width: 250px;"
+                                       value="@(data.HigherDepartment != null ? data.HigherDepartment.CustomedNumberAndName : addDefaultValue)" />
+                                <input class="hidden-id" name="HigherDepartmentId" type="hidden" value="@(data.HigherDepartment?.Id ?? 0)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>预算来源：</label>
+                            <div class="col-sm-8">
+                                <input class="easyui-combotree" data-url="@Url.Action("GetTreeBasicData", new {ModelTypeName = nameof(BudgetSource)})" style="width: 250px;"
+                                       value="@(data.BudgetSource != null ? data.BudgetSource.CustomedNumberAndName : addDefaultValue)" />
+                                <input class="hidden-id" name="@nameof(HigherBudgetTargetEditDto.BudgetSourceId)" type="hidden" value="@(data.BudgetSource?.Id ?? 0)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="redRequired">*</span>住址：</label>
+                    <div class="col-sm-10">
+                        <textarea rows="3" name="Address" class="form-control input-sm" >@data.Address</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="hidden">
+                        <input name="Id" type="hidden" value="@data.Id" />
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        @if (isAdd)
+                        {
+                            <button type="button" class="btn btn-success u-btn" id="btnSaveContinue" data-url="@Url.Action("Save")">
+                                <i class="fa fa-save" aria-hidden="true"></i>
+                                保存并新增
+                            </button>
+                        }
+                        <button type="button" class="btn btn-success u-btn" id="btnSave" data-url="@Url.Action("Save")">
+                            <i class="fa fa-save" aria-hidden="true"></i>
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/Areas/SystemManage/Scripts/customer-edit.js"></script>

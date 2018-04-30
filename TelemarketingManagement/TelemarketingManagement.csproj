@@ -236,6 +236,8 @@
     <Content Include="Areas\SystemManage\Content\higherBudgetTarget-index.css" />
     <Content Include="Areas\SystemManage\Content\jquery.mmenu.css" />
     <Content Include="Areas\SystemManage\Content\report-index.css" />
+    <Content Include="Areas\SystemManage\Scripts\customer-edit.js" />
+    <Content Include="Areas\SystemManage\Scripts\customer-index.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -1420,6 +1422,8 @@
     <Content Include="Areas\SystemManage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\SystemManage\Views\Shared\Menu.cshtml" />
     <Content Include="Areas\SystemManage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\SystemManage\Views\Customer\Edit.cshtml" />
     <None Include="Lib\JQueryValidate\1.15.0\jquery.validate-vsdoc.js" />
     <Content Include="Lib\JQueryValidate\1.15.0\jquery.validate-vsdoc.min.js" />
     <Content Include="Lib\JQueryValidate\1.15.0\jquery.validate.js" />
@@ -1742,7 +1746,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\SystemManage\Models\" />
     <Folder Include="Areas\SystemManage\Views\CustomerCategory\" />
-    <Folder Include="Areas\SystemManage\Views\Customer\" />
     <Folder Include="Areas\SystemManage\Views\Default\" />
     <Folder Include="Areas\SystemManage\Views\TelephoneRecording\" />
     <Folder Include="Areas\SystemManage\Views\User\" />
@@ -1775,6 +1778,10 @@
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{85550d7d-c3c6-4109-9174-494ff90f99a9}</Project>
       <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{C8044BFD-31FB-47D2-AF60-CA933B48D864}</Project>
+      <Name>ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

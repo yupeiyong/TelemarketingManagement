@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,9 @@ namespace DataTransferObjects
         public DateTime? StartLastModifyTime { get; set; }
 
         public DateTime? EndLastModifyTime { get; set; }
+
+        public long CustomerCategoryId { get; set; }
+
+        public Gender? Gender { get; set; }
     }
 }

@@ -105,7 +105,22 @@ namespace UnitTestProject.Models
         [TestMethod]
         public void AdminUserInit()
         {
-
+            var defaultPassword = UserService.Encrypt("admin");
+            var user=new User
+            {
+                RealName = $"管理员",
+                AccountName="admin",
+                Gender = Gender.Male,
+                Birthday = new System.DateTime(1980, 12, 5),
+                Wechat = "wwwweweqw",
+                Qq = $"5678",
+                NickName = "小管",
+                UserState = UserStateEnum.Enable,
+                MobilePhoneNumber = "13990182231",
+                Password = defaultPassword
+            };
+            DataDbContext.Set<User>().Add(user);
+            DataDbContext.SaveChanges();
         }
 
 

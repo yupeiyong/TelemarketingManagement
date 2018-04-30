@@ -15,7 +15,8 @@ namespace TelemarketingManagement
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+                namespaces: new[] { "TelemarketingManagement.Controllers" }
             );
             //routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }

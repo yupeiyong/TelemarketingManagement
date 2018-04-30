@@ -42,7 +42,7 @@ namespace Service.SystemManage
             var user = DataDbContext.Set<User>().FirstOrDefault(t => t.AccountName == username);
             if (user != null)
             {
-                if (user.UserState != Models.Enum.UserStateEnum.Enable)
+                if (user.UserState == Models.Enum.UserStateEnum.Enable)
                 {
                     string dbPassword = Encrypt(password);
 
@@ -51,6 +51,7 @@ namespace Service.SystemManage
                         DateTime lastVisitTime = DateTime.Now;
                         user.LogOnCount += 1;
                         user.LastModifyTime = DateTime.Now;
+                        DataDbContext.SaveChanges();
                         return user;
                     }
                     else

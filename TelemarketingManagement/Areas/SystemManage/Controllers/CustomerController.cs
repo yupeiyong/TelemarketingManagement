@@ -1,6 +1,7 @@
 ﻿using Common;
 using DataTransferObjects;
 using Models;
+using Models.Enum;
 using Service;
 using Service.SystemManage;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TelemarketingManagement.App_Start.Base;
+using ViewModels;
 
 namespace TelemarketingManagement.Areas.SystemManage.Controllers
 {
@@ -39,7 +41,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
         public JsonResult GetData(CustomerSearchDto dto)
         {
             dto.IsGetTotalCount = true;
-
+            dto.PageSize = 20;
             var rows = CustomerService.Search(dto);
             //var viewModels = plans.MapToList<ChongQinSSCPlanViewModel>();
             //var models = rows.CloneAnyMembersRange<BudgetTarget, BudgetTargetViewModel>();
@@ -53,27 +55,21 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
         }
 
 
-        //public ActionResult Edit(long id = -1)
-        //{
-        //    var budgetTarget = new BudgetTarget();
-        //    var basicDataBaseModels = new Dictionary<string, BasicDataBaseModel>();
-
-        //    //是否为新增
-        //    if (id == -1)
-        //    {
-        //        basicDataBaseModels = BasicDataService.GetDefaultBaseModels();
-        //    }
-        //    else
-        //    {
-        //        budgetTarget = BudgetTargetService.GetDataById(id) ?? new BudgetTarget();
-        //    }
-        //    var viewModel = new BudgetTargetEditViewModel
-        //    {
-        //        BudgetTarget = budgetTarget,
-        //        BasicDataBaseModels = basicDataBaseModels
-        //    };
-        //    return View(viewModel);
-        //}
+        public ActionResult Edit(long id = -1)
+        {
+            var customer = new Customer();
+            //是否为新增
+            if (id >0)
+            {
+                customer = CustomerService.GetDataById(id) ?? new Customer();
+            }
+            var viewModel = new CustomerEditViewModel
+            {
+               Customer= customer,
+               Genders=Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList()
+            };
+            return View(viewModel);
+        }
 
 
         public ActionResult Add()

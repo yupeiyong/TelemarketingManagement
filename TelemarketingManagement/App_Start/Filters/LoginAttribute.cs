@@ -8,6 +8,8 @@ namespace TelemarketingManagement.App_Start.Filters
     public class LoginAttribute : AuthorizeAttribute
     {
         public bool Ignore = true;
+
+        public string LoginUrl = "/User/Login";
         public LoginAttribute(bool ignore = true)
         {
             Ignore = ignore;
@@ -21,7 +23,7 @@ namespace TelemarketingManagement.App_Start.Filters
             if (OnlineUserProvider.Provider.GetCurrent() == null)
             {
                 WebHelper.WriteCookie("online_user_login_error", "overdue");
-                filterContext.HttpContext.Response.Write("<script>top.location.href = '/Login/Index';</script>");
+                filterContext.HttpContext.Response.Write("<script>top.location.href = '" + LoginUrl + "';</script>");
                 return;
             }
         }
