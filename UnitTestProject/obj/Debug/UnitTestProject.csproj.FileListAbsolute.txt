@@ -89,3 +89,5 @@ E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\zh-Hans\System.We
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\zh-Hans\System.Web.WebPages.resources.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\ViewModels.dll
+E:\workspace\TelemarketingManagement\UnitTestProject\bin\Debug\ViewModels.pdb

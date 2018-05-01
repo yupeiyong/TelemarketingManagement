@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="BaseResponseDto.cs" />
     <Compile Include="BaseSearchDto.cs" />
+    <Compile Include="CustomerCategoryEditDto.cs" />
+    <Compile Include="CustomerCategorySearchDto.cs" />
     <Compile Include="CustomerEditDto.cs" />
     <Compile Include="CustomerSearchDto.cs" />
     <Compile Include="LoginResultDto.cs" />

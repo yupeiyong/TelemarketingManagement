@@ -142,3 +142,5 @@ E:\workspace\TelemarketingManagement\TelemarketingManagement.Tests\bin\Debug\Mod
 E:\workspace\TelemarketingManagement\TelemarketingManagement.Tests\bin\Debug\Data.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement.Tests\bin\Debug\Config.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement.Tests\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement.Tests\bin\Debug\ViewModels.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement.Tests\bin\Debug\ViewModels.pdb

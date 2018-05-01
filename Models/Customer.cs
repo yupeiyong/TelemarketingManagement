@@ -16,6 +16,7 @@ namespace Models
     [Description("客户")]
     public class Customer : BaseEntity
     {
+        [Index]
         [MaxLength(50)]
         public string NickName { get; set; }
 

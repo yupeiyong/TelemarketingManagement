@@ -417,10 +417,7 @@
     <Content Include="Content\Images\icon_rili.png" />
     <Content Include="Content\Images\left_guidBottom.png" />
     <Content Include="Content\Images\loginBack.jpg" />
-    <Content Include="Content\Images\loginBackOld.jpg" />
     <Content Include="Content\Images\logo.png" />
-    <Content Include="Content\Images\logoForHead.png" />
-    <Content Include="Content\Images\logoForHeadOld.png" />
     <Content Include="Content\Themes\Administrator\SystemInit.css" />
     <Content Include="Content\Themes\changePassword.css" />
     <Content Include="Content\Themes\common.css" />

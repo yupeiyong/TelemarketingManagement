@@ -15,8 +15,15 @@ namespace Service.SystemManage
     public class UserService
     {
 
+        private readonly string _modelDescription = typeof(User).GetDescription();
+
         public DataDbContext DataDbContext { get; set; }
 
+        ~UserService()
+        {
+            if (DataDbContext != null)
+                DataDbContext.Dispose();
+        }
 
         public List<User> Search(UserSearchDto dto)
         {
@@ -97,6 +104,7 @@ namespace Service.SystemManage
                     onlineUser.UserId = user.Id;
                     onlineUser.AccountName = user.AccountName;
                     onlineUser.UserName = user.RealName;
+                    onlineUser.NickName = user.NickName;
                     //onlineUser.CompanyId = user.F_OrganizeId;
                     //onlineUser.DepartmentId = user.F_DepartmentId;
                     //onlineUser.RoleId = user.F_RoleId;
@@ -172,16 +180,19 @@ namespace Service.SystemManage
             //dto.NickName = dto.NickName ?? "";
         }
 
-
-        public void Remove(long id)
+        public void Remove(params long[] ids)
         {
-            //var user = roleEnum.HasValue ?
-            //    DbContext.Set<User>().FirstOrDefault(m => m.Id == id && (m.UserRoles.HasValue && ((m.UserRoles.Value & (long)roleEnum.Value) == (long)roleEnum.Value))) :
-            //    DbContext.Set<User>().FirstOrDefault(m => m.Id == id);
-            //if (user == null)
-            //    throw new Exception(string.Format($"错误：指定Id {id} 的用户不存在！"));
+            if (ids == null || ids.Length == 0)
+                throw new Exception("错误，删除的序号为空！");
+            foreach (var id in ids)
+            {
+                var data = DataDbContext.Set<User>().FirstOrDefault(b => b.Id == id);
+                if (data == null)
+                    throw new Exception($"错误，{_modelDescription}不存在！(Id:{id})");
 
-            //DbContext.Remove(user).SaveChanges();
+                DataDbContext.Set<User>().Remove(data);
+            }
+            DataDbContext.SaveChanges();
         }
 
 
@@ -193,5 +204,9 @@ namespace Service.SystemManage
             return Md5.md5(DesEncrypt.Encrypt(Md5.md5(pwd, 32), Settings.UserSecretkey).ToLower(), 32).ToLower();
         }
 
+        public User GetDataById(long id)
+        {
+            return DataDbContext.Set<User>().FirstOrDefault(b => b.Id == id);
+        }
     }
 }
