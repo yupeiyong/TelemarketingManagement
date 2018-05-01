@@ -47,19 +47,11 @@
                             </a>
                         </div>*@
                     <p class="messageTips"></p>
-                    <button id="btnLogin" data-url="@Url.Action("LoginSubmitJson", "User", new RouteValueDictionary {{"area", ""}})"></button>
+                    
 
-                    @*<div class="inputBox">
-                            @if (!AppSettings.IsSystemInitialized)
-                            {
-                                <span class="WarningMessage">系统尚未初始化请 <a href="/Admin/Administrator/SystemInit">初始化</a></span>
-                            }
-                            else
-                            {
-                                <a href="/Admin/Administrator/SystemInit">初始化</a>
-                            }
-                            <button id="btnLogin" data-url="@Url.Action("LoginSubmitJson", "AllUser", new RouteValueDictionary {{"area", ""}})"></button>
-                        </div>*@
+                    <div class="inputBox">
+                        <button id="btnLogin" data-url="@Url.Action("LoginSubmitJson", "User", new RouteValueDictionary {{"area", ""}})"></button>
+                        </div>
                 </form>
             </div>
         </div>

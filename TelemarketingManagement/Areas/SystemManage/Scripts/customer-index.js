@@ -29,12 +29,13 @@
                 if (!rowId || rowId.length <= 0) {
                     return false;
                 }
-                title = "修改客户资料 " + rowId;
+                title = "修改客户资料  " + rowId;
             }
 
             //获取链接路径
             var url = $(this).data("u-url");
-            //弹窗显示详情
+
+            //打开编辑页
             BootstrapDialog.show({
                 title: title,
                 size: BootstrapDialog.SIZE_WIDE,
@@ -42,100 +43,121 @@
                 closeByBackdrop: false,
                 closeByKeyboard: true,
                 draggable: true,
-                message: function (dialog) {
-                    var dialogRef = dialog;
-                    var $message = $("<div></div>");
-                    $message.load(url, function () {
-                        var $form = dialogRef.$modalBody.find("form");
-
-                        //添加按钮添加事件处理函数
-                        dialogRef.$modalBody.find("#btnSave, #btnSaveContinue").off("click").on("click", function () {
-                            //检测验证结果
-                            if (!$form.valid()) {
-                                $(".form-group input.error")[0].select();
-                                $(".form-group input.error")[0].focus();
-                                return false;
-                            }
-                            //当前对象
-                            var $this = $(this);
-                            //是否关闭编辑窗口
-                            var isCloseWindow = isModify ? true : ($this.attr("id") == "btnSave" ? true : false);
-
-                            var $closeBtn = dialogRef.$modalHeader.find("button.close");
-
-                            var url = $this.data("url");
-                            //保存
-                            var data = $form.serializeArray();
-                            var btnOriginalText = $this.text();
-                            $.ajax({
-                                url: url,
-                                type: "json",
-                                data: data,
-                                beforeSend: function () {
-                                    $this.attr("disabled", true);
-                                    $closeBtn.attr("disabled", true);
-
-                                    $this.text("保存中...");
-                                },
-                                success: function (data) {
-                                    layer.msg(data.Message, { time: 5000 });
-                                    if (data.Success) {
-                                        if (isCloseWindow) {
-                                            $this.closest(".bootstrap-dialog").modal("hide");
-                                        } else {
-                                            $form[0].reset();
-                                            $form.find(".easyui-combotree").each(function (e) {
-                                                var $e = $(this);
-                                                $e.combotree("setValue", "");
-                                            });
-                                            $form.find("input").each(function (e) {
-                                                var $e = $(this);
-                                                $e.val("");
-                                            });
-                                            $form.find(".u-select2").each(function (e) {
-                                                var $e = $(this);
-                                                $e.val("").trigger("change");
-                                            });
-                                        }
-                                        $table.bootstrapTable("refresh");
-                                    }
-                                },
-                                error: function (xhr, error, errThrow) {
-                                    layer.msg(errThrow, { time: 5000 });
-                                },
-                                complete: function (msg, textStatus) {
-                                    $this.attr("disabled", false);
-                                    $closeBtn.attr("disabled", false);
-                                    $this.text(btnOriginalText);
-                                }
-                            });
-                            //不执行提交动作
-                            return false;
-                        });
-                    });
-                    return $message;
-                },
+                message: $('<div></div>').load(url),
                 onshow: function (dialogRef) {
-                    dialogRef.$modal.removeAttr("tabindex");
+                    dialogRef.$modal.removeAttr('tabindex');
                 },
                 onshown: function (dialogRef) {
                     //打开页面时设置焦点
                     $("input.first").focus().select();
                 },
                 onhidden: function (dialogRef) {
-                    ////编辑窗口所有组合树组件
-                    //dialogRef.$modalBody.find(".form-edit .easyui-combotree").each(function () {
-                    //    var el = $(this);
-                    //    var $tree = el.combotree("tree");
-                    //    //删除组合框和包含的树
-                    //    $tree.parent().parent().remove();
-                    //});
-                    $(".form-edit .easyui-combotree").combotree("setValue", {
-                        id: "",
-                        text: ""
-                    });
+                    $table.bootstrapTable('refresh');
                 }
             });
+
+            ////弹窗显示详情
+            //BootstrapDialog.show({
+            //    title: title,
+            //    size: BootstrapDialog.SIZE_WIDE,
+            //    closable: true,
+            //    closeByBackdrop: false,
+            //    closeByKeyboard: true,
+            //    draggable: true,
+            //    message: function (dialog) {
+            //        var dialogRef = dialog;
+            //        var $message = $("<div></div>");
+            //        $message.load(url, function () {
+            //            var $form = dialogRef.$modalBody.find("form");
+
+            //            //添加按钮添加事件处理函数
+            //            dialogRef.$modalBody.find("#btnSave, #btnSaveContinue").off("click").on("click", function () {
+            //                //检测验证结果
+            //                if (!$form.valid()) {
+            //                    $(".form-group input.error")[0].select();
+            //                    $(".form-group input.error")[0].focus();
+            //                    return false;
+            //                }
+            //                //当前对象
+            //                var $this = $(this);
+            //                //是否关闭编辑窗口
+            //                var isCloseWindow = isModify ? true : ($this.attr("id") == "btnSave" ? true : false);
+
+            //                var $closeBtn = dialogRef.$modalHeader.find("button.close");
+
+            //                var url = $this.data("url");
+            //                //保存
+            //                var data = $form.serializeArray();
+            //                var btnOriginalText = $this.text();
+            //                $.ajax({
+            //                    url: url,
+            //                    type: "json",
+            //                    data: data,
+            //                    beforeSend: function () {
+            //                        $this.attr("disabled", true);
+            //                        $closeBtn.attr("disabled", true);
+
+            //                        $this.text("保存中...");
+            //                    },
+            //                    success: function (data) {
+            //                        layer.msg(data.Message, { time: 5000 });
+            //                        if (data.Success) {
+            //                            if (isCloseWindow) {
+            //                                $this.closest(".bootstrap-dialog").modal("hide");
+            //                            } else {
+            //                                $form[0].reset();
+            //                                $form.find(".easyui-combotree").each(function (e) {
+            //                                    var $e = $(this);
+            //                                    $e.combotree("setValue", "");
+            //                                });
+            //                                $form.find("input").each(function (e) {
+            //                                    var $e = $(this);
+            //                                    $e.val("");
+            //                                });
+            //                                $form.find(".u-select2").each(function (e) {
+            //                                    var $e = $(this);
+            //                                    $e.val("").trigger("change");
+            //                                });
+            //                            }
+            //                            $table.bootstrapTable("refresh");
+            //                        }
+            //                    },
+            //                    error: function (xhr, error, errThrow) {
+            //                        layer.msg(errThrow, { time: 5000 });
+            //                    },
+            //                    complete: function (msg, textStatus) {
+            //                        $this.attr("disabled", false);
+            //                        $closeBtn.attr("disabled", false);
+            //                        $this.text(btnOriginalText);
+            //                    }
+            //                });
+            //                //不执行提交动作
+            //                return false;
+            //            });
+            //        });
+            //        return $message;
+            //    },
+            //    onshow: function (dialogRef) {
+            //        dialogRef.$modal.removeAttr("tabindex");
+            //    },
+            //    onshown: function (dialogRef) {
+            //        //打开页面时设置焦点
+            //        $("input.first").focus().select();
+            //    },
+            //    onhidden: function (dialogRef) {
+            //        ////编辑窗口所有组合树组件
+            //        //dialogRef.$modalBody.find(".form-edit .easyui-combotree").each(function () {
+            //        //    var el = $(this);
+            //        //    var $tree = el.combotree("tree");
+            //        //    //删除组合框和包含的树
+            //        //    $tree.parent().parent().remove();
+            //        //});
+            //        $(".form-edit .easyui-combotree").combotree("setValue", {
+            //            id: "",
+            //            text: ""
+            //        });
+            //    }
+            //});
 
             return false;
         });

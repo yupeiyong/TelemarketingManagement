@@ -1,4 +1,5 @@
-﻿using DataTransferObjects;
+﻿using Common.Operator;
+using DataTransferObjects;
 using Service.SystemManage;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,14 @@ namespace TelemarketingManagement.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult OutLogin()
+        {
+            Session.Abandon();
+            Session.Clear();
+            OnlineUserProvider.Provider.RemoveCurrent();
+            return RedirectToAction("Login");
+        }
 
         //注销
         //public JsonResult LogoutSubmitJson()

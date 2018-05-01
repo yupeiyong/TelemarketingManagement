@@ -192,5 +192,6 @@ namespace Service.SystemManage
 
             return Md5.md5(DesEncrypt.Encrypt(Md5.md5(pwd, 32), Settings.UserSecretkey).ToLower(), 32).ToLower();
         }
+
     }
 }

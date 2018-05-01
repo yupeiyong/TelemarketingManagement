@@ -22,15 +22,15 @@
                 </ul>*@
             <div class="nav navbar-nav navbar-actions navbar-left">
                 <a class="sidebar-header" href="/Admin/Manager/">
-                    <img src="~/Content/Images/logoForHead.png" alt="logo"/>
+                    <img src="~/Content/Images/logo.png" alt="logo"/>
                 </a>
             </div>
             <div class="navbar-right">
                 <img src="~/Content/Images/header_left.png"/>
                 <div>
 
-                    <a href="/Admin/Administrator/">管理员后台</a>
-                    <a href="/Admin/Manager/">部门后台</a>
+                    @*<a href="/Admin/Administrator/">管理员后台</a>
+                    <a href="/Admin/Manager/">部门后台</a>*@
 
                     <img src="~/Content/Images/icon_line.png"/>
                     @DateTime.Now.ToString("yyyy-MM-dd")
@@ -46,10 +46,10 @@
                     else
                     {
                         <span style="color: #F8D261;">@onlineUser.NickName 您好！</span>
-                        <a href="@Url.Action("ChangePassword", "User", new RouteValueDictionary {{"area", "AdminMember"}})">修改密码</a>
+                        @*<a href="@Url.Action("ChangePassword", "User", new RouteValueDictionary {{"area", "AdminMember"}})">修改密码</a>*@
 
                         <img src="~/Content/Images/icon_loginOut.png"/>
-                        <a href="@Url.Action("Logout", "User", new RouteValueDictionary {{"area", ""}})">注销</a>
+                        <a href="@Url.Action("OutLogin", "User", new RouteValueDictionary {{"area", ""}})">注销</a>
                     }
                 </div>
             </div>
