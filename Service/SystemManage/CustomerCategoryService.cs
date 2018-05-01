@@ -97,6 +97,9 @@ namespace Service.SystemManage
                 if (data == null)
                     throw new Exception($"错误，{_modelDescription}不存在！(Id:{id})");
 
+                if(DataDbContext.Set<Customer>().Any(c=>c.CustomerCategory!=null && c.CustomerCategory.Id==data.Id))
+                    throw new Exception($"错误，有客户记录引用了{_modelDescription}，请先删除客户资料重试！)");
+
                 DataDbContext.Set<CustomerCategory>().Remove(data);
             }
             DataDbContext.SaveChanges();

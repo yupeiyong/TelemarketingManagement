@@ -3,42 +3,42 @@ $(function () {
     ////默认值
     //var addDefaultValue = "-- 无 --";
 
-    ////转换为select2
-    //$(".form-edit .u-select2").each(function() {
-    //    //当前对象
-    //    var $this = $(this);
-    //    var url = $this.data("url");
+    //转换为select2
+    $(".form-edit .u-select2").each(function() {
+        //当前对象
+        var $this = $(this);
+        var url = $this.data("url");
 
-    //    //远程筛选
-    //    $this.select2({
-    //        ajax: {
-    //            url: url,
-    //            dataType: "json",
-    //            delay: 250,
-    //            data: function(params) {
-    //                return {
-    //                    Keywords: params.term,
-    //                    page: params.page
-    //                };
-    //            },
-    //            processResults: function(data, params) {
-    //                params.page = params.page || 1;
-    //                if (!data.IsSuccess) {
-    //                    return false;
-    //                }
-    //                var arr = data.Data || data.data || {};
-    //                arr.unshift({ id: 0, text: addDefaultValue });
-    //                return {
-    //                    results: arr
-    //                };
-    //            },
-    //            cache: true
-    //        },
-    //        escapeMarkup: function(markup) { return markup; },
-    //        minimumInputLength: 0,
-    //        language: "zh-CN"
-    //    });
-    //});
+        //远程筛选
+        $this.select2({
+            ajax: {
+                url: url,
+                dataType: "json",
+                delay: 250,
+                data: function(params) {
+                    return {
+                        Keywords: params.term,
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    params.page = params.page || 1;
+                    if (!data.IsSuccess) {
+                        return false;
+                    }
+                    var arr = data.Data || data.data || {};
+                    arr.unshift({ id: 0, text: addDefaultValue });
+                    return {
+                        results: arr
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) { return markup; },
+            minimumInputLength: 0,
+            language: "zh-CN"
+        });
+    });
 
     $('.buttons #btnSave').on('click', function () {
         var $form = $("form.form-horizontal");
@@ -91,202 +91,6 @@ $(function () {
     });
 
 
-    $(".form-edit .easyui-combotree").each(function () {
-        //当前对象
-        var $this = $(this);
-        var url = $this.data("url");
-        $this.combotree({
-            editable: true,
-            panelHeight: 150,
-            //valueField: 'text',
-            //textField: 'id',
-            url: url,
-            collapseAll: true,
-            delay: 0,
-            keyHandler: {
-                query: function (q) {
-                    $(this).combotree("options").url = url + '&Keywords=' + q;
-                    $(this).combotree("reload");
-                    //设置文本输入的值,输入框内容是text,值是id
-                    //$(this).combotree("setValue", {
-                    //    id: "",
-                    //    text: q
-                    //});
-                },
-                enter: function (e) {
-                    var p = $(this).combotree("panel");
-                    if (p.is(":visible")) {
-                        var component = $(this).combotree("tree");
-                        var data = $(component).tree("getChildren");
-                        var node = component.tree("getSelected");//判断是有选中的数据
-                        if (data.length > 0 && !node) {
-                            var k = $this.combo("textbox").val();
-                            for (var i = 0; i < data.length; i++) {
-                                if (data[i].text.indexOf(k) >= 0) {
-                                    $this.combotree("setValue", {
-                                        id: data[i].id,
-                                        text: data[i].text
-                                    });
-                                    $this.siblings('.hidden-id').val(data[i].id);
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    switchFoucusEdit(e);
-                    $(this).combotree("hidePanel");
-                    //没有提交查询
-                },
-                up: function () {
-                    var el = $(this);
-                    var p = el.combotree("panel");
-                    if (!p.is(":visible")) {
-                        el.combotree("showPanel");
-                    }
-
-                    var $tree = el.combotree("tree");
-                    var nodes = $tree.tree("getChildren");
-                    if (!nodes.length) {
-                        return;
-                    }
-                    var node = $tree.tree("getSelected");
-                    if (!node) {
-                        $tree.tree("select", nodes[0].target);
-                        $this.combotree("setValue", {
-                            id: nodes[0].id,
-                            text: nodes[0].text
-                        });
-                    } else {
-                        var idx = nodes.indexOf(node);
-                        if (idx > 0 && !node.children) {
-                            $tree.tree("select", nodes[idx - 1].target);
-                            $this.combotree("setValue", {
-                                id: nodes[idx - 1].id,
-                                text: nodes[idx - 1].text
-                            });
-                            $this.siblings('.hidden-id').val(nodes[idx - 1].id);
-                        }
-                        $tree.tree("scrollTo", nodes[idx - 1].target);
-                    }
-                },
-                down: function () {
-                    var el = $(this);
-                    var p = el.combotree("panel");
-                    if (!p.is(":visible")) {
-                        el.combotree("showPanel");
-                    }
-
-                    el = el.combotree("tree");
-                    var nodes = el.tree("getChildren");
-                    if (!nodes.length) {
-                        return false;
-                    }
-                    var node = el.tree("getSelected");
-                    if (!node) {
-                        node = nodes[0];
-                        //if (!node.children) {
-                        //    el.tree('expand', node.target);
-                        //} else {
-                        //    el.tree("select", node.target);
-                        //    $this.combotree("setValue", {
-                        //        id: node.id,
-                        //        text: node.text
-                        //    });
-                        //}
-                        el.tree("select", node.target);
-                        $this.combotree("setValue", {
-                            id: node.id,
-                            text: node.text
-                        });
-
-                    } else {
-                        var idx = nodes.indexOf(node);
-                        if (idx < nodes.length && !node.children) {
-                            el.tree("select", nodes[idx + 1].target);
-                            $this.combotree("setValue", {
-                                id: nodes[idx + 1].id,
-                                text: nodes[idx + 1].text
-                            });
-                            $this.siblings('.hidden-id').val(nodes[idx + 1].id);
-                        }
-                        el.tree("scrollTo", nodes[idx + 1].target);
-                    }
-                }
-            },
-            onLoadSuccess: function (node, data) {
-                var t = $this.combotree("tree");
-                var k = $this.combo("textbox").val();
-
-                //获取返回条数
-                t.tree("collapseAll");
-
-                if (k != null && k !== "") {
-                    for (var i = 0; i < data.length; i++) {
-                        t.tree("expand", data[i].target); //展开节点
-                    }
-                }
-                //if (data.length === 1) {
-                //    var currentData = t.tree("getChildren");
-                //    t.tree("expand", currentData[0].target); //展开节点
-                //}
-            },
-            onBeforeSelect: function (node) {
-                if (!$(this).tree('isLeaf', node.target)) {
-                    layer.msg("请选择最末一级节点！", { time: 5000 });
-                    var input = $this.combo("textbox");
-                    $(input).false();//故意抛错、阻止程序继续运行
-                    return false;
-                }
-            },
-            onBeforeExpand: function (row) {
-                if (!row.children) {
-                    $this.combotree("tree").tree("options").url = url + '&ParentId=' + row.id;
-                }
-            },
-            onExpand: function (row) {
-                //请不要自动选择，考虑客户可能输入错误的情况
-                //var $combotree = $(this);
-                //if (row.children && row.children.length > 0) {
-                //    var node = row.children[0];
-                //    $combotree.tree("select", node.target);
-                //    $this.combotree("setValue", {
-                //        id: node.id,
-                //        text: node.text
-                //    });
-                //}
-            },
-            onSelect: function (node) {
-                $this.siblings('.hidden-id').val(node.id);
-            }
-        });
-    });
-
-    $('.combo input.textbox-text').keyup(function () {
-        var $this = $(this);
-        var value = $this.val();
-        if (value && value.trim().length === 0) {
-            //输入框为空，即设置值为0（解决删除内容后，仍然有Id值的问题）
-            $this.parent().siblings('.hidden-id').val(0);
-        }
-    });
-
-    $("#TotalAmount").off("change").on("change", function () {
-        var $this = $(this);
-        var totalAmount = parseFloat($this.val());
-        var totalAppropriated = parseFloat($("#TotalAppropriated").val());
-        if (totalAmount < totalAppropriated) {
-            layer.msg("指标金额不能小于已拨付金额", { time: 5000 });
-            $this.focus();
-            return false;
-        }
-        var $balance = $("#Balance");
-        var balance = totalAmount - totalAppropriated;
-        $balance.val(balance);
-        return true;
-    });
-
-
     //输入框焦点事件
     $("input").focus(function () {
         $(this).select();
@@ -308,22 +112,6 @@ $(function () {
 
     $('.first').focus().select();
 
-    //检测input框输入值，解决combotree输入掉文字问题
-    $(".form-edit input.textbox-text").blur(function () {
-        var k = $(this).parents(".form-group").find("input.textbox-value").val();
-        if (!k) {
-            //$(this).val("");
-            $(this).parents(".form-group").find(".easyui-combotree").combotree("setValue", {
-                id: "",
-                text: ""
-            });
-        }
-    }).bind('input propertychange', function () {
-        $(this).parents(".form-group").find(".easyui-combotree").combotree("setValue", {
-            id: "",
-            text: $(this).val()
-        });
-    });
 });
 
 

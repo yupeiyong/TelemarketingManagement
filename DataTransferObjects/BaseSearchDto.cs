@@ -17,7 +17,7 @@ namespace DataTransferObjects
         /// <summary>
         ///     每一页数量
         /// </summary>
-        public int PageSize { get; set; }
+        public int PageSize { get; set; } = 20;
 
 
         /// <summary>

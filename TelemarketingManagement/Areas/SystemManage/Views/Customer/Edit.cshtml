@@ -92,11 +92,11 @@
                     </div>
                     <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label"><span class="redRequired">*</span>客户分类：</label>
+                                <label class="col-sm-4 control-label">客户分类：</label>
                                 <div class="col-sm-8">
-                                    @*<input class="easyui-combotree" data-url="@Url.Action(getTreeBasicDataActionName,basicDataControllerName, new {ModelTypeName =nameof(BudgetUnit)})" style="width: 250px;"
+                                    <input class="easyui-combotree" data-url="@Url.Action("GetCategories")" style="width: 250px;"
                                            value="@(data.CustomerCategory != null ? data.CustomerCategory.Name : "")" />
-                                    <input class="hidden-id" name="CustomerCategoryId" type="hidden" value="@(data.CustomerCategory?.Id ?? 0)" />*@
+                                    <input class="hidden-id" name="CustomerCategoryId" type="hidden" value="@(data.CustomerCategory?.Id ?? 0)" />
                                 </div>
                             </div>
                         </div>
