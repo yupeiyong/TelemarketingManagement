@@ -1,7 +1,7 @@
 ﻿
 $(function () {
     ////默认值
-    //var addDefaultValue = "-- 无 --";
+    var addDefaultValue = "-- 无 --";
 
     //转换为select2
     $(".form-edit .u-select2").each(function() {
