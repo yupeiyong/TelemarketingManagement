@@ -45,7 +45,11 @@
     <Compile Include="CustomerCategoryEditDto.cs" />
     <Compile Include="CustomerCategorySearchDto.cs" />
     <Compile Include="CustomerEditDto.cs" />
+    <Compile Include="CustomerImportDto.cs" />
     <Compile Include="CustomerSearchDto.cs" />
+    <Compile Include="FileUploadResultDto.cs" />
+    <Compile Include="ImportedResultDto.cs" />
+    <Compile Include="ImportFileEditDto.cs" />
     <Compile Include="LoginResultDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultInfo.cs" />

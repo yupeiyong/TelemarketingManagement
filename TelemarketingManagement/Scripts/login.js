@@ -29,7 +29,6 @@ $(function () {
             type: 'post',
             dataType: 'json',
             success: function (data) {
-                //$("p.messageTips").html(data.Message);
                 if (data.Success) {
                     location.href = data.RedirectUrl;
                 } else {

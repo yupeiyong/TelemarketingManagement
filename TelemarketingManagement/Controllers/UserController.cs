@@ -28,20 +28,35 @@ namespace TelemarketingManagement.Controllers
         //登录
         public JsonResult LoginSubmitJson(UserLoginDto dto)
         {
-            var currentOnlineUser = UserService.Login(dto);
-            if (currentOnlineUser == null)
-                throw new Exception("错误：用户登录失败，注册数据为空，请联系系统管理员！");
-
-            var result = new LoginResultDto
+            try
             {
-                Title = "用户登录",
-                Message = "登录成功！",
-                Success = true,
-                NickName = currentOnlineUser.NickName,
-                RedirectUrl= "/SystemManage/Home"
-            };
-            
-            return Json(result, JsonRequestBehavior.AllowGet);
+                var currentOnlineUser = UserService.Login(dto);
+                if (currentOnlineUser == null)
+                    throw new Exception("错误：用户登录失败，注册数据为空，请联系系统管理员！");
+
+                var result = new LoginResultDto
+                {
+                    Title = "用户登录",
+                    Message = "登录成功！",
+                    Success = true,
+                    NickName = currentOnlineUser.NickName,
+                    RedirectUrl = "/SystemManage/Home"
+                };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                var result = new LoginResultDto
+                {
+                    Title = "用户登录",
+                    Message = $"登录失败！{ex.Message}",
+                    Success = false,
+                };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }    
+
+           
         }
 
         [HttpGet]

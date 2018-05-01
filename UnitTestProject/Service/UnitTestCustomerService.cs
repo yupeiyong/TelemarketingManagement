@@ -157,7 +157,7 @@ namespace UnitTestProject.Service
 
                 DataDbContext.SaveChanges();
                 var service = GetService<CustomerService>();
-                var rows = service.Search(new CustomerSearchDto { StartIndex = 0, PageSize = 20, StartLastModifyTime= DateTime.Now.AddDays(10).Date,EndLastModifyTime= DateTime.Now.AddDays(12).Date });
+                var rows = service.Search(new CustomerSearchDto { StartIndex = 0, PageSize = 20, StartCreatorTime= DateTime.Now.AddDays(10).Date,EndCreatorTime= DateTime.Now.AddDays(12).Date });
                 Assert.IsTrue(rows.Count == 3);
             }
 

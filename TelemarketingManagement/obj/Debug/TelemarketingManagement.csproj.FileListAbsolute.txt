@@ -221,3 +221,9 @@ E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\DataTransferObj
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\DataTransferObjects.pdb
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\ViewModels.dll
 E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\ViewModels.pdb
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\NPOI.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\NPOI.OOXML.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\ICSharpCode.SharpZipLib.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\NPOI.OpenXmlFormats.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\NPOI.OpenXml4Net.dll
+E:\workspace\TelemarketingManagement\TelemarketingManagement\bin\NPOI.xml

@@ -9,9 +9,9 @@ namespace DataTransferObjects
 {
     public class CustomerSearchDto : BaseSearchDto
     {
-        public DateTime? StartLastModifyTime { get; set; }
+        public DateTime? StartCreatorTime { get; set; }
 
-        public DateTime? EndLastModifyTime { get; set; }
+        public DateTime? EndCreatorTime { get; set; }
 
         public long CustomerCategoryId { get; set; }
 

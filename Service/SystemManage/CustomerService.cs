@@ -32,7 +32,10 @@ namespace Service.SystemManage
             if (dto.CustomerCategoryId > 0)
                 dataSource = dataSource.Where(c => c.CustomerCategory != null && c.CustomerCategory.Id == dto.CustomerCategoryId);
 
-            dataSource = dataSource.WhereDateTime(nameof(Customer.LastModifyTime), dto.StartLastModifyTime, dto.EndLastModifyTime);
+            dataSource = dataSource.WhereDateTime(nameof(Customer.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
+
+            if(!string.IsNullOrWhiteSpace(dto.Keywords))
+                dataSource = dataSource.Where(c => c.RealName!=null && c.RealName.Contains(dto.Keywords) || c.NickName != null && c.NickName.Contains(dto.Keywords)|| c.MobilePhoneNumber != null && c.MobilePhoneNumber.Contains(dto.Keywords));
 
             dataSource = dataSource.OrderByDescending(a => a.LastModifyTime);
 

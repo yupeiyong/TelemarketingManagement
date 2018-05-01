@@ -1,0 +1,49 @@
+﻿@using Config
+@{
+    Layout = null;
+}
+
+<link href="~/Lib/BootstrapFileInput/4.3.7/css/fileinput.min.css" rel="stylesheet" />
+<link href="~/Lib/bootstrap-file-input-extend.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <form class="form-horizontal import" role="form">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">文件名：</label>
+                    <div class="col-sm-10">
+                        <input name="OriginalFileName" type="text" class="form-control input-sm" value="" placeholder="上传文件后自动保存文件名" readonly="readonly" />
+                        <input name="FileName" type="hidden" value="" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">客户资料：</label>
+                    <div class="col-sm-10">
+                        <input multiple="multiple" type="file" id="excelFile" data-url="@Url.Action("ImportData")" accept="@Settings.AcceptImportExcelFileTypes">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <span style="color: red;" class="upload-message"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 text-center buttons">
+                        <button type="button" class="btn btn-primary u-btn" id="btnClose">
+                            <i class="fa fa-close" aria-hidden="false"></i>
+                            关闭
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/Lib/BootstrapFileInput/4.3.7/js/fileinput.min.js"></script>
+<script src="~/Lib/BootstrapFileInput/4.3.7/js/locales/zh.js"></script>
+<script src="~/Lib/bootstrap-file-input-extend.js"></script>
+<script src="~/Areas/SystemManage/Scripts/customer-import.js"></script>

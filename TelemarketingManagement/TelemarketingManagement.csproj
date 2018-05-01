@@ -236,6 +236,7 @@
     <Content Include="Areas\SystemManage\Content\higherBudgetTarget-index.css" />
     <Content Include="Areas\SystemManage\Content\jquery.mmenu.css" />
     <Content Include="Areas\SystemManage\Content\report-index.css" />
+    <Content Include="Areas\SystemManage\Scripts\customer-import.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-edit.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-index.js" />
     <Content Include="Content\bootstrap.css" />
@@ -1421,6 +1422,8 @@
     <Content Include="Areas\SystemManage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\SystemManage\Views\Customer\Index.cshtml" />
     <Content Include="Areas\SystemManage\Views\Customer\Edit.cshtml" />
+    <Content Include="App_Data\.Template\客户资料模板.xls" />
+    <Content Include="Areas\SystemManage\Views\Customer\Import.cshtml" />
     <None Include="Lib\JQueryValidate\1.15.0\jquery.validate-vsdoc.js" />
     <Content Include="Lib\JQueryValidate\1.15.0\jquery.validate-vsdoc.min.js" />
     <Content Include="Lib\JQueryValidate\1.15.0\jquery.validate.js" />
@@ -1740,7 +1743,7 @@
     <Content Include="Views\Shared\_LayoutForAllUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\.ImportCustomerFiles\" />
     <Folder Include="Areas\SystemManage\Models\" />
     <Folder Include="Areas\SystemManage\Views\CustomerCategory\" />
     <Folder Include="Areas\SystemManage\Views\Default\" />
@@ -1759,6 +1762,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{DD0C1F4E-6F8F-4626-AC88-B517B75B257F}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Config\Config.csproj">
+      <Project>{009E70EA-DFFE-428C-8A3F-C3B00DD178D8}</Project>
+      <Name>Config</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataTransferObjects\DataTransferObjects.csproj">
       <Project>{C5D0E46C-D528-4831-88EE-F4A36BDAB3B6}</Project>

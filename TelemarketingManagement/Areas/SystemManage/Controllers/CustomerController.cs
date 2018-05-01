@@ -1,4 +1,6 @@
 ﻿using Common;
+using Common.Configs;
+using Config;
 using DataTransferObjects;
 using Models;
 using Models.Enum;
@@ -6,6 +8,7 @@ using Service;
 using Service.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -96,6 +99,40 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
                 Data = rows.Select(m => new SelectViewModel { id = m.Id, text = m.Name }).ToList()
             };
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public FileStreamResult DownLoadTemplate()
+        {
+            var fileName = "客户资料模板.xls";
+            var fullName = Path.Combine(Settings.AppDataPathFullname, $".Template/{fileName}");
+            if (System.IO.File.Exists(fullName))
+            {
+                var fileResult = new FileStreamResult(new FileStream(fullName, FileMode.Open, FileAccess.Read, FileShare.Read), "application/ms-excel") { FileDownloadName = fileName };
+                return fileResult;
+            }
+            throw new Exception("模板文件不存在！");
+        }
+
+
+        public JsonResult ImportData(ImportedFileDto dto)
+        {
+            var resultDto = CustomerFileHelper.DoImport(dto);
+            return Json(resultDto,JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult Import()
+        {
+            return View();
+        }
+
+        public JsonResult Upload()
+        {
+            var file = Request.Files[0];
+            //var dtoes = ImportService.Upload(postedFiles);
+            var dto = CustomerFileHelper.Upload(file);
+            return Json(dto, JsonRequestBehavior.AllowGet);
         }
     }
 }

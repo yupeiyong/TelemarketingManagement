@@ -30,3 +30,9 @@ E:\workspace\TelemarketingManagement\Service\bin\Debug\AutoMapper.xml
 E:\workspace\TelemarketingManagement\Service\bin\Debug\Config.pdb
 E:\workspace\TelemarketingManagement\Service\bin\Debug\zh-Hans\EntityFramework.resources.dll
 E:\workspace\TelemarketingManagement\Service\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\workspace\TelemarketingManagement\Service\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\workspace\TelemarketingManagement\Service\bin\Debug\NPOI.dll
+E:\workspace\TelemarketingManagement\Service\bin\Debug\NPOI.OOXML.dll
+E:\workspace\TelemarketingManagement\Service\bin\Debug\NPOI.OpenXml4Net.dll
+E:\workspace\TelemarketingManagement\Service\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\workspace\TelemarketingManagement\Service\bin\Debug\NPOI.xml
