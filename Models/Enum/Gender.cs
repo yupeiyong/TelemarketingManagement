@@ -14,12 +14,12 @@ namespace Models.Enum
         /// <summary>
         ///     男性
         /// </summary>
-        [Description("男性")] Male = 1,
+        [Description("男")] Male = 1,
 
         /// <summary>
         ///     女性
         /// </summary>
-        [Description("女性")] Female = 2
+        [Description("女")] Female = 2
 
     }
 

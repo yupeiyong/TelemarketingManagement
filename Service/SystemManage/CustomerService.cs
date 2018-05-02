@@ -4,9 +4,13 @@ using DataTransferObjects;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.Enum;
+using NPOI.HSSF.Record.Chart;
+
 
 namespace Service.SystemManage
 {
@@ -34,8 +38,8 @@ namespace Service.SystemManage
 
             dataSource = dataSource.WhereDateTime(nameof(Customer.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
 
-            if(!string.IsNullOrWhiteSpace(dto.Keywords))
-                dataSource = dataSource.Where(c => c.RealName!=null && c.RealName.Contains(dto.Keywords) || c.NickName != null && c.NickName.Contains(dto.Keywords)|| c.MobilePhoneNumber != null && c.MobilePhoneNumber.Contains(dto.Keywords));
+            if (!string.IsNullOrWhiteSpace(dto.Keywords))
+                dataSource = dataSource.Where(c => c.RealName != null && c.RealName.Contains(dto.Keywords) || c.NickName != null && c.NickName.Contains(dto.Keywords) || c.MobilePhoneNumber != null && c.MobilePhoneNumber.Contains(dto.Keywords));
 
             dataSource = dataSource.OrderByDescending(a => a.LastModifyTime);
 
@@ -136,6 +140,105 @@ namespace Service.SystemManage
         public Customer GetDataById(long id)
         {
             return DataDbContext.Set<Customer>().FirstOrDefault(b => b.Id == id);
+        }
+
+
+        /// <summary>
+        /// 导入客户资料
+        /// </summary>
+        /// <param name="dtos"></param>
+        /// <returns>返回导入条数</returns>
+        public ImportedResultDto Import(List<CustomerImportDto> dtos)
+        {
+            var message = new StringBuilder();
+            var count = 0;
+            for (int i = 0, len = dtos.Count; i < len; i++)
+            {
+                var dto = dtos[i];
+
+
+                if (string.IsNullOrWhiteSpace(dto.RealName))
+                {
+                    message.AppendLine($"第{i + 1}条导入资料，客户姓名为空！");
+                    continue;
+                }
+                var customer = new Customer { RealName = dto.RealName };
+
+                if (!string.IsNullOrWhiteSpace(dto.CustomerCategoryName))
+                {
+                    var category = DataDbContext.Set<CustomerCategory>().FirstOrDefault(cc => cc.Name != null && cc.Name == dto.CustomerCategoryName);
+                    if (category == null)
+                    {
+                        message.AppendLine($"第{i + 1}条导入资料，{dto.CustomerCategoryName}的客户分类不存在！");
+                        continue;
+                    }
+                    customer.CustomerCategory = category;
+                }
+                customer.NickName = dto.NickName;
+                if (!string.IsNullOrWhiteSpace(dto.GenderDescription))
+                {
+                    var genderDescriptions = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToDictionary(g => g.GetEnumDescription(), v => v);
+                    if (genderDescriptions.Keys.All(desc => desc != dto.GenderDescription))
+                    {
+                        message.AppendLine($"第{i + 1}条导入资料，{dto.GenderDescription}不是正确的性别，正确为{string.Join(",", genderDescriptions)}！");
+                        continue;
+                    }
+                    var gender = genderDescriptions[dto.GenderDescription];
+                    customer.Gender = gender;
+                }
+
+                if (!string.IsNullOrWhiteSpace(dto.MobilePhoneNumber))
+                {
+                    if (!Validator.IsMobile(dto.MobilePhoneNumber))
+                    {
+                        message.AppendLine($"第{i + 1}条导入资料，{dto.MobilePhoneNumber} 不是正确的手机号！");
+                        continue;
+                    }
+                    customer.MobilePhoneNumber = dto.MobilePhoneNumber;
+                }
+
+                customer.Qq = dto.Qq;
+                customer.Wechat = dto.Wechat;
+                customer.Address = dto.Address;
+
+                if (!string.IsNullOrWhiteSpace(dto.BirthdayDescription))
+                {
+                    DateTime birthday;
+                    if (!DateTime.TryParse(dto.BirthdayDescription, out birthday))
+                    {
+                        message.AppendLine($"第{i + 1}条导入资料，{dto.BirthdayDescription} 不是正确的日期格式！");
+                        continue;
+                    }
+                    customer.Birthday = birthday;
+                }
+
+                var originalCustomer = DataDbContext.Set<Customer>()
+                    .FirstOrDefault(c => c.MobilePhoneNumber == null && c.MobilePhoneNumber != dto.MobilePhoneNumber && c.RealName == dto.RealName);
+
+                if (originalCustomer != null)
+                {
+                    originalCustomer.RealName = customer.RealName;
+                    originalCustomer.NickName = customer.NickName;
+                    originalCustomer.Gender = customer.Gender;
+                    originalCustomer.Birthday = customer.Birthday;
+                    originalCustomer.MobilePhoneNumber = customer.MobilePhoneNumber;
+                    originalCustomer.Qq = customer.Qq;
+                    originalCustomer.Wechat = customer.Wechat;
+                    originalCustomer.Address = customer.Address;
+                    originalCustomer.CustomerCategory = customer.CustomerCategory;
+                    originalCustomer.LastModifyTime = DateTime.Now;
+                }
+                else
+                {
+                    customer.CreatorTime = DateTime.Now;
+                    customer.LastModifyTime = DateTime.Now;
+                    DataDbContext.Set<Customer>().Add(customer);
+                }
+                DataDbContext.SaveChanges();
+                count++;
+            }
+            var resultMessage = message.Length > 0 ? $"成功导入{count},其中失败的：{message.ToString()}" : $"成功导入{count}";
+            return new ImportedResultDto { Message = resultMessage, Title = "", Count = count, Success = true };
         }
     }
 }

@@ -440,9 +440,9 @@
             closeByKeyboard: true,
             draggable: true,
             message: $('<div></div>').load(url),
-            //onhidden: function (dialogRef) {
-            //    $table.bootstrapTable('refresh');
-            //}
+            onhidden: function (dialogRef) {
+                $table.bootstrapTable('refresh');
+            }
         });
 
         return false;

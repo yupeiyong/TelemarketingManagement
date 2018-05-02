@@ -20,10 +20,12 @@ namespace Service.SystemManage
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public static ImportedResultDto DoImport(ImportedFileDto dto)
+        public static List<CustomerImportDto> DoImport(ImportedFileDto dto)
         {
+            var importDtos = new List<CustomerImportDto>();
+
             if (string.IsNullOrWhiteSpace(dto.FileName))
-                return new ImportedResultDto { Count = 0, Title = "导入客户资料", Message = "资料文件名为空，导入失败！" };
+                return importDtos;
 
             var fileFullName = Path.Combine(Settings.ImportCustomerFilesPathFullname, dto.FileName);
             using (var fs = new FileStream(fileFullName, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -40,7 +42,7 @@ namespace Service.SystemManage
                         {
                             IRow firstRow = sheet.GetRow(0);
                             int cellCount = firstRow.LastCellNum;//列数  
-                            var importDtos = new List<CustomerImportDto>();
+
                             for (var r = 1; r < rowCount; r++)
                             {
                                 var row = sheet.GetRow(r);
@@ -78,33 +80,66 @@ namespace Service.SystemManage
                                 cell = row.GetCell(4);//出生年月
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
-                                    if (!string.IsNullOrWhiteSpace(str))
-                                        importDto.BirthdayDescription = str;
+
+                                    if (cell.CellType == CellType.Numeric)
+                                    {
+                                        var str = cell.DateCellValue;
+                                        importDto.BirthdayDescription = str.ToString("yyyy-MM-dd");
+                                    }
+                                    else if (cell.CellType == CellType.String)
+                                    {
+                                        var str = cell.StringCellValue;
+                                        if (!string.IsNullOrWhiteSpace(str))
+                                            importDto.BirthdayDescription = str;
+                                    }
                                 }
 
                                 cell = row.GetCell(5);//手机
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
-                                    if (!string.IsNullOrWhiteSpace(str))
-                                        importDto.MobilePhoneNumber = str;
+                                    if (cell.CellType == CellType.Numeric)
+                                    {
+                                        var str = cell.NumericCellValue;
+                                        importDto.MobilePhoneNumber = str.ToString();
+                                    }
+                                    else if (cell.CellType == CellType.String)
+                                    {
+                                        var str = cell.StringCellValue;
+                                        if (!string.IsNullOrWhiteSpace(str))
+                                            importDto.MobilePhoneNumber = str;
+                                    }
                                 }
 
                                 cell = row.GetCell(6);//QQ
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
-                                    if (!string.IsNullOrWhiteSpace(str))
-                                        importDto.Qq = str;
+                                    if (cell.CellType == CellType.Numeric)
+                                    {
+                                        var str = cell.NumericCellValue;
+                                        importDto.Qq = str.ToString();
+                                    }
+                                    else if (cell.CellType == CellType.String)
+                                    {
+                                        var str = cell.StringCellValue;
+                                        if (!string.IsNullOrWhiteSpace(str))
+                                            importDto.Qq = str;
+                                    }
                                 }
 
                                 cell = row.GetCell(7);//微信
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
-                                    if (!string.IsNullOrWhiteSpace(str))
-                                        importDto.Wechat = str;
+                                    if (cell.CellType == CellType.Numeric)
+                                    {
+                                        var str = cell.NumericCellValue;
+                                        importDto.Wechat = str.ToString();
+                                    }
+                                    else if (cell.CellType == CellType.String)
+                                    {
+                                        var str = cell.StringCellValue;
+                                        if (!string.IsNullOrWhiteSpace(str))
+                                            importDto.Wechat = str;
+                                    }
                                 }
 
                                 cell = row.GetCell(8);//联系地址
@@ -120,7 +155,7 @@ namespace Service.SystemManage
                     }
                 }
             }
-            return new ImportedResultDto { Count = 1, Title = "" }; 
+            return importDtos;
         }
 
         /// <summary>

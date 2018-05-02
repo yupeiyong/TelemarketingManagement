@@ -39,6 +39,22 @@ namespace DataTransferObjects
 
         public string Keywords { get; set; }
 
+        public string sort { get; set; }
+
+        public string order { get; set; }
+
+        public int offset
+        {
+            get { return StartIndex; }
+            set { StartIndex = value; }
+        }
+
+        public int limit
+        {
+            get { return PageSize; }
+            set { PageSize = value; }
+        }
+
     }
 
 }
