@@ -116,8 +116,9 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
 
         public JsonResult ImportData(ImportedFileDto dto)
         {
-            var resultDto = CustomerFileHelper.DoImport(dto);
-            return Json(resultDto,JsonRequestBehavior.AllowGet);
+            var importDtos = CustomerFileHelper.DoImport(dto);
+            var result=CustomerService.Import(importDtos);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 

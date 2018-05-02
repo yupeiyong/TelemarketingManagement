@@ -20,10 +20,12 @@ namespace Service.SystemManage
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public static ImportedResultDto DoImport(ImportedFileDto dto)
+        public static List<CustomerImportDto> DoImport(ImportedFileDto dto)
         {
+            var importDtos = new List<CustomerImportDto>();
+
             if (string.IsNullOrWhiteSpace(dto.FileName))
-                return new ImportedResultDto { Count = 0, Title = "导入客户资料", Message = "资料文件名为空，导入失败！" };
+                return importDtos;
 
             var fileFullName = Path.Combine(Settings.ImportCustomerFilesPathFullname, dto.FileName);
             using (var fs = new FileStream(fileFullName, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -40,7 +42,7 @@ namespace Service.SystemManage
                         {
                             IRow firstRow = sheet.GetRow(0);
                             int cellCount = firstRow.LastCellNum;//列数  
-                            var importDtos = new List<CustomerImportDto>();
+
                             for (var r = 1; r < rowCount; r++)
                             {
                                 var row = sheet.GetRow(r);
@@ -48,14 +50,14 @@ namespace Service.SystemManage
                                 var cell = row.GetCell(0);//分类
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.CustomerCategoryName = str;
                                 }
                                 cell = row.GetCell(1);//姓名
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (string.IsNullOrWhiteSpace(str))
                                         continue;
                                     importDto.RealName = str;
@@ -63,14 +65,14 @@ namespace Service.SystemManage
                                 cell = row.GetCell(2);//性别
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.GenderDescription = str;
                                 }
                                 cell = row.GetCell(3);//昵称
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.NickName = str;
                                 }
@@ -78,7 +80,7 @@ namespace Service.SystemManage
                                 cell = row.GetCell(4);//出生年月
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.BirthdayDescription = str;
                                 }
@@ -86,7 +88,7 @@ namespace Service.SystemManage
                                 cell = row.GetCell(5);//手机
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.MobilePhoneNumber = str;
                                 }
@@ -94,7 +96,7 @@ namespace Service.SystemManage
                                 cell = row.GetCell(6);//QQ
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.Qq = str;
                                 }
@@ -102,7 +104,7 @@ namespace Service.SystemManage
                                 cell = row.GetCell(7);//微信
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.Wechat = str;
                                 }
@@ -110,7 +112,7 @@ namespace Service.SystemManage
                                 cell = row.GetCell(8);//联系地址
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.Address = str;
                                 }
@@ -120,7 +122,7 @@ namespace Service.SystemManage
                     }
                 }
             }
-            return new ImportedResultDto { Count = 1, Title = "" }; 
+            return importDtos;
         }
 
         /// <summary>

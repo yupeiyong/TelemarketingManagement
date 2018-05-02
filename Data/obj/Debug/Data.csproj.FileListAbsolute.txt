@@ -40,3 +40,9 @@ E:\workspace\TelemarketingManagement\Data\obj\Debug\Data.dll
 E:\workspace\TelemarketingManagement\Data\obj\Debug\Data.pdb
 E:\workspace\TelemarketingManagement\Data\bin\Debug\zh-Hans\EntityFramework.resources.dll
 E:\workspace\TelemarketingManagement\Data\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+F:\workspace\TelemarketingManagement\Data\bin\Debug\log4net.dll
+F:\workspace\TelemarketingManagement\Data\bin\Debug\Newtonsoft.Json.dll
+F:\workspace\TelemarketingManagement\Data\bin\Debug\log4net.xml
+F:\workspace\TelemarketingManagement\Data\bin\Debug\Newtonsoft.Json.xml
+F:\workspace\TelemarketingManagement\Data\bin\Debug\zh-Hans\EntityFramework.resources.dll
+F:\workspace\TelemarketingManagement\Data\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll

@@ -20,3 +20,17 @@ E:\workspace\TelemarketingManagement\ViewModels\bin\Debug\log4net.xml
 E:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Newtonsoft.Json.xml
 E:\workspace\TelemarketingManagement\ViewModels\bin\Debug\AutoMapper.xml
 E:\workspace\TelemarketingManagement\ViewModels\bin\Debug\zh-Hans\EntityFramework.resources.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Models.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\EntityFramework.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Common.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\log4net.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Newtonsoft.Json.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\AutoMapper.dll
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Models.pdb
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\EntityFramework.xml
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Common.pdb
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\log4net.xml
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\Newtonsoft.Json.xml
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\AutoMapper.xml
+F:\workspace\TelemarketingManagement\ViewModels\bin\Debug\zh-Hans\EntityFramework.resources.dll
+F:\workspace\TelemarketingManagement\ViewModels\obj\Debug\ViewModels.csprojResolveAssemblyReference.cache

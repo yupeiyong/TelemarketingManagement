@@ -229,11 +229,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemManage\Content\add-ons.min.css" />
-    <Content Include="Areas\SystemManage\Content\budgetTarget-edit.css" />
-    <Content Include="Areas\SystemManage\Content\budgetTarget-index.css" />
-    <Content Include="Areas\SystemManage\Content\budgetTarget-print.css" />
     <Content Include="Areas\SystemManage\Content\common.css" />
-    <Content Include="Areas\SystemManage\Content\higherBudgetTarget-index.css" />
+    <Content Include="Areas\SystemManage\Content\customer-index.css" />
     <Content Include="Areas\SystemManage\Content\jquery.mmenu.css" />
     <Content Include="Areas\SystemManage\Content\report-index.css" />
     <Content Include="Areas\SystemManage\Scripts\customer-import.js" />
