@@ -4,7 +4,7 @@
     var addDefaultValue = "-- 无 --";
 
     //转换为select2
-    $(".form-edit .u-customer-select2").each(function () {
+    $("form.search .u-customer-select2").each(function () {
         //当前对象
         var $this = $(this);
         var url = $this.data("url");

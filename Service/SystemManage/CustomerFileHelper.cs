@@ -50,14 +50,14 @@ namespace Service.SystemManage
                                 var cell = row.GetCell(0);//分类
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.CustomerCategoryName = str;
                                 }
                                 cell = row.GetCell(1);//姓名
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (string.IsNullOrWhiteSpace(str))
                                         continue;
                                     importDto.RealName = str;
@@ -65,14 +65,14 @@ namespace Service.SystemManage
                                 cell = row.GetCell(2);//性别
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.GenderDescription = str;
                                 }
                                 cell = row.GetCell(3);//昵称
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.NickName = str;
                                 }
@@ -80,72 +80,39 @@ namespace Service.SystemManage
                                 cell = row.GetCell(4);//出生年月
                                 if (cell != null)
                                 {
-
-                                    if (cell.CellType == CellType.Numeric)
-                                    {
-                                        var str = cell.DateCellValue;
-                                        importDto.BirthdayDescription = str.ToString("yyyy-MM-dd");
-                                    }
-                                    else if (cell.CellType == CellType.String)
-                                    {
-                                        var str = cell.StringCellValue;
-                                        if (!string.IsNullOrWhiteSpace(str))
-                                            importDto.BirthdayDescription = str;
-                                    }
+                                    var str = cell.ToString();
+                                    if (!string.IsNullOrWhiteSpace(str))
+                                        importDto.BirthdayDescription = str;
                                 }
 
                                 cell = row.GetCell(5);//手机
                                 if (cell != null)
                                 {
-                                    if (cell.CellType == CellType.Numeric)
-                                    {
-                                        var str = cell.NumericCellValue;
-                                        importDto.MobilePhoneNumber = str.ToString();
-                                    }
-                                    else if (cell.CellType == CellType.String)
-                                    {
-                                        var str = cell.StringCellValue;
-                                        if (!string.IsNullOrWhiteSpace(str))
-                                            importDto.MobilePhoneNumber = str;
-                                    }
+                                    var str = cell.ToString();
+                                    if (!string.IsNullOrWhiteSpace(str))
+                                        importDto.MobilePhoneNumber = str;
                                 }
 
                                 cell = row.GetCell(6);//QQ
                                 if (cell != null)
                                 {
-                                    if (cell.CellType == CellType.Numeric)
-                                    {
-                                        var str = cell.NumericCellValue;
-                                        importDto.Qq = str.ToString();
-                                    }
-                                    else if (cell.CellType == CellType.String)
-                                    {
-                                        var str = cell.StringCellValue;
-                                        if (!string.IsNullOrWhiteSpace(str))
-                                            importDto.Qq = str;
-                                    }
+                                    var str = cell.ToString();
+                                    if (!string.IsNullOrWhiteSpace(str))
+                                        importDto.Qq = str;
                                 }
 
                                 cell = row.GetCell(7);//微信
                                 if (cell != null)
                                 {
-                                    if (cell.CellType == CellType.Numeric)
-                                    {
-                                        var str = cell.NumericCellValue;
-                                        importDto.Wechat = str.ToString();
-                                    }
-                                    else if (cell.CellType == CellType.String)
-                                    {
-                                        var str = cell.StringCellValue;
-                                        if (!string.IsNullOrWhiteSpace(str))
-                                            importDto.Wechat = str;
-                                    }
+                                    var str = cell.ToString();
+                                    if (!string.IsNullOrWhiteSpace(str))
+                                        importDto.Wechat = str;
                                 }
 
                                 cell = row.GetCell(8);//联系地址
                                 if (cell != null)
                                 {
-                                    var str = cell.StringCellValue;
+                                    var str = cell.ToString();
                                     if (!string.IsNullOrWhiteSpace(str))
                                         importDto.Address = str;
                                 }
