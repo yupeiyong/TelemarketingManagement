@@ -3,3 +3,8 @@ F:\workspace\TelemarketingManagement\Config\bin\Debug\Config.pdb
 F:\workspace\TelemarketingManagement\Config\obj\Debug\Config.csprojResolveAssemblyReference.cache
 F:\workspace\TelemarketingManagement\Config\obj\Debug\Config.dll
 F:\workspace\TelemarketingManagement\Config\obj\Debug\Config.pdb
+E:\workspace\TelemarketingManagement\Config\bin\Debug\Config.dll
+E:\workspace\TelemarketingManagement\Config\bin\Debug\Config.pdb
+E:\workspace\TelemarketingManagement\Config\obj\Debug\Config.dll
+E:\workspace\TelemarketingManagement\Config\obj\Debug\Config.pdb
+E:\workspace\TelemarketingManagement\Config\obj\Debug\Config.csprojResolveAssemblyReference.cache

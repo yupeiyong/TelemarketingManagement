@@ -1,0 +1,51 @@
+﻿p.loading {
+    text-align: center;
+    line-height: 100px;
+}
+
+.select2-container .select2-selection--single { height: 34px !important; }
+
+.select2-container--default .select2-selection--single { border: 1px solid #E3E6F3 !important; }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 34px !important; }
+
+.form-inline .form-group { vertical-align: top; }
+
+/*多选条件*/
+.conditional ul {
+    margin-top: 15px;
+    padding: 0;
+}
+
+.conditional ul li {
+    line-height: 22px;
+    list-style: none;
+}
+
+.conditional ul li i {
+    cursor: pointer;
+    float: right;
+}
+
+/*样式调整*/
+.conditional .col-md-3 .form-group {
+    width: 100%;
+}
+
+.conditional .form-group label {
+    float: left;
+    line-height: 25px;
+}
+
+.conditional .form-group > div {
+    width: 100%;
+    padding-left: 80px;
+}
+
+.main .container-fluid .row:first-of-type {
+    margin-bottom: 0 !important;
+}
+
+.conditional .form-group input[type=date] {
+    width: 100%;
+}

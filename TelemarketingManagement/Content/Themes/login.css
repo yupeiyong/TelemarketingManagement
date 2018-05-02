@@ -1,0 +1,112 @@
+﻿@font-face {
+    font-family: '兰亭黑简_0';
+    src: url('../fonts/兰亭黑简_0.TTF') format('truetype');
+}
+
+.backBox {
+    background: url(/Content/Images/loginBack.jpg) top center no-repeat;
+}
+
+.loginBox {
+    width: 516px;
+    margin: auto;
+    padding-top: 250px;
+}
+
+.loginBox .loginInner {
+}
+
+.loginBox .loginInner .title {
+    font-family: '兰亭黑简_0';
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-indent: 1px;
+    color: #3bb09b;
+    /*margin-top: 38px;*/
+    margin-top: 50px;
+    text-align: center;
+}
+
+.loginBox .loginInner .title img {
+    margin-bottom: 5px;
+}
+
+.loginBox .loginInner .inputBox {
+    /*margin-top: 20px;*/
+    margin-top: 20px;
+}
+
+.loginBox .loginInner .inputBox:last-of-type {
+    padding-left: 36px;
+}
+
+.loginBox .loginInner .inputBox > label,
+.loginBox .loginInner .inputBox > a {
+    font-size: 14px;
+    color: #235e8d;
+    width: 60px;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+.loginBox .loginInner .inputBox > a {
+    font-size: 13px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.loginBox .loginInner .inputBox > span,
+.loginBox .loginInner .inputBox > a {
+    display: inline-block;
+    width: 212px;
+}
+
+.loginBox .loginInner .inputBox > span a{
+    color: #235e8d;
+}
+
+.loginBox .loginInner .inputBox input {
+    display: inline-block;
+    width: 219px;
+    height: 28px;
+    text-align: center;
+    color: #0075BB;
+    border: 1px solid #3876a2;
+    border-radius: 0px !important;
+}
+
+#btnLogin {
+    width: 81px;
+    height: 33px;
+    /*margin-left: 133px;*/
+    border: none;
+    overflow: hidden;
+    background-image: url(/Content/Images/icon_loginHang.jpg);
+}
+
+#btnLogin:hover {
+    background-image: url(/Content/Images/icon_loginHover.jpg);
+}
+
+.loginBox .loginInner .inputBox.three input {
+    width: 130px;
+    border: 1px solid #3876a2;
+    padding: 0;
+}
+
+.link-change-securityCode span {
+    font-size: 10px;
+    color: #3BB09B;
+}
+
+/*浏览器自带记住密码样式覆盖 !important防止选中改色*/
+input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0 400px #fff inset !important;
+    -webkit-text-fill-color: #0075BB;/*8698a1*/
+}
+
+p.messageTips {
+    color: red;
+    padding-left: 40px;
+    margin-top: 20px;
+}

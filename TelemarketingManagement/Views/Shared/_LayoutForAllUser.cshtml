@@ -1,0 +1,82 @@
+﻿@using TelemarketingManagement.App_Start.Base
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="utf-8">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <meta name="wap-font-scale" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="expires" content="@DateTime.Now.AddDays(30)">
+    <meta http-equiv="pragma" content="Pragma">
+    <meta http-equiv="cache-control" content="public">
+
+    <title>@SeoSettings.Title</title>
+    <meta name="keywords" content="@SeoSettings.Keywords" />
+    <meta name="description" content="@SeoSettings.Description" />
+
+
+    <link href="~/Lib/BootStrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Lib/BootStrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Lib/FontAwesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Lib/Layer/3.0.1/skin/default/layer.css" rel="stylesheet" />
+    <link href="~/Lib/BootStrapDialog/1.35.2/css/bootstrap-dialog.min.css" rel="stylesheet" />
+    <link href="~/Lib/BootStrapTable/1.11.0/bootstrap-table.min.css" rel="stylesheet" />
+
+    <link href="~/Areas/SystemManage/Content/jquery.mmenu.css" rel="stylesheet" />
+
+    <link href="~/Content/Themes/style.css" rel="stylesheet" />
+    <link href="~/Content/Themes/common.css" rel="stylesheet" />
+
+    <script src="~/Lib/JQuery/2.2.4/jquery.min.js"></script>
+    <!--引入子页面的样式-->
+    @RenderSection("css", false)
+</head>
+<body>
+
+    @{
+        Html.RenderPartial("~/Views/Shared/HeaderPartialForAdmin.cshtml");
+    }
+    <div class="container-fluid content">
+        <div class="row">
+            @*@{
+        Html.RenderPartial("~/Areas/SystemManage/Views/Shared/Menu.cshtml");
+    }*@
+            <div class="main ">
+                @RenderBody()
+            </div>
+            <div id="footer">
+                @{
+                    Html.RenderPartial("~/Views/Shared/FooterPartialForAdmin.cshtml");
+                }
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <script src="~/Lib/BootStrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/Lib/Layer/3.0.1/layer.js"></script>
+    <script src="~/Lib/BootStrapDialog/1.35.2/js/bootstrap-dialog.min.js"></script>
+    <script src="~/Lib/BootStrapTable/1.11.0/bootstrap-table.min.js"></script>
+    <script src="~/Lib/BootStrapTable/1.11.0/bootstrap-table-locale-all.min.js"></script>
+    <script src="~/Lib/BootStrapTable/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="~/Lib/JQueryValidate/1.15.0/jquery.validate.min.js"></script>
+
+    <script src="~/Lib/bootstrap-table-extend.js"></script>
+    <script src="~/Lib/Commons.js"></script>
+
+    <script src="~/Areas/SystemManage/Scripts/core.min.js"></script>
+    <script src="~/Areas/SystemManage/Scripts/jquery.mmenu.min.js"></script>
+    <script src="~/Areas/SystemManage/Scripts/index.js"></script>
+
+    <!--加载子页面的js-->
+    @RenderSection("scripts", false)
+
+
+</body>
+</html>

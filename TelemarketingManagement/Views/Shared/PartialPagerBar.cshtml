@@ -1,0 +1,25 @@
+﻿@model JJsoft.Infrastructure.NetUtils.PagerViewModel
+
+
+<link href="~/Content/themes/Shared/HtmlPager.css" rel="stylesheet"/>
+<script src="~/Content/Libraries/OthersJs/HtmlPager.js"></script>
+
+<div id="PagerPartialPanel">
+    <a href="@Model.GetUrl(Model.PreviousItem.StartIndex)" class="@Model.PreviousItem.ClassNamesString">@Model.PreviousItem.Text</a>
+
+    @foreach (var item in Model.NumberItems)
+    {
+        <a href="@Model.GetUrl(@item.StartIndex)" class="@item.ClassNamesString">@item.Text</a>
+    }
+
+    <a href="@Model.GetUrl(Model.NextItem.StartIndex)" class="@Model.NextItem.ClassNamesString">@Model.NextItem.Text</a>
+    <a href="javascript:void(0);" class="Fonts">共@(Model.TotalPageNumber)页</a>
+
+    <div class="JumpOther">
+        <span class="Fonts">到</span>
+        <input class="PageIndex" type="text" value="@Model.CurrentPageNumber"/>
+        <span class="Fonts">页</span>
+        <span class="PagerItem PagerBorderLeft" data-page-size="@Model.TakeCount" data-url-pattern="@Model.PagerUrlPattern" onclick="javascript: PagerJump2(this);" title="跳转到指定页">确定</span>
+    </div>
+
+</div>

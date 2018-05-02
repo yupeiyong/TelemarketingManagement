@@ -16,7 +16,7 @@ namespace UnitTestProject.Models
             {
                 var customer=new Customer
                 {
-                    AccountName = "John.lee"
+                    RealName = "John.lee"
                 };
                 dao.Set<Customer>().Add(customer);
                 dao.SaveChanges();

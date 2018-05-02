@@ -1,0 +1,142 @@
+﻿body {
+    color:#44677d;
+}
+
+.Disabled {
+    color:#aaa;
+    background-color: #666;
+}
+
+a {
+    color:#555;
+}
+a:hover {
+    color:#45A79E;
+}
+
+td a {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+td a i {
+    margin-left: 3px;
+}
+
+
+/*公用*/
+.CurrentPosition {
+    width: 100%;
+    line-height: 37px;
+    background: url(/Content/Images/back_nav-expanded.jpg) repeat-x;
+    background-size: contain;
+    padding-left: 26px;
+    border-bottom: 1px solid #b6c0c9;
+}
+
+.CurrentPosition img {
+    vertical-align: sub;
+}
+
+.row.conditional {
+    background: #f2f2f2 !important;
+    border: 1px solid #ccc;
+    margin: 7px;
+    padding: 15px !important;
+}
+
+.row.conditional > div > div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.input-group-addon, .input-group-btn {
+    width: auto;
+}
+
+.row.conditional > div > div input {
+    width: 200px !important;
+}
+
+.row.conditional .row {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.row.conditional .row:last-of-type {
+    border-top: 1px solid #d0d0d0;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-radius: 0;
+}
+
+/**必填项*/
+span.redRequired {
+    color: red;
+    margin-right: 3px;
+}
+
+label.redTipsForForm {
+    color: red;
+    font-size: 12px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+/*错误提示*/
+.error {
+    color: red;
+}
+/*弹窗*/
+.modal-header {
+    padding: 5px !important;
+    margin: 1px 2px;
+}
+
+.modal-content {
+    border: 1px solid #c5d8e2;
+}
+
+.modal-content .modal-body {
+    background: -webkit-linear-gradient(#e0eaec 10%, #eaf2f5 10%, #fff 30%, #fff 50%);
+    background: -o-linear-gradient(#e0eaec 10%, #eaf2f5 10%, #fff 30%, #fff 50%);
+    background: -moz-linear-gradient(#e0eaec 10%, #eaf2f5 10%, #fff 30%, #fff 50%);
+    background: linear-gradient(#e0eaec 10%, #eaf2f5 10%, #fff 30%, #fff 50%);
+}
+
+.modal-content .modal-body .container-fluid {
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.modal-footer {
+    display: block !important;
+    /*height: 10px;*/
+    background: url(/Content/Images/back_popBottom.jpg) repeat-x bottom;
+    padding: 0;
+}
+
+.type-warning .modal-footer{
+    padding: 10px;
+    background: none !important;
+}
+
+/*删除弹窗*/
+.bootstrap-dialog.type-warning .modal-header {
+    background-color: #D62614;
+}
+
+.btn-warning {
+    background-color: #D62614;
+}
+
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open > .dropdown-toggle.btn-warning {
+    background-color: #AD2011;
+}
+
+/*复选框*/
+.icheckbox_square-blue.focus {
+    background-position: -24px 0;
+}

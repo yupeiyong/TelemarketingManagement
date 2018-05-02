@@ -1,0 +1,168 @@
+.edui-dialog-image .edui-image-wrapper {
+    font-size: 12px;
+    margin: 15px;
+}
+
+/*upload*/
+
+.edui-dialog-image .edui-image-upload1 {
+    height: 38px;
+    left: 50%;
+    margin-left: -22px;
+    margin-top: -19px;
+    position: absolute;
+    top: 50%;
+    width: 44px;
+}
+
+.edui-dialog-image .edui-image-upload2 {
+    float: left;
+    height: 120px;
+    margin: 5px 0 0 5px;
+    position: relative;
+    width: 120px;
+}
+
+.edui-dialog-image .edui-image-form {
+    cursor: pointer;
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.edui-dialog-image .edui-image-form .edui-image-file {
+    filter: alpha(opacity=0);
+    height: 100%;
+    width: 100%;
+}
+
+.edui-dialog-image .edui-image-upload1 .edui-image-icon {
+    background-image: url('images/upload1.png');
+    display: inline-block;
+    height: 38px;
+    width: 44px;
+}
+
+.edui-dialog-image .edui-image-upload1 .edui-image-icon.hover { background-position: -50px 0; }
+
+.edui-dialog-image .edui-image-upload2 .edui-image-icon {
+    background-image: url('images/upload2.png');
+    display: inline-block;
+    height: 120px;
+    width: 120px;
+}
+
+.edui-dialog-image .edui-image-dragTip {
+    color: #222;
+    display: none;
+    font-size: 14px;
+    left: 50%;
+    margin-left: -60px;
+    margin-top: 30px;
+    position: absolute;
+    text-shadow: 0px 2px 3px #555;
+    top: 50%;
+}
+
+.edui-dialog-image .edui-image-content {
+    height: 330px;
+    position: relative;
+    width: 100%;
+}
+
+.edui-dialog-image .edui-image-mask {
+    background-color: #fff;
+    color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    font-size: 14px;
+    font-weight: bold;
+    height: 100%;
+    left: 0;
+    line-height: 300px;
+    opacity: 0.6;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+
+.edui-dialog-image .edui-image-mask.edui-active { display: block; }
+
+/*network*/
+
+.edui-dialog-image .edui-image-searchBar { margin: 10px; }
+
+.edui-dialog-image .edui-image-searchBar .edui-image-searchTxt {
+    border: 1px solid #c5d2ff;
+    display: inline-block !important;
+    *display: inline !important;
+    font-size: 14px;
+    height: 20px;
+    line-height: 18px;
+    margin: 0;
+    outline: 0;
+    padding: 3px;
+    width: 400px;
+    *zoom: 1;
+}
+
+.edui-dialog-image .edui-image-searchBar .edui-image-searchAdd {
+    background-color: #ffffff;
+    border: 1px solid #ababab;
+    cursor: pointer;
+    display: inline-block !important;
+    *display: inline !important;
+    height: 25px;
+    line-height: 25px;
+    margin-left: 20px;
+    padding: 0;
+    text-align: center;
+    text-align: center;
+    width: 60px;
+    *zoom: 1;
+}
+
+.edui-dialog-image .edui-image-searchBar .edui-image-searchAdd.hover {
+    background-color: #d5e1f2;
+    border: 1px solid #a3bde3;
+    padding: 0;
+}
+
+.edui-dialog-image .edui-image-searchRes {
+    height: 280px;
+    overflow: auto;
+}
+
+
+/*common*/
+
+.edui-dialog-image .edui-image-item {
+    border: 1px solid #CCC;
+    cursor: default;
+    float: left;
+    height: 120px;
+    margin: 5px 0 0 5px;
+    position: relative;
+    width: 120px;
+}
+
+.edui-dialog-image .edui-image-item .edui-image-pic {
+    left: -9999px;
+    position: absolute;
+}
+
+.edui-dialog-image .edui-image-item .edui-image-close {
+    background: url('images/close.png');
+    cursor: pointer;
+    height: 17px;
+    position: absolute;
+    right: 0;
+    width: 17px;
+    z-index: 1
+}
+
+.edui-dialog-image .edui-image-item.hover .edui-image-close { display: block; }
