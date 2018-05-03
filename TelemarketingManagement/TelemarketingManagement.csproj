@@ -208,7 +208,6 @@
     <Compile Include="App_Start\Base\AutoMapperInitial.cs" />
     <Compile Include="App_Start\Base\BaseController.cs" />
     <Compile Include="App_Start\Base\ContainerFactory.cs" />
-    <Compile Include="App_Start\Base\SeoSettings.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Filters\LoginAttribute.cs" />
@@ -230,11 +229,19 @@
   <ItemGroup>
     <Content Include="Areas\SystemManage\Content\add-ons.min.css" />
     <Content Include="Areas\SystemManage\Content\common.css" />
+    <Content Include="Areas\SystemManage\Content\customerCategory-index.css" />
+    <Content Include="Areas\SystemManage\Content\user-edit.css" />
+    <Content Include="Areas\SystemManage\Content\customer-edit.css" />
+    <Content Include="Areas\SystemManage\Content\user-index.css" />
     <Content Include="Areas\SystemManage\Content\customer-index.css" />
     <Content Include="Areas\SystemManage\Content\jquery.mmenu.css" />
     <Content Include="Areas\SystemManage\Content\report-index.css" />
+    <Content Include="Areas\SystemManage\Scripts\category-edit.js" />
+    <Content Include="Areas\SystemManage\Scripts\user-edit.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-import.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-edit.js" />
+    <Content Include="Areas\SystemManage\Scripts\category-index.js" />
+    <Content Include="Areas\SystemManage\Scripts\user-index.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-index.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1421,6 +1428,10 @@
     <Content Include="Areas\SystemManage\Views\Customer\Edit.cshtml" />
     <Content Include="App_Data\.Template\客户资料模板.xls" />
     <Content Include="Areas\SystemManage\Views\Customer\Import.cshtml" />
+    <Content Include="Areas\SystemManage\Views\User\Edit.cshtml" />
+    <Content Include="Areas\SystemManage\Views\User\Index.cshtml" />
+    <Content Include="Areas\SystemManage\Views\CustomerCategory\Edit.cshtml" />
+    <Content Include="Areas\SystemManage\Views\CustomerCategory\Index.cshtml" />
     <None Include="Lib\JQueryValidate\1.15.0\jquery.validate-vsdoc.js" />
     <Content Include="Lib\JQueryValidate\1.15.0\jquery.validate-vsdoc.min.js" />
     <Content Include="Lib\JQueryValidate\1.15.0\jquery.validate.js" />
@@ -1742,10 +1753,8 @@
   <ItemGroup>
     <Folder Include="App_Data\.ImportCustomerFiles\" />
     <Folder Include="Areas\SystemManage\Models\" />
-    <Folder Include="Areas\SystemManage\Views\CustomerCategory\" />
     <Folder Include="Areas\SystemManage\Views\Default\" />
     <Folder Include="Areas\SystemManage\Views\TelephoneRecording\" />
-    <Folder Include="Areas\SystemManage\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

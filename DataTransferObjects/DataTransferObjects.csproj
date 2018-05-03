@@ -55,7 +55,7 @@
     <Compile Include="ResultInfo.cs" />
     <Compile Include="UserLoginDto.cs" />
     <Compile Include="UserSearchDto.cs" />
-    <Compile Include="UserUpdateDto.cs" />
+    <Compile Include="UserEditDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

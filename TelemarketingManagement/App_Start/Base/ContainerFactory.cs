@@ -1,12 +1,11 @@
-﻿
-
-using Autofac;
-using Autofac.Integration.Mvc;
-using System;
+﻿using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using System.Linq;
-namespace TelemarketingManagement.App_Start.Base
+using Autofac;
+using Autofac.Integration.Mvc;
+
+
+namespace TelemarketingManagement.Base
 {
     public class ContainerFactory
     {

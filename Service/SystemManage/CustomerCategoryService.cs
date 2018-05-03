@@ -1,20 +1,22 @@
-﻿using Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Common;
 using Data;
 using DataTransferObjects;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Service.SystemManage
 {
+
     public class CustomerCategoryService
     {
-        private readonly string _modelDescription = typeof(CustomerCategory).GetDescription();
+
+        private readonly string _modelDescription = typeof (CustomerCategory).GetDescription();
 
         public DataDbContext DataDbContext { get; set; }
+
 
         ~CustomerCategoryService()
         {
@@ -22,12 +24,15 @@ namespace Service.SystemManage
                 DataDbContext.Dispose();
         }
 
+
         public List<CustomerCategory> Search(CustomerCategorySearchDto dto)
         {
             var dataSource = DataDbContext.Set<CustomerCategory>().AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(dto.Keywords))
-                dataSource = dataSource.Where(cc=>cc.Name!=null && cc.Name.Contains(dto.Keywords) || cc.Description!=null && cc.Description.Contains(dto.Keywords));
+                dataSource = dataSource.Where(cc => cc.Name != null && cc.Name.Contains(dto.Keywords) || cc.Description != null && cc.Description.Contains(dto.Keywords));
+
+            dataSource = dataSource.WhereDateTime(nameof(Customer.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
 
             dataSource = dataSource.OrderByDescending(a => a.LastModifyTime);
 
@@ -58,13 +63,13 @@ namespace Service.SystemManage
         {
             ValidateEditDto(dto);
 
-            if (DataDbContext.Set<CustomerCategory>().Any(cc=>cc.Name!=null && cc.Name==dto.Name))
+            if (DataDbContext.Set<CustomerCategory>().Any(cc => cc.Name != null && cc.Name == dto.Name))
                 throw new Exception($"错误，新增失败，名称：{dto.Name}的{_modelDescription}已经存在！");
 
-            var CustomerCategory = dto.MapTo<CustomerCategory>();
-            CustomerCategory.CreatorTime = DateTime.Now;
-            CustomerCategory.LastModifyTime = DateTime.Now;
-            DataDbContext.Set<CustomerCategory>().Add(CustomerCategory);
+            var customerCategory = dto.MapTo<CustomerCategory>();
+            customerCategory.CreatorTime = DateTime.Now;
+            customerCategory.LastModifyTime = DateTime.Now;
+            DataDbContext.Set<CustomerCategory>().Add(customerCategory);
             DataDbContext.SaveChanges();
         }
 
@@ -86,7 +91,6 @@ namespace Service.SystemManage
         }
 
 
-
         public void Remove(params long[] ids)
         {
             if (ids == null || ids.Length == 0)
@@ -97,7 +101,7 @@ namespace Service.SystemManage
                 if (data == null)
                     throw new Exception($"错误，{_modelDescription}不存在！(Id:{id})");
 
-                if(DataDbContext.Set<Customer>().Any(c=>c.CustomerCategory!=null && c.CustomerCategory.Id==data.Id))
+                if (DataDbContext.Set<Customer>().Any(c => c.CustomerCategory != null && c.CustomerCategory.Id == data.Id))
                     throw new Exception($"错误，有客户记录引用了{_modelDescription}，请先删除客户资料重试！)");
 
                 DataDbContext.Set<CustomerCategory>().Remove(data);
@@ -110,5 +114,7 @@ namespace Service.SystemManage
         {
             return DataDbContext.Set<CustomerCategory>().FirstOrDefault(b => b.Id == id);
         }
+
     }
+
 }

@@ -36,6 +36,7 @@ namespace Service.SystemManage
                     (m.NickName != null && m.NickName.Contains(dto.Keywords)) ||
                     (m.MobilePhoneNumber != null && m.MobilePhoneNumber.Contains(dto.Keywords)));
             }
+            dataSource = dataSource.WhereDateTime(nameof(Customer.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
 
             dataSource = dataSource.OrderByDescending(m => m.LastModifyTime);
             if (dto.IsGetTotalCount)
@@ -55,7 +56,6 @@ namespace Service.SystemManage
 
                     if (dbPassword == user.Password)
                     {
-                        DateTime lastVisitTime = DateTime.Now;
                         user.LogOnCount += 1;
                         user.LastModifyTime = DateTime.Now;
                         DataDbContext.SaveChanges();
@@ -92,11 +92,6 @@ namespace Service.SystemManage
 
             try
             {
-                //if (Session["nfine_session_verifycode"].IsEmpty() || Md5.md5(code.ToLower(), 16) != Session["nfine_session_verifycode"].ToString())
-                //{
-                //    throw new Exception("验证码错误，请重新输入");
-                //}
-
                 var user = CheckLogin(dto.AccountName, dto.Password);
                 if (user != null)
                 {
@@ -105,9 +100,6 @@ namespace Service.SystemManage
                     onlineUser.AccountName = user.AccountName;
                     onlineUser.UserName = user.RealName;
                     onlineUser.NickName = user.NickName;
-                    //onlineUser.CompanyId = user.F_OrganizeId;
-                    //onlineUser.DepartmentId = user.F_DepartmentId;
-                    //onlineUser.RoleId = user.F_RoleId;
                     onlineUser.LoginIPAddress = Net.Ip;
                     onlineUser.LoginIPAddressName = Net.GetLocation(onlineUser.LoginIPAddress);
                     onlineUser.LoginTime = DateTime.Now;
@@ -127,27 +119,29 @@ namespace Service.SystemManage
             }
             catch (Exception ex)
             {
-                //logBaseEntity.F_Account = username;
-                //logBaseEntity.F_NickName = username;
-                //logBaseEntity.F_Result = false;
-                //logBaseEntity.F_Description = "登录失败，" + ex.Message;
-                //new LogService().WriteDbLog(logBaseEntity);
-                //return Content(new AjaxResult { state = ResultType.error.ToString(), message = ex.Message }.ToJson());
                 throw new Exception("登录失败，" + ex.Message);
             }
         }
 
+        public void Save(UserEditDto dto)
+        {
+            if (dto.UpdateId > 0)
+                Update(dto);
+            else
+                Add(dto);
+        }
 
-
-        public void Add(UserUpdateDto dto)
+        public void Add(UserEditDto dto)
         {
             ValidateUpdateDto(dto);
+            if (string.IsNullOrEmpty(dto.LoginPassword))
+                throw new Exception("错误：用户密码不能为空！");
 
             if (DataDbContext.Set<User>().Any(u => u.AccountName == dto.AccountName))
                 throw new Exception($"添加用户失败，{dto.AccountName}已存在！");
 
             var user = dto.MapTo<User>();
-            user.Password = Encrypt(dto.Password);
+            user.Password = Encrypt(dto.LoginPassword);
             user.CreatorTime = DateTime.Now;
             user.LastModifyTime = DateTime.Now;
 
@@ -156,7 +150,7 @@ namespace Service.SystemManage
         }
 
 
-        public void Update(UserUpdateDto dto)
+        public void Update(UserEditDto dto)
         {
             var user = DataDbContext.Set<User>().FirstOrDefault(m => m.Id == dto.UpdateId);
             if (user == null)
@@ -170,12 +164,10 @@ namespace Service.SystemManage
         }
 
 
-        private static void ValidateUpdateDto(UserUpdateDto dto)
+        private static void ValidateUpdateDto(UserEditDto dto)
         {
             if (string.IsNullOrEmpty(dto.AccountName))
                 throw new Exception("错误：用户帐号不能为空！");
-            if (string.IsNullOrEmpty(dto.Password))
-                throw new Exception("错误：用户密码不能为空！");
 
             //dto.NickName = dto.NickName ?? "";
         }

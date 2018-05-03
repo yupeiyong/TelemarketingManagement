@@ -40,6 +40,14 @@ $(function () {
         });
     });
 
+    //转换为select2
+    $("form.form-edit .no-search-select2").each(function () {
+        //当前对象
+        var $this = $(this);
+        //远程筛选
+        $this.select2();
+    });
+    
     $('.buttons #btnSave').on('click', function () {
         var $form = $("form.form-horizontal");
 

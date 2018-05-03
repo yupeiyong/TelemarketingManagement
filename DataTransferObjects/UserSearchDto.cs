@@ -8,5 +8,8 @@ namespace DataTransferObjects
 {
     public class UserSearchDto:BaseSearchDto
     {
+        public DateTime? StartCreatorTime { get; set; }
+
+        public DateTime? EndCreatorTime { get; set; }
     }
 }

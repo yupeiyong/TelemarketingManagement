@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-    public class UserUpdateDto
+    public class UserEditDto
     {
         public long UpdateId { get; set; }
 
         public string AccountName { get; set; }
 
-        public string Password { get; set; }
+        public string LoginPassword { get; set; }
 
         public string NickName { get; set; }
 
@@ -45,6 +45,12 @@ namespace DataTransferObjects
 
 
         public DateTime? Birthday { get; set; }
+
+
+        /// <summary>
+        ///     用户状态
+        /// </summary>
+        public UserStateEnum UserState { get; set; }
 
     }
 }
