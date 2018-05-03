@@ -66,6 +66,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
 
         public JsonResult Save(TelephoneRecordingEditDto dto)
         {
+            dto.VisitorId = CurrentOnlineUser.UserId;
             TelephoneRecordingService.Save(dto);
             return Json(new BaseResponseDto { Message = "保存成功！", Success = true, Title = _modelDescription });
         }

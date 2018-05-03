@@ -30,7 +30,7 @@ $(function () {
         recorder.start();
     });
 
-    var audioBolb=null;
+    var audioBolb = null;
     stop.addEventListener('click', function () {
         this.disabled = true;
         start.disabled = false;
@@ -42,7 +42,7 @@ $(function () {
             }
             var audio = document.createElement('audio');
             audio.src = URL.createObjectURL(blob);
-            audio.controls = true;            
+            audio.controls = true;
             container.appendChild(audio);
             audioBolb = blob;
         });
@@ -95,7 +95,6 @@ $(function () {
             layer.msg("请先录音", { time: 5000 });
             return false;
         }
-            alert("请先录音");
 
         var $form = $("form.form-horizontal");
 
@@ -114,43 +113,19 @@ $(function () {
 
         var uplodaUrl = $this.data('upload-url');
         var url = $this.data("url");
-        //保存
-        var data = $form.serializeArray();
-        var btnOriginalText = $this.text();
 
+        var btnOriginalText = $this.text();
 
         //创建formData对象
         var formData = new FormData();
 
         //audioData
         formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
-        //formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
-        //formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
-        //formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
-        //formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
-        ////上传数据
-        //$.ajax({
-        //    url: url,
-        //    type: 'post',
-        //    processData: false,
-        //    contentType: false,
-        //    data: formData,
-        //    dataType: 'json',
-        //    success: function (data) {
-        //        var obj = eval(data);
-        //        if (obj.responseCode == '0') {
-
-        //        }
-        //    },
-        //    error: function (jqXHR, textStatus, errorThrown) {
-        //        alert(textStatus + "---" + errorThrown);
-        //    }
-        //});
-
         $.ajax({
             url: uplodaUrl,
             type: "json",
             data: formData,
+            async: false,
             processData: false,
             contentType: false,
             beforeSend: function () {
@@ -158,12 +133,22 @@ $(function () {
                 $closeBtn.attr("disabled", true);
                 $this.text("保存中...");
             },
-            success: function (data) {
-                debugger;
-                layer.msg(data.Message, { time: 5000 });
-                //记录保存结果
-                if (data.Success) {
-                    $this.closest('.bootstrap-dialog').modal('hide');
+            success: function (response) {
+                if (response.Success) {
+                    var audioFileName = response.FileName;
+                    $('#AudioFileName').val(audioFileName);
+                    //保存
+                    var data = $form.serializeArray();
+
+                    $.post(url, data, function (res) {
+                        layer.msg(res.Message, { time: 5000 });
+                        //记录保存结果
+                        if (res.Success) {
+                            $this.closest('.bootstrap-dialog').modal('hide');
+                        }
+                    }, 'json');
+                } else {
+                    layer.msg(response.Message, { time: 5000 });
                 }
             },
             error: function (xhr, error, errThrow) {
