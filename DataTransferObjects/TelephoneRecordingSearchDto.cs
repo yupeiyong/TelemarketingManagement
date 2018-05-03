@@ -13,5 +13,10 @@ namespace DataTransferObjects
 
         public DateTime? EndCreatorTime { get; set; }
 
+        public long CustomerId { get; set; }
+
+        public long VisitorId { get; set; }
+
+
     }
 }

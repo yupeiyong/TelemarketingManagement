@@ -15,5 +15,7 @@ namespace DataTransferObjects
 
         public string AudioFileName { get; set; }
 
+        public string Description { get; set; }
+
     }
 }

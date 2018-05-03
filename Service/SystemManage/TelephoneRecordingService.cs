@@ -26,6 +26,11 @@ namespace Service.SystemManage
         {
             var dataSource = DataDbContext.Set<TelephoneRecording>().AsQueryable();
 
+            if(dto.CustomerId>0)
+                dataSource = dataSource.Where(c => c.CustomerId==dto.CustomerId);
+
+            if(dto.VisitorId>0)
+                dataSource = dataSource.Where(c => c.VisitorId == dto.VisitorId);
 
             dataSource = dataSource.WhereDateTime(nameof(TelephoneRecording.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
 
@@ -76,7 +81,7 @@ namespace Service.SystemManage
                     throw new Exception($"错误，Id={dto.CustomerId}的客户不存在，请检查后重试！");
             }
 
-            var telephoneRecording = new TelephoneRecording { AudioFileName = dto.AudioFileName };
+            var telephoneRecording = new TelephoneRecording { AudioFileName = dto.AudioFileName,Description=dto.Description };
             if (customer != null)
             {
                 telephoneRecording.CustomerId = customer.Id;
@@ -137,6 +142,7 @@ namespace Service.SystemManage
                 telephoneRecording.VisitorNickName = visitor.NickName;
             }
 
+            telephoneRecording.Description = dto.Description;
             telephoneRecording.LastModifyTime = DateTime.Now;
             DataDbContext.SaveChanges();
 

@@ -1,0 +1,127 @@
+﻿@using Models
+@using Common
+@{
+    var modelDescription = typeof(TelephoneRecording).GetDescription();
+    ViewBag.Title = modelDescription + "编辑";
+}
+@section css{
+    <link href="~/Areas/SystemManage/Content/telephoneRecording-index.css" rel="stylesheet" />
+    <link href="~/Lib/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+}
+<div class="container-fluid">
+    <div class="CurrentPosition">
+        <img src="~/Content/Images/icon_currentPosition.png" />
+        当前位置：电话营销管理系统 > @ViewBag.Title
+    </div>
+    <div class="row clearfix conditional">
+        <div class="form-search">
+            <form class="search">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">采访时间：</label>
+                            <div>
+                                <input name="StartCreatorTime" type="date" class="form-control input-sm" title="采访时间" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">--</label>
+                            <div>
+                                <input name="EndCreatorTime" type="date" class="form-control input-sm" title="采访时间" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">客户：</label>
+                            <div>
+                                <select name="CustomerId" class="select2 u-select2" style="width:100%;" data-url="@Url.Action("GetCustomers")"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">录音人：</label>
+                            <div>
+                                <select name="VisitorId" class="select2 u-select2" style="width:100%;" data-url="@Url.Action("GetUsers")"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control bk-radius" name="Keywords" id="Keywords" placeholder="关键词...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" id="btnSearch">
+                                    <i class="fa fa-search"></i>
+                                    搜索
+                                </button>
+                            </span>
+                        </div>
+                        <button type="button" class="btn btn-default btn-sm" id="btnAdd"
+                                title="新增客户资料" data-u-url="@Url.Action("Add")">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            新增
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" id="btnImport"
+                                title="导入客户资料" data-u-url="@Url.Action("Remove")">
+                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+                            批量删除
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <table data-url="@Url.Action("GetData")" id="tab"
+                   data-id-field="Id"
+                   data-resizable="true"
+                   data-filter-control="false">
+                <thead>
+                    <tr>
+                        <th data-sortable="false" data-field="_id" data-width="50"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            行号
+                        </th>
+                        <th data-sortable="false" data-field="@nameof(TelephoneRecording.Id)" data-visible="false" data-width="0"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            Id
+                        </th>
+                        <th data-sortable="true" data-field="@nameof(TelephoneRecording.CustomerRealName)" data-width="180"
+                            data-align="left" data-halign="center" data-valign="middle">
+                            客户姓名
+                        </th>
+                        <th data-sortable="true" data-field="@nameof(TelephoneRecording.AudioFileName)" data-width="180"
+                            data-align="left" data-halign="center" data-valign="middle">
+                            采访录音
+                        </th>
+                        <th data-sortable="true" data-field="@nameof(TelephoneRecording.VisitorNickName)" data-width="180"
+                            data-align="left" data-halign="center" data-valign="middle">
+                            采访人
+                        </th>
+                        <th data-sortable="true" data-field="@nameof(TelephoneRecording.Description)" data-width="180"
+                            data-align="right" data-halign="center" data-valign="middle">
+                            备注
+                        </th>
+                        <th data-sortable="false" data-width="180" data-field="Id"
+                            data-formatter="operateFormatter"
+                            data-align="center" data-halign="center" data-valign="middle">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Lib/jquery-validate-extend.js"></script>
+    <script src="~/Lib/select2/4.0.3/js/select2.min.js"></script>
+    <script src="~/Lib/select2/4.0.3/js/select2.full.min.js"></script>
+    <script src="~/Areas/SystemManage/Scripts/telephoneRecording-index.js"></script>
+}

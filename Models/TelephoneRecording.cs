@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Description("电话采访记录")]
+    [Description("电话录音")]
     public class TelephoneRecording : BaseEntity
     {
         public long CustomerId { get; set; }
@@ -20,5 +20,8 @@ namespace Models
         public string VisitorNickName { get; set; }
 
         public string AudioFileName { get; set; }
+
+
+        public string Description { get; set; }
     }
 }

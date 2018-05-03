@@ -1,0 +1,62 @@
+﻿@using Models
+@using Common
+@model TelephoneRecording
+@{
+    Layout = null;
+    var data = Model ?? new TelephoneRecording();
+    var isAdd = data.Id <= 0;
+}
+<link href="~/Lib/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="~/Areas/SystemManage/Content/telephoneRecording-edit.css" rel="stylesheet" />
+<script src="~/Areas/SystemManage/Scripts/recorder.js"></script>
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <form class="form-horizontal form-edit" role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">客户：</label>
+                            <div class="col-sm-8">
+                                <select name="CustomerId" class="select2 u-select2" style="width:100%;" data-url="@Url.Action("GetCustomers")">
+                                    <option value="@data.CustomerId" selected="selected">@data.CustomerRealName</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (isAdd)
+                {
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">电话录音：</label>
+                        <div class="col-sm-10">
+                            <button id="start" class="ui-btn ui-btn-primary" disabled>录音</button>
+                            <button id="stop" class="ui-btn ui-btn-primary" disabled>停止</button>
+                            <div id="audio-container"></div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注：</label>
+                    <div class="col-sm-10">
+                        <textarea rows="3" name="Description" class="form-control input-sm">@data.Description</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="hidden">
+                        <input name="UpdateId" type="hidden" value="@data.Id" />
+                    </div>
+                    <div class="col-sm-12 text-center buttons">
+                        <button type="button" class="btn btn-success u-btn" id="btnSave" data-url="@Url.Action("Save")" data-upload-url="@Url.Action("UploadFile")">
+                            <i class="fa fa-save" aria-hidden="true"></i>
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/Lib/select2/4.0.3/js/select2.min.js"></script>
+<script src="~/Lib/select2/4.0.3/js/select2.full.min.js"></script>
+<script src="~/Areas/SystemManage/Scripts/telephoneRecording-edit .js"></script>

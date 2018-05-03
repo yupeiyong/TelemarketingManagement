@@ -28,5 +28,13 @@ namespace Config
         ///     允许上传Excel文件的类型
         /// </summary>
         public static string AcceptImportExcelFileTypes = ".xlsx,.xls";
+
+
+        public static string ImportAudioFilesPathFullname => Path.Combine(AppDataPathFullname, ".ImportAudioFiles");
+
+        /// <summary>
+        ///     允许上传Excel文件的类型
+        /// </summary>
+        public static string AcceptImportAudioFileTypes = ".wav,.mp3";
     }
 }
