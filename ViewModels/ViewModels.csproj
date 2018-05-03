@@ -43,6 +43,7 @@
     <Compile Include="CustomerEditViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectViewModel.cs" />
+    <Compile Include="UserEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

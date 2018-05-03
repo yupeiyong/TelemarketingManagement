@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-    public class UserUpdateDto
+    public class UserEditDto
     {
         public long UpdateId { get; set; }
 

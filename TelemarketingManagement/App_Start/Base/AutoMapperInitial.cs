@@ -15,7 +15,7 @@ namespace TelemarketingManagement.App_Start.Base
             Mapper.Reset();
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap(typeof(UserUpdateDto), typeof(User));
+                cfg.CreateMap(typeof(UserEditDto), typeof(User));
                 cfg.CreateMap(typeof(CustomerEditDto), typeof(Customer));
                 //cfg.CreateMap(typeof(Pk10Plan), typeof(PK10PlanViewModel));
                 //cfg.CreateMap(typeof(BetSettingEditDto), typeof(BetSetting));

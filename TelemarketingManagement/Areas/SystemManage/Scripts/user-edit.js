@@ -4,50 +4,13 @@ $(function () {
     var addDefaultValue = "-- 无 --";
 
     //转换为select2
-    $("form.form-edit .u-select2").each(function () {
-        //当前对象
-        var $this = $(this);
-        var url = $this.data("url");
-
-        //远程筛选
-        $this.select2({
-            ajax: {
-                url: url,
-                dataType: "json",
-                delay: 250,
-                data: function(params) {
-                    return {
-                        Keywords: params.term,
-                        page: params.page
-                    };
-                },
-                processResults: function(data, params) {
-                    params.page = params.page || 1;
-                    if (!data.IsSuccess) {
-                        return false;
-                    }
-                    var arr = data.Data || data.data || {};
-                    arr.unshift({ id: 0, text: addDefaultValue });
-                    return {
-                        results: arr
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function(markup) { return markup; },
-            minimumInputLength: 0,
-            language: "zh-CN"
-        });
-    });
-
-    //转换为select2
     $("form.form-edit .no-search-select2").each(function () {
         //当前对象
         var $this = $(this);
         //远程筛选
         $this.select2();
     });
-    
+
     $('.buttons #btnSave').on('click', function () {
         var $form = $("form.form-horizontal");
 
@@ -83,7 +46,7 @@ $(function () {
                 //记录保存结果
                 if (data.Success) {
                     $this.closest('.bootstrap-dialog').modal('hide');
-                } 
+                }
             },
             error: function (xhr, error, errThrow) {
                 layer.msg(errThrow, { time: 5000 });

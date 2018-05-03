@@ -11,7 +11,7 @@ namespace UnitTestProject.Service
         [TestMethod]
         public void Test_Add()
         {
-            var updateDto = new UserUpdateDto { AccountName="admin",Password="admin" };
+            var updateDto = new UserEditDto { AccountName="admin",Password="admin" };
             var service = GetService<UserService>();
             service.Add(updateDto);
         }

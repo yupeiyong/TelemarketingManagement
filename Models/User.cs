@@ -15,9 +15,9 @@ namespace Models
     {
         public string NickName { get; set; }
 
-        public string Sex => Gender.GetEnumDescription();
+        public string Sex => this.Gender == null ? string.Empty : this.Gender.Value.GetEnumDescription();
 
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
 
         /// <summary>

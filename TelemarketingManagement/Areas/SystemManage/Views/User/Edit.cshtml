@@ -1,14 +1,15 @@
 ﻿@using Models
 @using Common
-@model ViewModels.CustomerEditViewModel
+@model ViewModels.UserEditViewModel
 @{
     Layout = null;
-    var data = Model.Customer;
+    var data = Model.User;
     var genders = Model.Genders;
+    var userStates = Model.UserStates;
     var isAdd = data.Id <= 0;
 }
-<link href="~/Lib/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
-<link href="~/Areas/SystemManage/Content/customer-edit.css" rel="stylesheet" />
+<link href="~/Lib/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="~/Areas/SystemManage/Content/user-edit.css" rel="stylesheet" />
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-md-12">
@@ -36,7 +37,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">性别：</label>
                             <div class="col-sm-8">
-                                <select name="@nameof(Customer.Gender)" class="select2 no-search-select2">
+                                <select name="@nameof(Models.User.Gender)" class="select2 no-search-select2">
                                     <option value="0"></option>
                                     @foreach (var gender in genders)
                                     {
@@ -91,12 +92,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">客户分类：</label>
+                            <label class="col-sm-4 control-label">登录状态：</label>
                             <div class="col-sm-8">
-                                <select name="CustomerCategoryId" class="select2 u-select2" style="width:200px;" data-url="@Url.Action("GetCategories")">
-                                    @if (data.CustomerCategory != null)
+                                <select name="@nameof(Models.User.UserState)" class="select2 no-search-select2">
+                                    <option value="0"></option>
+                                    @foreach (var state in userStates)
                                     {
-                                        <option value="@data.CustomerCategory.Id" selected="selected">@data.CustomerCategory.Name</option>
+                                        if (data.UserState == state)
+                                        {
+                                            <option value="@state" selected="selected">@state.GetEnumDescription()</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@state">@state.GetEnumDescription()</option>
+                                        }
                                     }
                                 </select>
                             </div>
@@ -104,12 +113,12 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">住址：</label>
-                    <div class="col-sm-10">
-                        <textarea rows="3" name="Address" class="form-control input-sm">@data.Address</textarea>
-                    </div>
-                </div>
+                @*<div class="form-group">
+                        <label class="col-sm-2 control-label">住址：</label>
+                        <div class="col-sm-10">
+                            <textarea rows="3" name="Address" class="form-control input-sm">@data.Address</textarea>
+                        </div>
+                    </div>*@
                 <div class="form-group">
                     <div class="hidden">
                         <input name="UpdateId" type="hidden" value="@data.Id" />
@@ -127,4 +136,4 @@
 </div>
 <script src="~/Lib/select2/4.0.3/js/select2.min.js"></script>
 <script src="~/Lib/select2/4.0.3/js/select2.full.min.js"></script>
-<script src="~/Areas/SystemManage/Scripts/customer-edit.js"></script>
+<script src="~/Areas/SystemManage/Scripts/user-edit.js"></script>
