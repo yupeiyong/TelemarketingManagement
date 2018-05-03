@@ -1,11 +1,11 @@
 ﻿@using Models
 @using Common
 @{
-    var modelDescription = typeof(Customer).GetDescription();
+    var modelDescription = typeof(CustomerCategory).GetDescription();
     ViewBag.Title = modelDescription + "编辑";
 }
 @section css{
-    <link href="~/Areas/SystemManage/Content/customer-index.css" rel="stylesheet" />
+    <link href="~/Areas/SystemManage/Content/customerCategory-index.css" rel="stylesheet" />
     <link href="~/Lib/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 }
 <div class="container-fluid">
@@ -33,14 +33,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">用户分类：</label>
-                            <div>
-                                <select name="CustomerCategoryId" class="select2 u-customer-select2" style="width:100%;" data-url="@Url.Action("GetCategories")"></select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -57,16 +49,6 @@
                                 title="新增客户资料" data-u-url="@Url.Action("Add")">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             新增
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm" id="btnImport"
-                                title="导入客户资料" data-u-url="@Url.Action("Import")">
-                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-                            导入
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm" id="btnExport"
-                                title="导出客户资料模板" data-u-url="@Url.Action("DownLoadTemplate")">
-                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-                            下载模板
                         </button>
                     </div>
                 </div>
@@ -85,41 +67,21 @@
                             data-align="center" data-halign="center" data-valign="middle">
                             行号
                         </th>
-                        <th data-sortable="false" data-field="@nameof(Customer.Id)" data-visible="false" data-width="0"
+                        <th data-sortable="false" data-field="@nameof(CustomerCategory.Id)" data-visible="false" data-width="0"
                             data-align="center" data-halign="center" data-valign="middle">
                             Id
                         </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.CategoryDescription)" data-width="180"
+                        <th data-sortable="true" data-field="@nameof(CustomerCategory.Name)" data-width="180"
                             data-align="left" data-halign="center" data-valign="middle">
-                            分类
+                            分类名称
                         </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.RealName)" data-width="180"
+                        <th data-sortable="true" data-field="@nameof(CustomerCategory.Description)" data-width="180"
                             data-align="left" data-halign="center" data-valign="middle">
-                            姓名
+                            描述
                         </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.Sex)" data-width="180"
+                        <th data-sortable="true" data-field="@nameof(CustomerCategory.CustomOrder)" data-width="180"
                             data-align="left" data-halign="center" data-valign="middle">
-                            性别
-                        </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.AgeDescription)" data-width="180"
-                            data-align="right" data-halign="center" data-valign="middle">
-                            年龄
-                        </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.MobilePhoneNumber)" data-width="180"
-                            data-align="left" data-halign="center" data-valign="middle">
-                            手机号
-                        </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.Qq)" data-width="180"
-                            data-align="left" data-halign="center" data-valign="middle">
-                            QQ号
-                        </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.Wechat)" data-width="180"
-                            data-align="left" data-halign="center" data-valign="middle">
-                            微信号
-                        </th>
-                        <th data-sortable="true" data-field="@nameof(Customer.Address)" data-width="180"
-                            data-align="left" data-halign="center" data-valign="middle">
-                            住址
+                            自定义顺序
                         </th>
                         <th data-sortable="false" data-width="180" data-field="Id"
                             data-formatter="operateFormatter"
@@ -136,5 +98,5 @@
     <script src="~/Lib/jquery-validate-extend.js"></script>
     <script src="~/Lib/select2/4.0.3/js/select2.min.js"></script>
     <script src="~/Lib/select2/4.0.3/js/select2.full.min.js"></script>
-    <script src="~/Areas/SystemManage/Scripts/customer-index.js"></script>
+    <script src="~/Areas/SystemManage/Scripts/category-index.js"></script>
 }

@@ -1,21 +1,22 @@
-﻿using Common;
-using Models.DataBase;
-using Models.Enum;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common;
+using Models.DataBase;
+using Models.Enum;
+
 
 namespace Models
 {
+
+    [Description("用户")]
     public class User : BaseEntity
     {
+
         public string NickName { get; set; }
 
-        public string Sex => this.Gender == null ? string.Empty : this.Gender.Value.GetEnumDescription();
+        public string Sex => Gender == null ? string.Empty : Gender.Value.GetEnumDescription();
 
         public Gender? Gender { get; set; }
 
@@ -35,8 +36,6 @@ namespace Models
         ///     微信
         /// </summary>
         public string Wechat { get; set; }
-
-
 
 
         public string RealName { get; set; }
@@ -78,15 +77,16 @@ namespace Models
         public DateTime? LastErrorDateTime { get; set; }
 
 
-
         [Index]
         public long? UserRoles { get; set; }
 
         public int LogOnCount { get; set; }
 
         /// <summary>
-        /// 用户状态
+        ///     用户状态
         /// </summary>
         public UserStateEnum UserState { get; set; }
+
     }
+
 }

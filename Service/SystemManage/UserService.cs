@@ -133,12 +133,14 @@ namespace Service.SystemManage
         public void Add(UserEditDto dto)
         {
             ValidateUpdateDto(dto);
+            if (string.IsNullOrEmpty(dto.LoginPassword))
+                throw new Exception("错误：用户密码不能为空！");
 
             if (DataDbContext.Set<User>().Any(u => u.AccountName == dto.AccountName))
                 throw new Exception($"添加用户失败，{dto.AccountName}已存在！");
 
             var user = dto.MapTo<User>();
-            user.Password = Encrypt(dto.Password);
+            user.Password = Encrypt(dto.LoginPassword);
             user.CreatorTime = DateTime.Now;
             user.LastModifyTime = DateTime.Now;
 
@@ -165,8 +167,6 @@ namespace Service.SystemManage
         {
             if (string.IsNullOrEmpty(dto.AccountName))
                 throw new Exception("错误：用户帐号不能为空！");
-            if (string.IsNullOrEmpty(dto.Password))
-                throw new Exception("错误：用户密码不能为空！");
 
             //dto.NickName = dto.NickName ?? "";
         }

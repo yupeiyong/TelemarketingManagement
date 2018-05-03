@@ -230,15 +230,18 @@
   <ItemGroup>
     <Content Include="Areas\SystemManage\Content\add-ons.min.css" />
     <Content Include="Areas\SystemManage\Content\common.css" />
+    <Content Include="Areas\SystemManage\Content\customerCategory-index.css" />
     <Content Include="Areas\SystemManage\Content\user-edit.css" />
     <Content Include="Areas\SystemManage\Content\customer-edit.css" />
     <Content Include="Areas\SystemManage\Content\user-index.css" />
     <Content Include="Areas\SystemManage\Content\customer-index.css" />
     <Content Include="Areas\SystemManage\Content\jquery.mmenu.css" />
     <Content Include="Areas\SystemManage\Content\report-index.css" />
+    <Content Include="Areas\SystemManage\Scripts\category-edit.js" />
     <Content Include="Areas\SystemManage\Scripts\user-edit.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-import.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-edit.js" />
+    <Content Include="Areas\SystemManage\Scripts\category-index.js" />
     <Content Include="Areas\SystemManage\Scripts\user-index.js" />
     <Content Include="Areas\SystemManage\Scripts\customer-index.js" />
     <Content Include="Content\bootstrap.css" />

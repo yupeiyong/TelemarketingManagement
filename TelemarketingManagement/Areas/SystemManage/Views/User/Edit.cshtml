@@ -17,9 +17,29 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="col-sm-4 control-label"><span class="redRequired">*</span>登录帐号：</label>
+                            <div class="col-sm-8">
+                                <input name="AccountName" type="text" class="form-control input-sm first" value="@data.AccountName" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    @if (isAdd)
+                    {
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">登录密码：</label>
+                                <div class="col-sm-8">
+                                    <input name="LoginPassword" type="text" class="form-control input-sm first" value=""  required="true" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div><div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label class="col-sm-4 control-label"><span class="redRequired">*</span>姓名：</label>
                             <div class="col-sm-8">
-                                <input name="RealName" type="text" class="form-control input-sm first" value="@data.RealName" required="true" />
+                                <input name="RealName" type="text" class="form-control input-sm first" value="@data.RealName" />
                             </div>
                         </div>
                     </div>
