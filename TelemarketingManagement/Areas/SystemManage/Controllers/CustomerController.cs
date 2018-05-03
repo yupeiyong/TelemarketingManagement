@@ -12,7 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TelemarketingManagement.App_Start.Base;
 using TelemarketingManagement.Base;
 using ViewModels;
 
@@ -132,7 +131,6 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
         public JsonResult Upload()
         {
             var file = Request.Files[0];
-            //var dtoes = ImportService.Upload(postedFiles);
             var dto = CustomerFileHelper.Upload(file);
             return Json(dto, JsonRequestBehavior.AllowGet);
         }
