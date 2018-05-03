@@ -4,6 +4,7 @@ using DataTransferObjects;
 using Models;
 using Service.SystemManage;
 using TelemarketingManagement.App_Start.Base;
+using TelemarketingManagement.Base;
 
 
 namespace TelemarketingManagement.Areas.SystemManage.Controllers

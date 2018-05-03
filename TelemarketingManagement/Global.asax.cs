@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using TelemarketingManagement.App_Start.Base;
+using TelemarketingManagement.Base;
+
 
 namespace TelemarketingManagement
 {

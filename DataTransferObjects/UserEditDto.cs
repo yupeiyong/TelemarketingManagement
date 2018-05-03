@@ -46,5 +46,11 @@ namespace DataTransferObjects
 
         public DateTime? Birthday { get; set; }
 
+
+        /// <summary>
+        ///     用户状态
+        /// </summary>
+        public UserStateEnum UserState { get; set; }
+
     }
 }

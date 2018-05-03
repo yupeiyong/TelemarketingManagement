@@ -36,6 +36,7 @@ namespace Service.SystemManage
                     (m.NickName != null && m.NickName.Contains(dto.Keywords)) ||
                     (m.MobilePhoneNumber != null && m.MobilePhoneNumber.Contains(dto.Keywords)));
             }
+            dataSource = dataSource.WhereDateTime(nameof(Customer.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
 
             dataSource = dataSource.OrderByDescending(m => m.LastModifyTime);
             if (dto.IsGetTotalCount)

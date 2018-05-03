@@ -32,6 +32,8 @@ namespace Service.SystemManage
             if (!string.IsNullOrWhiteSpace(dto.Keywords))
                 dataSource = dataSource.Where(cc => cc.Name != null && cc.Name.Contains(dto.Keywords) || cc.Description != null && cc.Description.Contains(dto.Keywords));
 
+            dataSource = dataSource.WhereDateTime(nameof(Customer.CreatorTime), dto.StartCreatorTime, dto.EndCreatorTime);
+
             dataSource = dataSource.OrderByDescending(a => a.LastModifyTime);
 
             if (dto.IsGetTotalCount)

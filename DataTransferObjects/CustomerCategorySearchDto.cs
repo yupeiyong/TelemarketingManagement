@@ -8,5 +8,8 @@ namespace DataTransferObjects
 {
     public class CustomerCategorySearchDto:BaseSearchDto
     {
+        public DateTime? StartCreatorTime { get; set; }
+
+        public DateTime? EndCreatorTime { get; set; }
     }
 }

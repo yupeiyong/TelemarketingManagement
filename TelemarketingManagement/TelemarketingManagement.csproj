@@ -208,7 +208,6 @@
     <Compile Include="App_Start\Base\AutoMapperInitial.cs" />
     <Compile Include="App_Start\Base\BaseController.cs" />
     <Compile Include="App_Start\Base\ContainerFactory.cs" />
-    <Compile Include="App_Start\Base\SeoSettings.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Filters\LoginAttribute.cs" />
