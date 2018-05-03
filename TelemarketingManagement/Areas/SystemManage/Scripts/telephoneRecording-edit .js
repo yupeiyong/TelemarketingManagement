@@ -91,7 +91,10 @@ $(function () {
 
 
     $('.buttons #btnSave').on('click', function () {
-        if (audioBolb == null)
+        if (audioBolb == null) {
+            layer.msg("请先录音", { time: 5000 });
+            return false;
+        }
             alert("请先录音");
 
         var $form = $("form.form-horizontal");
