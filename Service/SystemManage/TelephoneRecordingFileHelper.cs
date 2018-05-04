@@ -14,6 +14,8 @@ namespace Service.SystemManage
     {
         public static int MaxFileSize { get; set; } = 1024 * 500;
 
+        public static string DefaultExtension { get; set; } = ".wav";
+
         /// <summary>
         ///     上传文件
         /// </summary>
@@ -22,11 +24,6 @@ namespace Service.SystemManage
         public static FileUploadResultDto Upload(HttpPostedFileBase file)
         {
             var fileName = file.FileName;
-            var extension = Path.GetExtension(fileName);
-
-            //var allowFileTypes = Settings.AcceptImportExcelFileTypes.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-            //if (allowFileTypes.All(type => !type.EndsWith(extension)))
-            //    return new FileUploadResultDto { Success = false, OriginalFileName = fileName, Message = $"上传文件类型必须为：{Settings.AcceptImportExcelFileTypes}" };
 
             var fileSize = file.ContentLength;
             if (fileSize > MaxFileSize)
@@ -36,11 +33,31 @@ namespace Service.SystemManage
             if (!Directory.Exists(Settings.ImportAudioFilesPathFullname))
                 Directory.CreateDirectory(Settings.ImportCustomerFilesPathFullname);
 
-            var newFileName = string.Format("audio_{0}{1}", DateTime.Now.ToString("yyMMddHHmmssfffffff"), ".wav"); //生成文件名
+            var newFileName = $"audio_{DateTime.Now.ToString("yyMMddHHmmssfffffff")}{DefaultExtension}"; //生成文件名
 
             file.SaveAs(Path.Combine(Settings.ImportAudioFilesPathFullname, newFileName));
 
             return new FileUploadResultDto { Success = true, OriginalFileName = fileName, FileName = newFileName, Message = "上传文件成功" };
+        }
+
+
+        public static void RemoveFile(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+                return;
+
+            var fullFileName = Path.Combine(Settings.ImportAudioFilesPathFullname, fileName);
+            if (File.Exists(fullFileName))
+            {
+                try
+                {
+                    File.Delete(fullFileName);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
     }
 }

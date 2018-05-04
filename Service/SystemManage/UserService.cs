@@ -95,12 +95,14 @@ namespace Service.SystemManage
                 var user = CheckLogin(dto.AccountName, dto.Password);
                 if (user != null)
                 {
-                    OnlineUser onlineUser = new OnlineUser();
-                    onlineUser.UserId = user.Id;
-                    onlineUser.AccountName = user.AccountName;
-                    onlineUser.UserName = user.RealName;
-                    onlineUser.NickName = user.NickName;
-                    onlineUser.LoginIPAddress = Net.Ip;
+                    OnlineUser onlineUser = new OnlineUser
+                    {
+                        UserId = user.Id,
+                        AccountName = user.AccountName,
+                        UserName = user.RealName,
+                        NickName = user.NickName,
+                        LoginIPAddress = Net.Ip
+                    };
                     onlineUser.LoginIPAddressName = Net.GetLocation(onlineUser.LoginIPAddress);
                     onlineUser.LoginTime = DateTime.Now;
                     onlineUser.LoginToken = DesEncrypt.Encrypt(Guid.NewGuid().ToString());

@@ -66,8 +66,8 @@
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             新增
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" id="btnImport"
-                                title="导入客户资料" data-u-url="@Url.Action("Remove")">
+                        <button type="button" class="btn btn-default btn-sm" id="btnBatchRemove"
+                                title="导入客户资料" data-u-url="@Url.Action("BatchRemove")">
                             <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
                             批量删除
                         </button>
@@ -87,6 +87,9 @@
                         <th data-sortable="false" data-field="_id" data-width="50"
                             data-align="center" data-halign="center" data-valign="middle">
                             行号
+                        </th>
+                        <th data-sortable="false" data-field="selected" data-width="50" data-checkbox="true"
+                            data-align="center" data-halign="center" data-valign="middle">
                         </th>
                         <th data-sortable="false" data-field="@nameof(TelephoneRecording.Id)" data-visible="false" data-width="0"
                             data-align="center" data-halign="center" data-valign="middle">

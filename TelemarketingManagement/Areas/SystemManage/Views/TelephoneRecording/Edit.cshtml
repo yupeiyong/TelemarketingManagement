@@ -18,24 +18,31 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">客户：</label>
                             <div class="col-sm-8">
-                                <select name="CustomerId" class="select2 u-select2" style="width:100%;" data-url="@Url.Action("GetCustomers")">
+                                <select name="CustomerId" class="select2 u-select2" style="width: 100%;" data-url="@Url.Action("GetCustomers")">
                                     <option value="@data.CustomerId" selected="selected">@data.CustomerRealName</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                @if (isAdd)
-                {
-                    <div class="form-group">
+                <div class="form-group">
+                    @if (isAdd)
+                    {
                         <label class="col-sm-2 control-label">电话录音：</label>
                         <div class="col-sm-10">
                             <button id="start" class="ui-btn ui-btn-primary" disabled>录音</button>
                             <button id="stop" class="ui-btn ui-btn-primary" disabled>停止</button>
                             <div id="audio-container"></div>
                         </div>
-                    </div>
-                }
+                    }
+                    else
+                    {
+                        <label class="col-sm-2 control-label">电话录音：</label>
+                        <div class="col-sm-10">
+                            <audio src="~/App_Data/.ImportAudioFiles/@data.AudioFileName"></audio>
+                        </div>
+                    }
+                </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">备注：</label>
                     <div class="col-sm-10">

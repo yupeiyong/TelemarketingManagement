@@ -10,6 +10,9 @@ $(function () {
     });
 
     $('#btnLogin').off('click').on('click', function () {
+        $(this).attr('disabled', 'disabled');
+        debugger;
+        $("p.messageTips").html("登录中......");
         var $this = $(this);
         var url = $this.data('url');
         var accountName = $("input[name='AccountName']").val();
@@ -30,6 +33,7 @@ $(function () {
             dataType: 'json',
             success: function (data) {
                 if (data.Success) {
+                    $("p.messageTips").html("登录成功，跳转中...");
                     location.href = data.RedirectUrl;
                 } else {
                     $("p.messageTips").html(data.Message);

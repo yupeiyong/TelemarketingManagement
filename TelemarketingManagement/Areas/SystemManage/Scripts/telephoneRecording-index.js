@@ -146,7 +146,10 @@
 
     $table.extendBootstrapTable({
         searchButton: "#btnSearch",
-        searchForm: "form.search"
+        searchForm: "form.search",
+        checkboxHeader: true,  //表头是否显示复选框
+        clickToSelect: true,  //点击行即可选中单选/复选框  
+        singleSelect: false
     }).on("load-success.bs.table", function () {
         //处理获取到的数据
         addCustColClick();
@@ -215,6 +218,52 @@
     });
 
     $("form.search input.textbox-text").first().focus();
+
+    $("form.search #btnBatchRemove").off("click").on("click", function () {
+        var $this = $(this);
+
+        var selectedRows = $table.bootstrapTable('getAllSelections');
+        if (selectedRows == null || selectedRows.length == 0)
+            return false;
+
+        var ids = [];
+        for (var i = 0; i < selectedRows.length; i++) {
+            var id = selectedRows[i].Id;
+            ids.push(id);
+        }
+
+        var idsJsonStr = JSON.stringify(ids);
+
+        //获取链接路径
+        var url = $this.data("u-url");
+        //确认删除
+        BootstrapDialog.confirm({
+            title: "删除",
+            message: "确认删除选中的" +ids.length  + "条的记录吗?",
+            type: BootstrapDialog.TYPE_WARNING,
+            closable: true,
+            draggable: true,
+            btnCancelLabel: "取消",
+            btnOKLabel: "确认",
+            btnOKClass: "btn-warning",
+            callback: function (result) {
+                if (result) {
+                    $.post(url, {ids:idsJsonStr}, function (data) {
+                        layer.msg(data.Message, { time: 5000 });
+                        if (data.Success) {
+                            var $this = $(this);
+                            $this.closest(".bootstrap-dialog").modal("hide");
+                            $table.bootstrapTable("refresh");
+                        }
+                    });
+                } else {
+                    var $this = $(this);
+                    $this.closest(".bootstrap-dialog").modal("hide");
+                }
+            }
+        });
+        return false;
+    });
 
 });
 
