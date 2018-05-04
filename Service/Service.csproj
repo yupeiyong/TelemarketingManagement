@@ -74,6 +74,8 @@
     <Compile Include="SystemManage\CustomerFileHelper.cs" />
     <Compile Include="SystemManage\CustomerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManage\TelephoneRecordingFileHelper.cs" />
+    <Compile Include="SystemManage\TelephoneRecordingService.cs" />
     <Compile Include="SystemManage\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -53,6 +53,8 @@
     <Compile Include="LoginResultDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultInfo.cs" />
+    <Compile Include="TelephoneRecordingEditDto.cs" />
+    <Compile Include="TelephoneRecordingSearchDto.cs" />
     <Compile Include="UserLoginDto.cs" />
     <Compile Include="UserSearchDto.cs" />
     <Compile Include="UserEditDto.cs" />

@@ -8,7 +8,6 @@ using DataTransferObjects;
 using Models;
 using Models.Enum;
 using Service.SystemManage;
-using TelemarketingManagement.App_Start.Base;
 using TelemarketingManagement.Base;
 using ViewModels;
 
