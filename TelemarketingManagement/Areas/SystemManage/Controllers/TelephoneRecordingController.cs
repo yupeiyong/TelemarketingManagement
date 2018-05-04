@@ -117,16 +117,22 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
         }
 
 
-        public JsonResult BatchRemove()
+        public JsonResult BatchRemove(string ids)
         {
 
-            var idsString = Request.Params["recordingIds"];
-            if (string.IsNullOrWhiteSpace(idsString))
+            if (string.IsNullOrWhiteSpace(ids))
                 return Json(new BaseResponseDto { Success = false, Message = "删除内容为空！" }, JsonRequestBehavior.AllowGet);
 
-            var ids = JsonConvert.DeserializeObject<List<long>>(idsString);
-            TelephoneRecordingService.Remove(ids.ToArray());
-            return Json(new BaseResponseDto { Message = $"成功删除{ids.Count}条电话录音记录！", Success = true, Title = _modelDescription }, JsonRequestBehavior.AllowGet);
+            var idArray = JsonConvert.DeserializeObject<List<long>>(ids);
+            try
+            {
+                TelephoneRecordingService.Remove(idArray.ToArray());
+                return Json(new BaseResponseDto { Message = $"成功删除{idArray.Count}条电话录音记录！", Success = true, Title = _modelDescription }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new BaseResponseDto { Message = $"删除录音记录失败！" + ex.Message, Success = false, Title = _modelDescription }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

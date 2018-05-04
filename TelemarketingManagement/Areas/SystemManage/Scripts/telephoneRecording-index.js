@@ -221,14 +221,10 @@
 
     $("form.search #btnBatchRemove").off("click").on("click", function () {
         var $this = $(this);
-        var $form = $this.closest("form");
-        var url = $this.data("u-url");
-        var originalUrl = $form.attr("action");
-        $form.attr("action", url);
 
         var selectedRows = $table.bootstrapTable('getAllSelections');
         if (selectedRows == null || selectedRows.length == 0)
-            return;
+            return false;
 
         var ids = [];
         for (var i = 0; i < selectedRows.length; i++) {
@@ -236,12 +232,37 @@
             ids.push(id);
         }
 
-        debugger;
-
         var idsJsonStr = JSON.stringify(ids);
-        $("form.search input[name='recordingIds']").val(idsJsonStr);
-        $form.submit();
-        $form.attr("action", originalUrl);
+
+        //获取链接路径
+        var url = $this.data("u-url");
+        //确认删除
+        BootstrapDialog.confirm({
+            title: "删除",
+            message: "确认删除选中的" +ids.length  + "条的记录吗?",
+            type: BootstrapDialog.TYPE_WARNING,
+            closable: true,
+            draggable: true,
+            btnCancelLabel: "取消",
+            btnOKLabel: "确认",
+            btnOKClass: "btn-warning",
+            callback: function (result) {
+                if (result) {
+                    $.post(url, {ids:idsJsonStr}, function (data) {
+                        layer.msg(data.Message, { time: 5000 });
+                        if (data.Success) {
+                            var $this = $(this);
+                            $this.closest(".bootstrap-dialog").modal("hide");
+                            $table.bootstrapTable("refresh");
+                        }
+                    });
+                } else {
+                    var $this = $(this);
+                    $this.closest(".bootstrap-dialog").modal("hide");
+                }
+            }
+        });
+        return false;
     });
 
 });

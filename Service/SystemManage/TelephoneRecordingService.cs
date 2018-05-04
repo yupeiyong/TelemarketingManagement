@@ -160,6 +160,7 @@ namespace Service.SystemManage
                 if (data == null)
                     throw new Exception($"错误，{_modelDescription}不存在！(Id:{id})");
 
+                TelephoneRecordingFileHelper.RemoveFile(data.AudioFileName);
                 DataDbContext.Set<TelephoneRecording>().Remove(data);
             }
             DataDbContext.SaveChanges();
