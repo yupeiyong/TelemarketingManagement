@@ -9,12 +9,15 @@ namespace TelemarketingManagement.Base
     [Login]
     public abstract class BaseController : Controller
     {
-        public Log FileLog
-        {
-            get { return LogFactory.GetLogger(this.GetType().ToString()); }
-        }
+        public Log FileLog => LogFactory.GetLogger(this.GetType().ToString());
+
         public OnlineUser CurrentOnlineUser { get; set; }
 
+
+        protected BaseController()
+        {
+            CurrentOnlineUser = OnlineUserProvider.Provider.GetCurrent();
+        }
     }
 
 }
