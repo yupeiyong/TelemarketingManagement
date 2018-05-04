@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using TelemarketingManagement.Base;
 using ViewModels;
 
@@ -113,6 +114,19 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             var file = Request.Files[0];
             var dto = TelephoneRecordingFileHelper.Upload(file);
             return Json(dto, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult BatchRemove()
+        {
+
+            var idsString = Request.Params["recordingIds"];
+            if (string.IsNullOrWhiteSpace(idsString))
+                return Json(new BaseResponseDto { Success = false, Message = "删除内容为空！" }, JsonRequestBehavior.AllowGet);
+
+            var ids = JsonConvert.DeserializeObject<List<long>>(idsString);
+            TelephoneRecordingService.Remove(ids.ToArray());
+            return Json(new BaseResponseDto { Message = $"成功删除{ids.Count}条电话录音记录！", Success = true, Title = _modelDescription }, JsonRequestBehavior.AllowGet);
         }
     }
 }

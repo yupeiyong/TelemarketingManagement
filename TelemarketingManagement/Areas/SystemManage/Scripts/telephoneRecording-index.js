@@ -146,7 +146,10 @@
 
     $table.extendBootstrapTable({
         searchButton: "#btnSearch",
-        searchForm: "form.search"
+        searchForm: "form.search",
+        checkboxHeader: true,  //表头是否显示复选框
+        clickToSelect: true,  //点击行即可选中单选/复选框  
+        singleSelect: false
     }).on("load-success.bs.table", function () {
         //处理获取到的数据
         addCustColClick();
@@ -215,6 +218,31 @@
     });
 
     $("form.search input.textbox-text").first().focus();
+
+    $("form.search #btnBatchRemove").off("click").on("click", function () {
+        var $this = $(this);
+        var $form = $this.closest("form");
+        var url = $this.data("u-url");
+        var originalUrl = $form.attr("action");
+        $form.attr("action", url);
+
+        var selectedRows = $table.bootstrapTable('getAllSelections');
+        if (selectedRows == null || selectedRows.length == 0)
+            return;
+
+        var ids = [];
+        for (var i = 0; i < selectedRows.length; i++) {
+            var id = selectedRows[i].Id;
+            ids.push(id);
+        }
+
+        debugger;
+
+        var idsJsonStr = JSON.stringify(ids);
+        $("form.search input[name='recordingIds']").val(idsJsonStr);
+        $form.submit();
+        $form.attr("action", originalUrl);
+    });
 
 });
 

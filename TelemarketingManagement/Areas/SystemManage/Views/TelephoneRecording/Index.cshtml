@@ -66,8 +66,9 @@
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             新增
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" id="btnImport"
-                                title="导入客户资料" data-u-url="@Url.Action("Remove")">
+                        <input type="hidden" name="recordingIds" />
+                        <button type="button" class="btn btn-default btn-sm" id="btnBatchRemove"
+                                title="导入客户资料" data-u-url="@Url.Action("BatchRemove")">
                             <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
                             批量删除
                         </button>
