@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TelemarketingManagement.Base;
 
 namespace TelemarketingManagement.Controllers
 {
@@ -42,7 +43,7 @@ namespace TelemarketingManagement.Controllers
                     NickName = currentOnlineUser.NickName,
                     RedirectUrl = "/SystemManage/Home"
                 };
-
+                BaseController.CurrentOnlineUser = currentOnlineUser;
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)

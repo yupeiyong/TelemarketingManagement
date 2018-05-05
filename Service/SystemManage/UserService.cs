@@ -80,15 +80,15 @@ namespace Service.SystemManage
             }
         }
 
-        public User Login(UserLoginDto dto)
+        public OnlineUser Login(UserLoginDto dto)
         {
             //if (!SecurityCodeService.IsValid(dto.Token, dto.SecurityCode))
             //    throw new Exception("错误：图形验证码错误！");
 
             if (string.IsNullOrEmpty(dto.AccountName))
-                throw new Exception("错误：请输入您的账号！");
+                throw new Exception("账号为空！");
             if (string.IsNullOrEmpty(dto.Password))
-                throw new Exception("错误：请输入您的密码！");
+                throw new Exception("密码为空！");
 
             try
             {
@@ -115,13 +115,13 @@ namespace Service.SystemManage
                         onlineUser.IsSystem = false;
                     }
                     OnlineUserProvider.Provider.AddCurrent(onlineUser);
-                    return user;
+                    return onlineUser;
                 }
-                throw new Exception("登录失败，用户不存在！");
+                throw new Exception("用户不存在！");
             }
             catch (Exception ex)
             {
-                throw new Exception("登录失败，" + ex.Message);
+                throw ex;
             }
         }
 

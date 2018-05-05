@@ -1,52 +1,185 @@
 ﻿
 $(function () {
+    var id = $('input[name="UpdateId"]').val();
+    var isAdd = true;
+    if (id && id > 0) {
+        isAdd = false;
+    }
 
-    var start = document.querySelector('#start');
-    var stop = document.querySelector('#stop');
-    var container = document.querySelector('#audio-container');
-    var recorder = new Recorder({
-        sampleRate: 44100, //采样频率，默认为44100Hz(标准MP3采样率)
-        bitRate: 128, //比特率，默认为128kbps(标准MP3质量)
-        success: function () { //成功回调函数
-            start.disabled = false;
-        },
-        error: function (msg) { //失败回调函数
-            alert(msg);
-        },
-        fix: function (msg) { //不支持H5录音回调函数
-            alert(msg);
-        }
-    });
-
-    start.addEventListener('click', function () {
-        this.disabled = true;
-        stop.disabled = false;
-        var audio = document.querySelectorAll('audio');
-        for (var i = 0; i < audio.length; i++) {
-            if (!audio[i].paused) {
-                audio[i].pause();
+    if (isAdd) {
+        var start = document.querySelector('#start');
+        var stop = document.querySelector('#stop');
+        var container = document.querySelector('#audio-container');
+        var recorder = new Recorder({
+            sampleRate: 44100, //采样频率，默认为44100Hz(标准MP3采样率)
+            bitRate: 128, //比特率，默认为128kbps(标准MP3质量)
+            success: function () { //成功回调函数
+                start.disabled = false;
+            },
+            error: function (msg) { //失败回调函数
+                alert(msg);
+            },
+            fix: function (msg) { //不支持H5录音回调函数
+                alert(msg);
             }
-        }
-        recorder.start();
-    });
-
-    var audioBolb = null;
-    stop.addEventListener('click', function () {
-        this.disabled = true;
-        start.disabled = false;
-        recorder.stop();
-        recorder.getBlob(function (blob) {
-            var audios = document.querySelectorAll('audio');
-            for (var i = 0; i < audios.length; i++) {
-                audios[i].remove();
-            }
-            var audio = document.createElement('audio');
-            audio.src = URL.createObjectURL(blob);
-            audio.controls = true;
-            container.appendChild(audio);
-            audioBolb = blob;
         });
-    });
+
+        start.addEventListener('click', function () {
+            this.disabled = true;
+            stop.disabled = false;
+            var audio = document.querySelectorAll('audio');
+            for (var i = 0; i < audio.length; i++) {
+                if (!audio[i].paused) {
+                    audio[i].pause();
+                }
+            }
+            recorder.start();
+        });
+
+        var audioBolb = null;
+        stop.addEventListener('click', function () {
+            this.disabled = true;
+            start.disabled = false;
+            recorder.stop();
+            recorder.getBlob(function (blob) {
+                var audios = document.querySelectorAll('audio');
+                for (var i = 0; i < audios.length; i++) {
+                    audios[i].remove();
+                }
+                var audio = document.createElement('audio');
+                audio.src = URL.createObjectURL(blob);
+                audio.controls = true;
+                container.appendChild(audio);
+                audioBolb = blob;
+            });
+        });
+
+        $('.buttons #btnSave').on('click', function () {
+            if (audioBolb == null) {
+                layer.msg("请先录音", { time: 5000 });
+                return false;
+            }
+
+            var $form = $("form.form-horizontal");
+
+            //检测验证结果
+            if (!$form.valid()) {
+                //设置焦点
+                $(".form-group input.error")[0].select();
+                $(".form-group input.error")[0].focus();
+                return false;
+            }
+            //当前对象
+            var $this = $(this);
+            var parentModel = $this.closest('.bootstrap-dialog');
+            //关闭按钮X
+            var $closeBtn = parentModel.find("button.close");
+
+            var uplodaUrl = $this.data('upload-url');
+            var url = $this.data("url");
+
+            var btnOriginalText = $this.text();
+
+            //创建formData对象
+            var formData = new FormData();
+
+            //audioData
+            formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
+            $.ajax({
+                url: uplodaUrl,
+                type: "json",
+                data: formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $this.attr("disabled", true);
+                    $closeBtn.attr("disabled", true);
+                    $this.text("保存中...");
+                },
+                success: function (response) {
+                    if (response.Success) {
+                        var audioFileName = response.FileName;
+                        $('#AudioFileName').val(audioFileName);
+                        //保存
+                        var data = $form.serializeArray();
+
+                        $.post(url, data, function (res) {
+                            layer.msg(res.Message, { time: 5000 });
+                            //记录保存结果
+                            if (res.Success) {
+                                $this.closest('.bootstrap-dialog').modal('hide');
+                            }
+                        }, 'json');
+                    } else {
+                        layer.msg(response.Message, { time: 5000 });
+                    }
+                },
+                error: function (xhr, error, errThrow) {
+                    layer.msg(errThrow, { time: 5000 });
+                },
+                complete: function (msg, textStatus) {
+                    $this.attr("disabled", false);
+                    $closeBtn.attr("disabled", false);
+                    $this.text(btnOriginalText);
+                }
+            });
+            //不执行提交动作
+            return false;
+        });
+    } else {
+        $('.buttons #btnSave').on('click', function () {
+
+            var $form = $("form.form-horizontal");
+
+            //检测验证结果
+            if (!$form.valid()) {
+                //设置焦点
+                $(".form-group input.error")[0].select();
+                $(".form-group input.error")[0].focus();
+                return false;
+            }
+            //当前对象
+            var $this = $(this);
+            var parentModel = $this.closest('.bootstrap-dialog');
+            //关闭按钮X
+            var $closeBtn = parentModel.find("button.close");
+
+            var url = $this.data("url");
+
+            var btnOriginalText = $this.text();
+            //保存
+            var data = $form.serializeArray();
+
+            $.ajax({
+                url: url,
+                type: "json",
+                data: data,
+                beforeSend: function () {
+                    $this.attr("disabled", true);
+                    $closeBtn.attr("disabled", true);
+                    $this.text("保存中...");
+                },
+                success: function (response) {
+                    layer.msg(response.Message, { time: 5000 });
+                    //记录保存结果
+                    if (response.Success) {
+                        $this.closest('.bootstrap-dialog').modal('hide');
+                    }
+                },
+                error: function (xhr, error, errThrow) {
+                    layer.msg(errThrow, { time: 5000 });
+                },
+                complete: function (msg, textStatus) {
+                    $this.attr("disabled", false);
+                    $closeBtn.attr("disabled", false);
+                    $this.text(btnOriginalText);
+                }
+            });
+            //不执行提交动作
+            return false;
+        });
+    }
 
 
     ////默认值
@@ -90,79 +223,7 @@ $(function () {
     });
 
 
-    $('.buttons #btnSave').on('click', function () {
-        if (audioBolb == null) {
-            layer.msg("请先录音", { time: 5000 });
-            return false;
-        }
 
-        var $form = $("form.form-horizontal");
-
-        //检测验证结果
-        if (!$form.valid()) {
-            //设置焦点
-            $(".form-group input.error")[0].select();
-            $(".form-group input.error")[0].focus();
-            return false;
-        }
-        //当前对象
-        var $this = $(this);
-        var parentModel = $this.closest('.bootstrap-dialog');
-        //关闭按钮X
-        var $closeBtn = parentModel.find("button.close");
-
-        var uplodaUrl = $this.data('upload-url');
-        var url = $this.data("url");
-
-        var btnOriginalText = $this.text();
-
-        //创建formData对象
-        var formData = new FormData();
-
-        //audioData
-        formData.append("audioData", new Blob([audioBolb], { type: 'audio/wav' }));
-        $.ajax({
-            url: uplodaUrl,
-            type: "json",
-            data: formData,
-            async: false,
-            processData: false,
-            contentType: false,
-            beforeSend: function () {
-                $this.attr("disabled", true);
-                $closeBtn.attr("disabled", true);
-                $this.text("保存中...");
-            },
-            success: function (response) {
-                if (response.Success) {
-                    var audioFileName = response.FileName;
-                    $('#AudioFileName').val(audioFileName);
-                    //保存
-                    var data = $form.serializeArray();
-
-                    $.post(url, data, function (res) {
-                        layer.msg(res.Message, { time: 5000 });
-                        //记录保存结果
-                        if (res.Success) {
-                            $this.closest('.bootstrap-dialog').modal('hide');
-                        }
-                    }, 'json');
-                } else {
-                    layer.msg(response.Message, { time: 5000 });
-                }
-            },
-            error: function (xhr, error, errThrow) {
-                layer.msg(errThrow, { time: 5000 });
-            },
-            complete: function (msg, textStatus) {
-                $this.attr("disabled", false);
-                $closeBtn.attr("disabled", false);
-                $this.text(btnOriginalText);
-            }
-        });
-        //不执行提交动作
-        return false;
-    });
 
 
     //输入框焦点事件

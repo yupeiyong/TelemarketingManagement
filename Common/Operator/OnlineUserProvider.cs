@@ -13,7 +13,7 @@ namespace Common.Operator
         {
             get { return new OnlineUserProvider(); }
         }
-        private string OnlineUserKey = $"Online_User_{DateTime.Now.Date.ToString("yyyy-MM-dd")}";
+        private string OnlineUserKey = $"__Online_User_Key";
         private string LoginProvider = Common.Configs.Configs.GetValue("LoginProvider");
 
         public OnlineUser GetCurrent()

@@ -11,13 +11,7 @@ namespace TelemarketingManagement.Base
     {
         public Log FileLog => LogFactory.GetLogger(this.GetType().ToString());
 
-        public OnlineUser CurrentOnlineUser { get; set; }
-
-
-        protected BaseController()
-        {
-            CurrentOnlineUser = OnlineUserProvider.Provider.GetCurrent();
-        }
+        public static OnlineUser CurrentOnlineUser { get; set; }
     }
 
 }

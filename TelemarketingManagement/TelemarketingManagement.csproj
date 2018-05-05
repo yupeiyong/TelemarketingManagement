@@ -1764,6 +1764,7 @@
     <Folder Include="App_Data\.ImportCustomerFiles\" />
     <Folder Include="Areas\SystemManage\Models\" />
     <Folder Include="Areas\SystemManage\Views\Default\" />
+    <Folder Include="UploadAudio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

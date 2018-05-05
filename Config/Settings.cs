@@ -30,7 +30,7 @@ namespace Config
         public static string AcceptImportExcelFileTypes = ".xlsx,.xls";
 
 
-        public static string ImportAudioFilesPathFullname => Path.Combine(AppDataPathFullname, ".ImportAudioFiles");
+        public static string ImportAudioFilesPathFullname => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UploadAudio");
 
         /// <summary>
         ///     允许上传Excel文件的类型

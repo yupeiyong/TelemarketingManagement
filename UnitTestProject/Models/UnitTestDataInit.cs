@@ -20,6 +20,7 @@ namespace UnitTestProject.Models
             UserInit();
             CustomerCategoryInit();
             CustomerInit();
+            AdminUserInit();
         }
 
         [TestMethod]
@@ -37,12 +38,14 @@ namespace UnitTestProject.Models
                     RealName = $"客户{i}",
                     Gender = i%2==2? Gender.Female:Gender.Male,
                     CustomerCategory=categories[rnd.Next(0,categories.Count-1)],
-                    Birthday = new System.DateTime(1980, 12, 5),
+                    Birthday = new System.DateTime(rnd.Next(1965,2010), 12, 5),
                     Wechat = "wwwweweqw",
                     Qq = $"5678{i}",
                     NickName = "小李",
                     Address = "合肥四中",
-                    MobilePhoneNumber = "13990182231"
+                    MobilePhoneNumber = "13990182231",
+                    CreatorTime = DateTime.Now.AddDays(-rnd.Next(1, 60)),
+                    LastModifyTime = DateTime.Now
                 });
             }
 
@@ -60,13 +63,17 @@ namespace UnitTestProject.Models
             DataDbContext.Set<CustomerCategory>().RemoveRange(DataDbContext.Set<CustomerCategory>());
             DataDbContext.SaveChanges();
             var customers = new List<CustomerCategory>();
+            var rnd = new Random();
+
             for (var i = 0; i < 20; i++)
             {
                 customers.Add(new CustomerCategory
                 {
                     Name=$"客户分类{i}",
                     Description=$"客户分类描述{i}",
-                    CustomOrder=i
+                    CustomOrder=i,
+                    CreatorTime = DateTime.Now.AddDays(-rnd.Next(1, 60)),
+                    LastModifyTime = DateTime.Now
                 });
             }
 
@@ -87,14 +94,17 @@ namespace UnitTestProject.Models
                 users.Add(new User
                 {
                     RealName = $"用户{i}",
+                    AccountName=$"user{i}",
                     Gender = i % 2 == 2 ? Gender.Female : Gender.Male,
-                    Birthday = new System.DateTime(1980, 12, 5),
+                    Birthday = new System.DateTime(rnd.Next(1965, 2010), 12, 5),
                     Wechat = "wwwweweqw",
                     Qq = $"5678{i}",
                     NickName = "小李",
                     UserState=UserStateEnum.Enable,
                     MobilePhoneNumber = "13990182231",
-                    Password= defaultPassword
+                    Password= defaultPassword,
+                    CreatorTime = DateTime.Now.AddDays(-rnd.Next(1,60)),
+                    LastModifyTime = DateTime.Now
                 });
             }
 
@@ -106,18 +116,20 @@ namespace UnitTestProject.Models
         public void AdminUserInit()
         {
             var defaultPassword = UserService.Encrypt("admin");
-            var user=new User
+            var user = new User
             {
                 RealName = $"管理员",
-                AccountName="admin",
+                AccountName = "admin",
                 Gender = Gender.Male,
                 Birthday = new System.DateTime(1980, 12, 5),
                 Wechat = "wwwweweqw",
                 Qq = $"5678",
-                NickName = "小管",
+                NickName = "管理员",
                 UserState = UserStateEnum.Enable,
                 MobilePhoneNumber = "13990182231",
-                Password = defaultPassword
+                Password = defaultPassword,
+                CreatorTime = DateTime.Now,
+                LastModifyTime = DateTime.Now
             };
             DataDbContext.Set<User>().Add(user);
             DataDbContext.SaveChanges();

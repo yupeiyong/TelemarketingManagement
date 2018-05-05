@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using TelemarketingManagement.Base;
 using ViewModels;
+using Common.Operator;
 
 namespace TelemarketingManagement.Areas.SystemManage.Controllers
 {
@@ -67,7 +68,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
 
         public JsonResult Save(TelephoneRecordingEditDto dto)
         {
-            dto.VisitorId = CurrentOnlineUser.UserId;
+            dto.VisitorId =CurrentOnlineUser?.UserId ?? 0;
             TelephoneRecordingService.Save(dto);
             return Json(new BaseResponseDto { Message = "保存成功！", Success = true, Title = _modelDescription });
         }

@@ -27,6 +27,11 @@ namespace Models
         [Index]
         public int CustomOrder { get; set; }
 
+
+        public string CreatorTimeStr => this.CreatorTime.HasValue ? CreatorTime.Value.ToString("yyyy-MM-dd HH:mm") : string.Empty;
+
+        public string LastModifyTimeStr => this.LastModifyTime.HasValue ? LastModifyTime.Value.ToString("yyyy-MM-dd HH:mm") : string.Empty;
+
     }
 
 }

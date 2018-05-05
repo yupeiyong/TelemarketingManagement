@@ -87,6 +87,10 @@ namespace Models
         /// </summary>
         public UserStateEnum UserState { get; set; }
 
+        public string CreatorTimeStr => this.CreatorTime.HasValue ? CreatorTime.Value.ToString("yyyy-MM-dd HH:mm") : string.Empty;
+
+        public string LastModifyTimeStr => this.LastModifyTime.HasValue ? LastModifyTime.Value.ToString("yyyy-MM-dd HH:mm") : string.Empty;
+
     }
 
 }

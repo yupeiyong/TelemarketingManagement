@@ -83,8 +83,8 @@ namespace Service.SystemManage
                                 if (cell != null)
                                 {
                                     var str = cell.ToString();
-                                    if (!string.IsNullOrWhiteSpace(str))
-                                        importDto.BirthdayDescription = str;
+                                    if (!string.IsNullOrWhiteSpace(str) && cell.CellType==CellType.Numeric)
+                                        importDto.BirthdayDescription = cell.DateCellValue.ToString("yyyy-MM-dd HH:mm");
                                 }
 
                                 cell = row.GetCell(5); //手机
