@@ -88,6 +88,7 @@ $(function () {
             $.ajax({
                 url: uplodaUrl,
                 type: "json",
+                method: 'post',
                 data: formData,
                 async: false,
                 processData: false,
@@ -155,6 +156,7 @@ $(function () {
                 url: url,
                 type: "json",
                 data: data,
+                method:'post',
                 beforeSend: function () {
                     $this.attr("disabled", true);
                     $closeBtn.attr("disabled", true);

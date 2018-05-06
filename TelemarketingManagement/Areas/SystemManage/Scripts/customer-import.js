@@ -75,6 +75,7 @@ $(function () {
         $.ajax({
             url: url,
             type: 'json',
+            method:'post',
             data: data,
             beforeSend: function () {
                 $closeBtn.attr("disabled", true);

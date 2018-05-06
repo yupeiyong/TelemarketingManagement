@@ -34,6 +34,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
         public CustomerService CustomerService { get; set; }
 
         public UserService UserService { get; set; }
+
         public JsonResult GetData(TelephoneRecordingSearchDto dto)
         {
             var rows = TelephoneRecordingService.Search(dto);
@@ -65,7 +66,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             return RedirectToAction("Edit");
         }
 
-
+        [HttpPost]
         public JsonResult Save(TelephoneRecordingEditDto dto)
         {
             dto.VisitorId =CurrentOnlineUser?.UserId ?? 0;
@@ -73,7 +74,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             return Json(new BaseResponseDto { Message = "保存成功！", Success = true, Title = _modelDescription });
         }
 
-
+        [HttpPost]
         public JsonResult Remove(params long[] id)
         {
             TelephoneRecordingService.Remove(id);
@@ -117,7 +118,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             return Json(dto, JsonRequestBehavior.AllowGet);
         }
 
-
+        [HttpPost]
         public JsonResult BatchRemove(string ids)
         {
 

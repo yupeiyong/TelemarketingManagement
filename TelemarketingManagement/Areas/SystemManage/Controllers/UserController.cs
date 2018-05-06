@@ -70,14 +70,14 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             return RedirectToAction("Edit");
         }
 
-
+        [HttpPost]
         public JsonResult Save(UserEditDto dto)
         {
             UserService.Save(dto);
             return Json(new BaseResponseDto { Message = "保存成功！", Success = true, Title = _modelDescription });
         }
 
-
+        [HttpPost]
         public JsonResult Remove(params long[] id)
         {
             UserService.Remove(id);

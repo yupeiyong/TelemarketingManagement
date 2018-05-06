@@ -10,7 +10,7 @@ namespace Common.Security
     /// </summary>
     public class DesEncrypt
     {
-        private static string DESKey = "nfine_desencrypt_2016";
+        private static string DESKey = $"managment_desencrypt_{DateTime.Now.Year}";
 
         #region ========加密========
         /// <summary>

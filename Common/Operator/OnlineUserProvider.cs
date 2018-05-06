@@ -39,7 +39,6 @@ namespace Common.Operator
             {
                 WebHelper.WriteSession(OnlineUserKey, DesEncrypt.Encrypt(operatorModel.ToJson()));
             }
-            WebHelper.WriteCookie("Online_User_mac", Md5.md5(Net.Net.GetMacByNetworkInterface().ToJson(), 32));
         }
         public void RemoveCurrent()
         {

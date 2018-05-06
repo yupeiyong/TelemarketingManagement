@@ -15,6 +15,7 @@ namespace Common
             var t = typeof(TEnum);
             if (!t.IsEnum) return string.Empty;
             var propertyName = Enum.GetName(typeof(TEnum), source);
+            if (string.IsNullOrWhiteSpace(propertyName)) return string.Empty;
 
             var field = t.GetField(propertyName);
             if (field == null)

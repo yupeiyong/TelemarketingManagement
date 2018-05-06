@@ -20,10 +20,6 @@ namespace TelemarketingManagement.App_Start.Filters
             {
                 return;
             }
-            if (filterContext.HttpContext.Request.IsAjaxRequest())
-            {
-                return;
-            }
             if (OnlineUserProvider.Provider.GetCurrent() == null)
             {
                 WebHelper.WriteCookie("online_user_login_error", "overdue");

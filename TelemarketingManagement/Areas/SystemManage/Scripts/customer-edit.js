@@ -73,6 +73,7 @@ $(function () {
             url: url,
             type: "json",
             data: data,
+            method:'post',
             beforeSend: function () {
                 $this.attr("disabled", true);
                 $closeBtn.attr("disabled", true);

@@ -73,14 +73,14 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             return RedirectToAction("Edit");
         }
 
-
+        [HttpPost]
         public JsonResult Save(CustomerEditDto dto)
         {
             CustomerService.Save(dto);
             return Json(new BaseResponseDto { Message = "保存成功！", Success = true, Title = _modelDescription });
         }
 
-
+        [HttpPost]
         public JsonResult Remove(params long[] id)
         {
             CustomerService.Remove(id);
@@ -113,7 +113,7 @@ namespace TelemarketingManagement.Areas.SystemManage.Controllers
             throw new Exception("模板文件不存在！");
         }
 
-
+        [HttpPost]
         public JsonResult ImportData(ImportedFileDto dto)
         {
             var importDtos = CustomerFileHelper.DoImport(dto);
